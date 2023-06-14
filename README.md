@@ -1,47 +1,72 @@
-# REVAMP
+![REVAMP_logo_v3_color-tagline](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/00f0f999-043d-43c9-8bf8-1b8aa86bebca)
 
-Rapid Exploration and Visualization through an Automated Metabarcoding Pipeline - Currently In Development
+# REVAMP: Rapid Exploration and Visualization through an Automated Metabarcoding Pipeline
 
 Created by Sean McAllister, Chris Paight, Emily Norton, and Matt Galaska
 
-Developed by the Ocean Molecular Ecology (OME) Group at <a class="ui-tooltip" title="Pacific Marine Environmental Laboratory"><span style="cursor: help;">PMEL</span></a> (<a class="ui-tooltip" title="National Oceanic and Atmospheric Administration"><span style="cursor: help;">NOAA</span></a>) in cooperation with <a class="ui-tooltip" title="Cooperative Institute for Climate, Ocean, & Ecosystem Studies"><span style="cursor: help;">CICOES</span></a> (<a class="ui-tooltip" title="University of Washington"><span style="cursor: help;">UW</span></a>)
+**REVAMP** is designed to streamline the processing of metabarcoding data from raw fastq data files to the generation of information and visuals. The purpose is to standardize methods for rapid assessments of molecular ecology datasets, including those for environmental DNA (eDNA) monitoring.
+
+Developed by the **Ocean Molecular Ecology** ([OME](https://www.pmel.noaa.gov/ocean-molecular-ecology/)) Group at the Pacific Marine Environmental Laboratory ([PMEL/NOAA](https://www.pmel.noaa.gov/)) in cooperation with the Cooperative Institute for Climate, Ocean, & Ecosystem Studies ([CICOES/UW](https://cicoes.uw.edu/)).
 
 ## Citation
 
 **If you find REVAMP useful in your research, please cite...**
 
 ```
-
+IN REVIEW
 ```
 
-**REVAMP employs several programs internally, which should also be cited:**
+**REVAMP is a wrapper for severl tools, which should also be cited:**
 
-* dada2 (including blog post)
-* cutadapt
-* blast
-* KRONA
-* taxonkit
-* phyloseq
-* vegan
+* Cutadapt – [Martin, 2011](https://doi.org/10.14806/ej.17.1.200)
+* DADA2 – [Callahan et al., 2016](https://doi.org/10.1038/nmeth.3869) ([useful tutorial](https://benjjneb.github.io/dada2/index.html))
+* BLASTn – [Camacho et al., 2009](https://doi.org/10.1186/1471-2105-10-421)
+* TaxonKit – [Shen and Ren, 2021](https://doi.org/10.1016/j.jgg.2021.03.006)
+* Krona Plots – [Ondov et al., 2011](https://doi.org/10.1186/1471-2105-12-385)
+* phyloseq – [McMurdie and Holmes, 2013](https://doi.org/10.1371/journal.pone.0061217) ([useful tutorial](https://joey711.github.io/phyloseq/))
+* vegan – [Oksanen et al., 2020](https://cran.r-project.org/web/packages/vegan/)
+
+Many other auxiliary R packages make the figures possible: see dependencies.
 
 ## Wiki
-Check the REVAMP Wiki for more information on how REVAMP works.
+REVAMP Wiki output guides, tutorials, and best practices is in development.
 
 ## Installation
 ### Easy Installation
-Docker TBD
+Docker container in development
 
 ### Installation outside of Docker
+REVAMP was developed and test on MacOS 12.6.3. Additional portability is under development with Docker container.
 
 ```
+cd (location of choice: e.g. /Users/mcallister/software/)
 git clone https://github.com/McAllister-NOAA/REVAMP.git
-
+export PATH=/Users/mcallister/software/REVAMP:$PATH
 ```
 
-Add ```revamp.sh``` to your PATH
+Confirm that ```revamp.sh``` is in your ```$PATH```: ```which revamp.sh```.
 
-Install the necessary dependencies, stand alone packages and in R (below)
-##### Dependencies
+#### Install NCBI *nt* and *taxonomy* databases
+The blastn step of the pipeline can be completed on another computer, such as a high-performance computing resource. In this case, ASVs.fa can be moved to that resource and ```blastn``` run there. In either case, the NCBI *nt* and *taxonomy* databases need to be available on whatever resource is processing the ```blastn``` step.
+
+NCBI databases are prepped for use in REVAMP using the ```ncbi_db_cleanup.sh``` script.
+
+Dependencies for script: [blast+](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/), wget, and [taxonomy-tools](https://github.com/pmenzel/taxonomy-tools), all in your ```$PATH```.
+
+Run ```ncbi_db_cleanup.sh``` from inside blastdb directory of choice:
+```
+mkdir /path/to/blastdb
+cd /path/to/blastdb
+ncbi_db_cleanup.sh
+```
+
+If NCBI *nt* database files continually fail to download, try to run ```update_blastdb.pl nt``` outside of the pipeline's script.
+
+#### Install the necessary dependencies for REVAMP
+
+STOPPED HERE
+
+Stand alone tools:
 * R (Rscript)
 * dada2 – v.1.14.1
 * dbplyr - v.1.4.2
@@ -55,6 +80,13 @@ Install the necessary dependencies, stand alone packages and in R (below)
 * subtree (taxonomy...)
 * perl : List::MoreUtils
 * And many more...
+
+
+
+
+
+
+
 
 ## Toy Test dataset
 TBD
