@@ -1,0 +1,4 @@
+cutadaptFinished=TRUE
+dada2_Finished=TRUE
+blastFinished=TRUE
+taxonomyscriptFinished=TRUE

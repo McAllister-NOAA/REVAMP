@@ -1,0 +1,15 @@
+##This is the MetaPipe figure config file
+###Figure options:
+filterPercent=5
+filterPercentLowQualSamples=10
+pieScale=5.7
+
+###
+filterLowQualSamples=TRUE
+removeNA=FALSE
+
+#TAXA of Interest: Provides specific figures.
+#List one name per line. All from same taxonomic level.
+providedTaxaOfInterest=TRUE
+taxaOfInterestFile=/Users/mcallister/Desktop/chris_test/choice_taxa.txt
+taxaOfInterestLevel=Order

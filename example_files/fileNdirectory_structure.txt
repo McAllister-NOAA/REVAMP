@@ -1,0 +1,268 @@
+OUTDIR
+├── ASV2Taxonomy
+│   ├── ASVs_counts_NOUNKNOWNS.tsv
+│   ├── ASVs_counts_mergedOnTaxonomy.tsv
+│   ├── ASVs_counts_mergedOnTaxonomy_NOUNKNOWNS.tsv
+│   ├── OUTDIR_NO_UNKNOWNS_barchart.txt
+│   ├── OUTDIR_SPECIESlevel_commonNames_for_barchart.txt
+│   ├── OUTDIR_allin_TaxonomyASVSampleCount_byline.txt
+│   ├── OUTDIR_asvTaxonomyTable.txt
+│   ├── OUTDIR_asvTaxonomyTable_NOUNKNOWNS.txt
+│   ├── OUTDIR_barchart.txt
+│   ├── OUTDIR_barchart_forR.txt
+│   ├── OUTDIR_barchart_forR_filtLowAbund_zzOther.txt
+│   ├── OUTDIR_heatmap_multiASV.txt
+│   ├── OUTDIR_taxid_to_commonname_ALL.txt
+│   ├── OUTDIR_unique_terminaltaxa.txt
+│   ├── OUTDIR_unique_terminaltaxa_w_taxids.txt
+│   ├── OUTDIR_unknown_asvids.txt
+│   ├── KRONA_plots
+│   │   ├── OUTDIR_master_krona.html
+│   │   ├── OUTDIR_samplesSummedKRONA.html
+│   │   └── KRONA_inputs
+│   ├── basic_ASV_taxonomy_stats.txt
+│   ├── reformatted_taxonkit_out.txt
+│   ├── reformatted_taxonkit_out_ORIGINAL.txt
+│   ├── taxids.txt
+│   └── taxonkit_out.txt
+├── Figures
+│   ├── 00_KRONA_plots
+│   │   ├── OUTDIR_master_krona.html
+│   │   └── OUTDIR_samplesSummedKRONA.html
+│   ├── 01_Maps
+│   │   ├── mapBasic_datapoints.pdf
+│   │   ├── mapBathy_datapoints.pdf
+│   │   ├── mapBathy_sanslegend_datapoints.pdf
+│   │   ├── mapPies.pdf
+│   │   ├── mapPies_legend.pdf
+│   │   ├── mapPies_scattered.pdf
+│   │   ├── maps_rscript_out.log
+│   │   └── marmap_coord_...csv
+│   ├── 02_Barcharts
+│   │   ├── read_count
+│   │   │   ├── barplot_readcount_allsamples_alltaxa_Phylum.pdf + legend
+│   │   │   ├── barplot_readcount_allsamples_uniqueTerminalTaxa_noUnknowns.pdf + legend
+│   │   │   ├── barplot_readcount_allsamples_uniqueTerminalTaxa_withUnknowns.pdf + legend
+│   │   │   ├── barplot_readcount_filtsamples_alltaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
+│   │   │   └── barplot_readcount_filtsamples_filtLT5PERCtaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
+│   │   └── relative_abundance
+│   │       ├── SAME FILES as read_count (diff names) +
+│   │       ├── barplot_relabund_allsamples_filtLowAbundTaxa_to_zzOther_uniqueTerminalTaxa_noUnknowns.pdf + legend
+│   │       ├── barplot_relabund_filtsamples_alltaxa_Phylum_ASVsShown.pdf
+│   │       ├── barplot_relabund_[replicate,site]GroupedSamples_alltaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
+│   │       └── barplot_relabund_[replicate,site]GroupedSamples_filtLT5PERCtaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
+│   ├── 03_Heatmaps
+│   │   ├── ASV_based
+│   │   │   ├── heatmap_ASVs_relabund_filtsamples_alltaxa_clustSamples.pdf
+│   │   │   ├── heatmap_ASVs_relabund_filtsamples_alltaxa_orderedSamples.pdf
+│   │   │   ├── heatmap_ASVs_relabund_[replicate,site]GroupedSamples_alltaxa_clustReplicates.pdf
+│   │   │   └── heatmap_ASVs_relabund_[replicate,site]GroupedSamples_alltaxa_orderedReplicates.pdf
+│   │   └── Taxonomy_merge_based
+│   │       ├── heatmap_Taxa_relabund_filtsamples_alltaxa_clustSamples.pdf
+│   │       ├── heatmap_Taxa_relabund_filtsamples_alltaxa_orderedSamples.pdf
+│   │       ├── heatmap_Taxa_relabund_[replicate,site]GroupedSamples_alltaxa_clustReplicates.pdf
+│   │       └── heatmap_Taxa_relabund_[replicate,site]GroupedSamples_alltaxa_orderedReplicates.pdf
+│   ├── 04_Alpha_Diversity
+│   │   ├── ASV_based
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_Chao1Shannon.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_Chao1Shannon_[chemGroup]_Colored.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_Chao1Shannon_[chemGroup]_Colored_sortonChao1.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_Chao1Shannon_[chemGroup]_Colored_sortonShannon.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures_[chemGroup]_Colored.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures_[chemGroup]_Colored_sortonChao1.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures_[chemGroup]_Colored_sortonShannon.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures_group[1+]Colored_sortonChao1.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]ClusteredSamples_alltaxa_Chao1Shannon.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]ClusteredSamples_alltaxa_Chao1Shannon_[chemGroup]_Colored.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]ClusteredSamples_alltaxa_allMeasures.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]ClusteredSamples_alltaxa_allMeasures_[chemGroup]_Colored.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]ClusteredSamples_alltaxa_allMeasures_group[1+]Colored.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]GroupedSamples_alltaxa_Chao1Shannon.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]GroupedSamples_alltaxa_Chao1Shannon_[chemGroup]_Colored.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]GroupedSamples_alltaxa_allMeasures.pdf
+│   │   │   ├── alphaDiversity_ASVs_normalized_[replicate,site]GroupedSamples_alltaxa_allMeasures_[chemGroup]_Colored.pdf
+│   │   │   ├── alpha_diversity_ASVbased_R.tsv
+│   │   │   └── alpha_diversity_ASVbased_human.tsv
+│   │   └── Taxonomy_merge_based
+│   │       ├── SAME FILES as ASV_based (diff names) +
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_Chao1Shannon.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_Chao1Shannon_[chemGroup]_Colored.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_Chao1Shannon_[chemGroup]_Colored_sortonChao1.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_Chao1Shannon_[chemGroup]_Colored_sortonShannon.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_allMeasures.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_allMeasures_[chemGroup]_Colored.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_allMeasures_[chemGroup]_Colored_sortonChao1.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_allMeasures_[chemGroup]_Colored_sortonShannon.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_filtsamples_alltaxa_allMeasures_group[1+]Colored_sortonChao1.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]ClusteredSamples_alltaxa_Chao1Shannon.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]ClusteredSamples_alltaxa_Chao1Shannon_[chemGroup]_Colored.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]ClusteredSamples_alltaxa_allMeasures.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]ClusteredSamples_alltaxa_allMeasures_[chemGroup]_Colored.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]ClusteredSamples_alltaxa_allMeasures_group[1+]Colored.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]GroupedSamples_alltaxa_Chao1Shannon.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]GroupedSamples_alltaxa_Chao1Shannon_[chemGroup]_Colored.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]GroupedSamples_alltaxa_allMeasures.pdf
+│   │       ├── alphaDiversity_Taxa_normalized_TOSPECIES_[replicate,site]GroupedSamples_alltaxa_allMeasures_[chemGroup]_Colored.pdf
+│   │       ├── alpha_diversity_TAXAbased_ONLYINCLUDINGTAXACOMPLETETO_[Phylum,Class,Order,Family,Genus,Species]_R.tsv
+│   │       ├── alpha_diversity_TAXAbased_ONLYINCLUDINGTAXACOMPLETETO_[Phylum,Class,Order,Family,Genus,Species]_human.tsv
+│   │       ├── alpha_diversity_TAXAbased_R.tsv
+│   │       └── alpha_diversity_TAXAbased_human.tsv
+│   ├── 05_Ordination
+│   │   ├── ASV_based
+│   │   │   ├── read_count
+│   │   │   │   ├── ConvexHullAnalysis_[replicates,sites]_[NMDS,PCoA]_ASVbased_readcount_filtsamples_alltaxa.txt
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_samples_readcount_filtsamples_alltaxa.pdf
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_samples_readcount_filtsamples_alltaxa.txt
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_samples_readcount_filtsamples_alltaxa_[chemGroup]_Colored.pdf
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_samples_readcount_filtsamples_alltaxa_[chemGroup]_Colored_encircle[Replicates,Sites].pdf
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_samples_readcount_filtsamples_alltaxa_encircle[Replicates,Sites].pdf
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_samples_readcount_filtsamples_alltaxa_group[1+]Colored_encircleGroup.pdf
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_samples_readcount_filtsamples_alltaxa_group[1+]Colored_encircle[Replicates,Sites].pdf
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_taxa_readcount_filtsamples_alltaxa.pdf + legend
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_taxa_readcount_filtsamples_alltaxa.txt
+│   │   │   │   ├── [NMDS,PCoA]_ASVbased_taxa_readcount_filtsamples_alltaxa_biplot.pdf + legend
+│   │   │   │   └── [NMDS,PCoA]_ASVbased_taxa_readcount_filtsamples_alltaxa_facetPhylum_colorGenus.pdf + legend
+│   │   │   └── relative_abundance
+│   │   │       ├── SAME FILES as read_count (diff names) +
+│   │   │       ├── [NMDS,PCoA]_ASVbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa.pdf
+│   │   │       ├── [NMDS,PCoA]_ASVbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa.txt
+│   │   │       ├── [NMDS,PCoA]_ASVbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa_[chemGroup]_Colored.pdf
+│   │   │       ├── [NMDS,PCoA]_ASVbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa_group[1+]Colored_encircleGroup.pdf
+│   │   │       ├── [NMDS,PCoA]_ASVbased_taxa_relabund_[replicate,site]GroupedSamples_alltaxa.pdf + legend
+│   │   │       └── [NMDS,PCoA]_ASVbased_taxa_relabund_[replicate,site]GroupedSamples_alltaxa.txt
+│   │   └── Taxonomy_merge_based
+│   │       ├── filterInclude_TOSPECIES_only
+│   │       │   ├── read_count
+│   │       │   │   ├── ConvexHullAnalysis_[replicates,site]_[NMDS,PCoA]_TAXAbased_readcount_filtsamples_filterIncludeToSPECIESONLY.txt
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_samples_readcount_filtsamples_alltaxa_[chemGroup]_Colored_encircle[Replicates,Sites]_filterTOSPECIES.pdf
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_samples_readcount_filtsamples_alltaxa_[chemGroup]_Colored_filterTOSPECIES.pdf
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_samples_readcount_filtsamples_alltaxa_encircle[Replicates,Sites]_filterTOSPECIES.pdf
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_samples_readcount_filtsamples_alltaxa_filterTOSPECIES.pdf
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_samples_readcount_filtsamples_alltaxa_filterTOSPECIES.txt
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_samples_readcount_filtsamples_alltaxa_group[1+]Colored_encircleGroup_filterTOSPECIES.pdf
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_samples_readcount_filtsamples_alltaxa_group[1+]Colored_encircle[Replicates,Sites]_filterTOSPECIES.pdf
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_taxa_readcount_filtsamples_alltaxa_biplot_filterTOSPECIES.pdf + legend
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_taxa_readcount_filtsamples_alltaxa_facetPhylum_colorGenus_filterTOSPECIES.pdf + legend
+│   │       │   │   ├── [NMDS,PCoA]_TAXAbased_taxa_readcount_filtsamples_alltaxa_filterTOSPECIES.pdf + legend
+│   │       │   │   └── [NMDS,PCoA]_TAXAbased_taxa_readcount_filtsamples_alltaxa_filterTOSPECIES.txt
+│   │       │   └── relative_abundance
+│   │       │       ├── SAME FILES as read_count (diff names) +
+│   │       │       ├── [NMDS,PCoA]_TAXAbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa_[chemGroup]_Colored_filterTOSPECIES.pdf
+│   │       │       ├── [NMDS,PCoA]_TAXAbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa_filterTOSPECIES.pdf
+│   │       │       ├── [NMDS,PCoA]_TAXAbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa_filterTOSPECIES.txt
+│   │       │       ├── [NMDS,PCoA]_TAXAbased_samples_relabund_[replicate,site]GroupedSamples_alltaxa_group[1+]Colored_encircleGroup_filterTOSPECIES.pdf
+│   │       │       ├── [NMDS,PCoA]_TAXAbased_taxa_relabund_[replicate,site]GroupedSamples_alltaxa_filterTOSPECIES.pdf + legend
+│   │       │       └── [NMDS,PCoA]_TAXAbased_taxa_relabund_[replicate,site]GroupedSamples_alltaxa_filterTOSPECIES.txt
+│   │       ├── read_count
+│   │       │   └── SAME FILES as ASV_based/read_count (diff names)
+│   │       └── relative_abundance
+│   │           └── SAME FILES as ASV_based/relative_abundance (diff names)
+│   ├── 06_Network
+│   │   ├── ASV_based
+│   │   │   ├── read_count
+│   │   │   │   ├── Network_ASVbased_samples_readcount_filtsamples_gte1perctaxa_dist[0.1-0.9]_SampleLabeled.pdf
+│   │   │   │   ├── Network_ASVbased_samples_readcount_filtsamples_gte1perctaxa_dist[0.1-0.9]_SampleLabeled_colorReplicates.pdf
+│   │   │   │   └── Network_ASVbased_taxa_readcount_filtsamples_gte1perctaxa_dist[0.1-0.9]_ASVLabeled.pdf
+│   │   │   └── relative_abundance
+│   │   │       └── SAME FILES as read_count (diff names)
+│   │   └── Taxonomy_merge_based
+│   │       ├── read_count
+│   │       │   └── SAME FILES as ASV_based/read_count (diff names)
+│   │       └── relative_abundance
+│   │           └── SAME FILES as ASV_based/read_count (diff names)
+│   ├── 07_Rarefaction_Curves
+│   │   ├── RarefactionCurve_ASVbased_readcount_allsamples_alltaxa.pdf
+│   │   ├── RarefactionCurve_ASVbased_readcount_filtsamples_alltaxa.pdf
+│   │   └── RarefactionCurve_TAXAbased_readcount_filtsamples_alltaxa.pdf
+│   ├── 08_EnvironmentFit_Ordination
+│   │   ├── ASV_based
+│   │   │   ├── NMDS_vegan_ASVbased_ASV_coordinates.tsv
+│   │   │   ├── NMDS_vegan_ASVbased_environmentFitVectors_coordinates_r2_pvalues.tsv
+│   │   │   ├── NMDS_vegan_ASVbased_relabund_stressplot.pdf
+│   │   │   ├── NMDS_vegan_ASVbased_sample_coordinates.tsv
+│   │   │   ├── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa.pdf
+│   │   │   ├── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_encircle[Replicates,Sites].pdf
+│   │   │   ├── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_chemOnly.pdf
+│   │   │   ├── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_chemOnly_encircle[Replicates,Sites].pdf
+│   │   │   ├── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.001.pdf
+│   │   │   ├── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.001_encircle[Replicates,Sites].pdf
+│   │   │   ├── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.05.pdf
+│   │   │   └── NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.05_encircle[Replicates,Sites].pdf
+│   │   ├── Taxonomy_merge_based
+│   │   │   └── SAME FILES as ASV_based (diff names)
+│   │   └── envfit_rscript_out.log
+│   ├── ReadsVSReplicateDetection (only if replicates given)
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withUnknowns_avgReadsAllReplicates.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withUnknowns_avgReadsWhereDeteted.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withUnknowns_sumReads.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withoutUnknowns_avgReadsAllReplicates.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withoutUnknowns_avgReadsWhereDeteted.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withoutUnknowns_sumReads.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_TAXAbased_withoutUnknowns_avgReadsAllReplicates.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_TAXAbased_withoutUnknowns_avgReadsWhereDeteted.pdf
+│   │   ├── ViolinBoxPlot_ReadsVSReplicateDetection_TAXAbased_withoutUnknowns_sumReads.pdf
+│   │   └── violinboxplot_rscript_out.log
+│   ├── Taxa_of_interest
+│   │   ├── 02_Barcharts
+│   │   │   ├── read_count
+│   │   │   └── relative_abundance
+│   │   ├── 03_Heatmaps
+│   │   │   ├── ASV_based
+│   │   │   └── Taxonomy_merge_based
+│   │   └── 06_Network
+│   │       ├── ASV_based
+│   │       │   ├── read_count
+│   │       │   └── relative_abundance
+│   │       └── Taxonomy_merge_based
+│   │           ├── read_count
+│   │           └── relative_abundance
+│   └── phyloseq_rscript_out.log
+├── Rscript_arguments.log
+├── blast_results
+│   ├── ASV_blastn_nt.btab.gz
+│   ├── ASV_blastn_nt_formatted.txt
+│   ├── blastreformatting_rscript_out.log
+│   └── checkmaxtargetseqs.txt
+├── chem_headers.txt
+├── config_file.txt
+├── cutadapt
+│   └── cutadapt_primer_trimming_stats.txt
+├── dada2
+│   ├── ASVs.fa
+│   ├── ASVs_counts.tsv
+│   ├── ReadTrimSummary.txt
+│   ├── dada2_rscripts_out.log
+│   ├── errorFPlot.pdf
+│   ├── errorRPlot.pdf
+│   ├── filtered_out_stats.txt
+│   ├── rawFQualityPlot.pdf
+│   ├── rawRQualityPlot.pdf
+│   ├── trimFQualityPlot.pdf
+│   └── trimRQualityPlot.pdf
+├── figure_config_file.txt
+├── processed_tables
+│   ├── ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt
+│   ├── ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_controlsRemoved.tsv
+│   ├── ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv
+│   ├── ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund_groupedBy[Replicates,Sites].tsv
+│   ├── ASVs_counts_NOUNKNOWNS_controlsRemoved.tsv
+│   ├── ASVs_counts_NOUNKNOWNS_percentabund.tsv
+│   ├── ASVs_counts_NOUNKNOWNS_percentabund_groupedBy[Replicates,Sites].tsv
+│   ├── ASVs_counts_controlsRemoved.tsv
+│   ├── replicate_based_detection (only if replicates given)
+│   │   ├── compRelAbund_replicateDetection_ASVbased_NoUnknowns_filtsamples.txt
+│   │   ├── compRelAbund_replicateDetection_ASVbased_withUnknowns_filtsamples.txt
+│   │   ├── compRelAbund_replicateDetection_TAXAbased_NoUnknowns_filtsamples.txt
+│   │   ├── presenceabsence_unmarked_ASVbased_NoUnknowns_filtsamples.txt
+│   │   ├── presenceabsence_unmarked_ASVbased_withUnknowns_filtsamples.txt
+│   │   └── presenceabsence_unmarked_TAXAbased_NoUnknowns_filtsamples.txt
+│   ├── sample_metadata_NOUNKNOWNS_percentabund_groupedByReplicates.tsv
+│   └── table_rscript_out.log
+├── progress.txt
+├── run.log
+├── run_logs
+│   ├── runlog_date.txt (old logs)
+├── sample_metadata.txt
+├── sample_metadata_forR.txt
+└── sample_order.txt
