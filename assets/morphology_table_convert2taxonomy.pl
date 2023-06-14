@@ -17,8 +17,8 @@ getopts("i:o:m:f:ah", \%options);
 if ($options{h})
     {   print "\n\nHelp called:\nOptions:\n";
         print "-i = Input tab delimited morphology spreadsheet\n";
-        print "-a = Set to automatically fill in taxonkit output (as done in metapipe)\n";
-        print "-m = Location of metapipe directory\n";
+        print "-a = Set to automatically fill in taxonkit output (as done in REVAMP)\n";
+        print "-m = Location of REVAMP directory\n";
         print "-f = Filter cutoff for zzOther\n";
         print "-o = Output directory\n";
         print "-h = This help message\n\n";
@@ -425,8 +425,8 @@ foreach my $i (sort keys %COLLAPSE)
 
 #ASVs_counts.tsv = Plain counts for all "ASVs". In this case, each ASV simply represents a unique taxa.
 foreach my $unique_measurement (2..$#headers)
-    {   system("mkdir -p ".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]");
-        open(ASV_count, ">".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]/ASVs_counts.tsv");
+    {   system("mkdir -p ".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]");
+        open(ASV_count, ">".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]/ASVs_counts.tsv");
         print ASV_count "x";
         foreach my $i (0..$#unique_sampleHeaders)
             {   print ASV_count "\t$unique_sampleHeaders[$i]";
@@ -451,8 +451,8 @@ foreach my $unique_measurement (2..$#headers)
 
 #ASVs_counts_NOUNKNOWNS.tsv = Plain counts for all "ASVs", except those with unknown taxonomy.
 foreach my $unique_measurement (2..$#headers)
-    {   system("mkdir -p ".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]");
-        open(ASV_count, ">".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]/ASVs_counts_NOUNKNOWNS.tsv");
+    {   system("mkdir -p ".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]");
+        open(ASV_count, ">".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]/ASVs_counts_NOUNKNOWNS.tsv");
         print ASV_count "x";
         foreach my $i (0..$#unique_sampleHeaders)
             {   print ASV_count "\t$unique_sampleHeaders[$i]";
@@ -478,8 +478,8 @@ foreach my $unique_measurement (2..$#headers)
     }
 
 #morphology_asvTaxonomyTable.txt = ASV to taxonomy.
-system("mkdir -p ".$options{o}."/morphology_MetaPipeTables_ASV2Taxonomy");
-open(ASV_taxa, ">".$options{o}."/morphology_MetaPipeTables_ASV2Taxonomy/morphology_asvTaxonomyTable.txt");
+system("mkdir -p ".$options{o}."/morphology_REVAMPtables_ASV2Taxonomy");
+open(ASV_taxa, ">".$options{o}."/morphology_REVAMPtables_ASV2Taxonomy/morphology_asvTaxonomyTable.txt");
 print ASV_taxa "ASV\tKingdom\tPhylum\tClass\tOrder\tFamily\tGenus\tSpecies\n";
 foreach my $i (sort keys %COLLAPSE)
     {   print ASV_taxa $COLLAPSE{$i}{"chosen_ASV"};
@@ -493,7 +493,7 @@ foreach my $i (sort keys %COLLAPSE)
 close(ASV_taxa);
 
 #morphology_asvTaxonomyTable_NOUNKNOWNS.txt = ASV to taxonomy (without UNKNOWN).
-open(ASV_taxa, ">".$options{o}."/morphology_MetaPipeTables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt");
+open(ASV_taxa, ">".$options{o}."/morphology_REVAMPtables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt");
 print ASV_taxa "ASV\tKingdom\tPhylum\tClass\tOrder\tFamily\tGenus\tSpecies\n";
 foreach my $i (sort keys %COLLAPSE)
     {   unless ($i eq "Unknown;NA;NA;NA;NA;NA;NA")
@@ -510,9 +510,9 @@ close(ASV_taxa);
 
 #KRONA Plots
 foreach my $unique_measurement (2..$#headers)
-    {   system("mkdir -p ".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs");
+    {   system("mkdir -p ".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs");
         foreach my $uniquesample (0..$#unique_sampleHeaders)
-            {   open(ASV_taxa, ">".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs/".$unique_sampleHeaders[$uniquesample]."_KRONA.txt");
+            {   open(ASV_taxa, ">".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs/".$unique_sampleHeaders[$uniquesample]."_KRONA.txt");
                 foreach my $i (sort keys %COLLAPSE)
                     {   if (exists $COLLAPSE{$i}{$unique_sampleHeaders[$uniquesample]."---".$headers[$unique_measurement]})
                             {   my $print_value = $COLLAPSE{$i}{$unique_sampleHeaders[$uniquesample]."---".$headers[$unique_measurement]};
@@ -533,7 +533,7 @@ foreach my $unique_measurement (2..$#headers)
                 close(ASV_taxa);
             }
             
-            open(ASV_taxa, ">".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs/Morphology_samplesSummedKRONA.txt");
+            open(ASV_taxa, ">".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs/Morphology_samplesSummedKRONA.txt");
             foreach my $uniquesample (0..$#unique_sampleHeaders)
             {   foreach my $i (sort keys %COLLAPSE)
                     {   if (exists $COLLAPSE{$i}{$unique_sampleHeaders[$uniquesample]."---".$headers[$unique_measurement]})
@@ -559,18 +559,18 @@ foreach my $unique_measurement (2..$#headers)
 foreach my $unique_measurement (2..$#headers)
     {   my @locationKRONA;
         foreach my $i (@unique_sampleHeaders)
-            {   push(@locationKRONA, $options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs/".$i."_KRONA.txt");
+            {   push(@locationKRONA, $options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]/KRONA_plots/KRONA_inputs/".$i."_KRONA.txt");
             }
         my $printkronasamples = join(' ', @locationKRONA);
-        system("ImportText.pl -o ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_master_krona.html $printkronasamples");
+        system("ImportText.pl -o ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_master_krona.html $printkronasamples");
         
-        system("ImportText.pl -o ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_samplesSummedKRONA.html ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/KRONA_plots/KRONA_inputs/Morphology_samplesSummedKRONA.txt");
+        system("ImportText.pl -o ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_samplesSummedKRONA.html ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/KRONA_plots/KRONA_inputs/Morphology_samplesSummedKRONA.txt");
     }
 
 #ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv = relative abundance ASV biom table
 foreach my $unique_measurement (2..$#headers)
-    {   system("mkdir -p ".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]");
-        open(ASV_count, ">".$options{o}."/morphology_MetaPipeTables_$headers[$unique_measurement]/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv");
+    {   system("mkdir -p ".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]");
+        open(ASV_count, ">".$options{o}."/morphology_REVAMPtables_$headers[$unique_measurement]/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv");
         print ASV_count "x";
         foreach my $i (0..$#unique_sampleHeaders)
             {   print ASV_count "\t$unique_sampleHeaders[$i]";
@@ -619,7 +619,7 @@ foreach my $unique_measurement (2..$#headers)
 
 #Run filter_lowabundance_taxa.pl on outfiles to create zzOther taxonomy file
 foreach my $unique_measurement (2..$#headers)
-    {   system('perl '.$options{m}.'/assets/filter_lowabundance_taxa.pl -a '.$options{o}.'/morphology_MetaPipeTables_'.$headers[$unique_measurement].'/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv -t '.$options{o}.'/morphology_MetaPipeTables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt -p '.$options{f}.' > '.$options{o}.'/morphology_MetaPipeTables_'.$headers[$unique_measurement].'/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt');
+    {   system('perl '.$options{m}.'/assets/filter_lowabundance_taxa.pl -a '.$options{o}.'/morphology_REVAMPtables_'.$headers[$unique_measurement].'/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv -t '.$options{o}.'/morphology_REVAMPtables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt -p '.$options{f}.' > '.$options{o}.'/morphology_REVAMPtables_'.$headers[$unique_measurement].'/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt');
     }
 
 #Print file with the unique header identifiers
@@ -632,15 +632,15 @@ close(HEADER);
 
 #Move KRONA plots to Figures directory
 foreach my $unique_measurement (2..$#headers)
-    {   system("mkdir -p ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/Figures/00_KRONA_plots");
-        system("cp ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_master_krona.html ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/Figures/00_KRONA_plots/Morphology_".$headers[$unique_measurement]."_master_krona.html");
-        system("cp ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_samplesSummedKRONA.html ".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/Figures/00_KRONA_plots/Morphology_".$headers[$unique_measurement]."_samplesSummedKRONA.html");
+    {   system("mkdir -p ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/Figures/00_KRONA_plots");
+        system("cp ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_master_krona.html ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/Figures/00_KRONA_plots/Morphology_".$headers[$unique_measurement]."_master_krona.html");
+        system("cp ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/KRONA_plots/Morphology_samplesSummedKRONA.html ".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/Figures/00_KRONA_plots/Morphology_".$headers[$unique_measurement]."_samplesSummedKRONA.html");
     }
 
 #Print out ASV table combining asv2Taxonomy with perc abundance for human viewing
 foreach my $unique_measurement (2..$#headers)
-    {   open(OUT, ">".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/taxonomy2PercentAbundance_humanReadable.txt");
-        open(OUT_NOROUND, ">".$options{o}."/morphology_MetaPipeTables_".$headers[$unique_measurement]."/taxonomy2PercentAbundance_humanReadable_NoRounding.txt");
+    {   open(OUT, ">".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/taxonomy2PercentAbundance_humanReadable.txt");
+        open(OUT_NOROUND, ">".$options{o}."/morphology_REVAMPtables_".$headers[$unique_measurement]."/taxonomy2PercentAbundance_humanReadable_NoRounding.txt");
         
         my @sample_totals;
         my @sample_totals_sansUnknowns;

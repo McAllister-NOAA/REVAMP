@@ -3,18 +3,18 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 # TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/test_figs" #FIGURE OUT directory
-# args[2]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/ASV2Taxonomy/ASVs_counts_NOUNKNOWNS.tsv" #ASV count table
-# args[3]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/ASV2Taxonomy/CP_all_out_asvTaxonomyTable_NOUNKNOWNS.txt" #ASV taxonomy table
-# args[4]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/sample_metadata_forR.txt" #sample metadata file
+# args[1]<-"/PATH/REVAMP/outdir/test_figs" #FIGURE OUT directory
+# args[2]<-"/PATH/REVAMP/outdir/ASV2Taxonomy/ASVs_counts_NOUNKNOWNS.tsv" #ASV count table
+# args[3]<-"/PATH/REVAMP/outdir/ASV2Taxonomy/CP_all_out_asvTaxonomyTable_NOUNKNOWNS.txt" #ASV taxonomy table
+# args[4]<-"/PATH/REVAMP/outdir/sample_metadata_forR.txt" #sample metadata file
 # args[5]<-5 #percent filter (ASVs)
 # args[6]<-TRUE #controllabelFlag
 # args[7]<-TRUE #low quality sample filter
 # args[8]<-30 #percent filter (Samples), based on median (excluding controls)
-# args[9]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/ASV2Taxonomy/ASVs_counts_mergedOnTaxonomy_NOUNKNOWNS.tsv" #ASV counts merged on taxonomy
+# args[9]<-"/PATH/REVAMP/outdir/ASV2Taxonomy/ASVs_counts_mergedOnTaxonomy_NOUNKNOWNS.tsv" #ASV counts merged on taxonomy
 # args[10]<- FALSE #Sites metadata category
 # args[11]<- TRUE #Replicates metadata category
-# args[12]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/dada2/ASVs_counts.tsv"
+# args[12]<-"/PATH/REVAMP/outdir/dada2/ASVs_counts.tsv"
 ########################################
 library("dplyr")
 

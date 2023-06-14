@@ -3,7 +3,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-#args[1]<-"/Users/mcallister/Desktop/test_out/blast_results" #working directory
+#args[1]<-"/PATH/REVAMP/outdir/blast_results" #working directory
 #args[2]<-326 #blast length cutoff
 ########################################
 library(dplyr)

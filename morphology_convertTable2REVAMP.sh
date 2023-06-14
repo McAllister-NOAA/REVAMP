@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #NOTES: Require users to supply morphology data table, which is formatted Sample\tGenus species\tMetric1\tMetric2\tEtc.
-#Pair with sample_metadata.txt for creating figures (same as metapipe metadata file).
+#Pair with sample_metadata.txt for creating figures (same as REVAMP metadata file).
 ## Names should be identical to names in the sample metadata file.
 ## Names will be cleaned of illegal characters (only alphanumeric and underline allowed).
 ## This cleaning step will also be applied to the sample names in the metadata file (so they are the same).
 #
 #NO spaces or quotes or other weird characters in file paths
-#metapipe.sh must be in PATH
+#revamp.sh must be in PATH
 #Will need taxonomydmp - run prepscript beforehand
 
 unset inputspreadsheet
@@ -19,10 +19,10 @@ unset taxaOfInterestCategory
 
 workingdirectory=`pwd`
 
-unset metapipedir
+unset revampdir
 unset tempprogdir
-tempprogdir=`which metapipe.sh`
-metapipedir=`echo $tempprogdir | sed -E 's/\/metapipe\.sh$//'`
+tempprogdir=`which revamp.sh`
+revampdir=`echo $tempprogdir | sed -E 's/\/revamp\.sh$//'`
 myInvocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
 
 ##########################################################################################
@@ -64,7 +64,7 @@ while getopts ":i:s:n:o:t:c:f:y" opt; do
     y ) bypassflag=TRUE
       ;;
     \? ) echo "Invalid option: -$OPTARG"
-         echo "Usage: morphology_convertTable2Metapipe.sh" #Invalid option provided
+         echo "Usage: morphology_convertTable2REVAMP.sh" #Invalid option provided
          echo "       -i Input morphology spreadsheet"
          echo "       -s Sample metadata file"
          echo "       -o Output directory"
@@ -76,7 +76,7 @@ while getopts ":i:s:n:o:t:c:f:y" opt; do
          exit
       ;;
     : ) echo "Option is missing an argument: -$OPTARG"
-        echo "Usage: morphology_convertTable2Metapipe.sh" #Arg for a called option not provided
+        echo "Usage: morphology_convertTable2REVAMP.sh" #Arg for a called option not provided
         echo "       -i Input morphology spreadsheet"
         echo "       -s Sample metadata file"
         echo "       -o Output directory"
@@ -92,7 +92,7 @@ done
 shift $((OPTIND -1))
 
 if [ $OPTIND -eq 1 ]
-  then echo "Usage: morphology_convertTable2Metapipe.sh" #No options passed
+  then echo "Usage: morphology_convertTable2REVAMP.sh" #No options passed
         echo "       -i Input morphology spreadsheet"
         echo "       -s Sample metadata file"
         echo "       -o Output directory"
@@ -106,7 +106,7 @@ if [ $OPTIND -eq 1 ]
 
 if [[ $iflag -eq 0 || $sflag -eq 0 || $oflag -eq 0 || $fflag -eq 0 ]]
   then echo "All options except -n, -t, -c, and -y are required."
-        echo "Usage: morphology_convertTable2Metapipe.sh" #Missing required options
+        echo "Usage: morphology_convertTable2REVAMP.sh" #Missing required options
         echo "       -i Input morphology spreadsheet"
         echo "       -s Sample metadata file"
         echo "       -o Output directory"
@@ -145,7 +145,7 @@ if [[ "${providedTaxaOfInterest}" = "TRUE" ]]; then
   fi
 
 #Create sample metadata file with identical manipulation of sample names for downstream R work
-perl ${metapipedir}/assets/sampleMetadata_fileCleanup.pl -i ${samplemetafilepath} > ${outdirectory}/sample_metadata_forR.txt
+perl ${revampdir}/assets/sampleMetadata_fileCleanup.pl -i ${samplemetafilepath} > ${outdirectory}/sample_metadata_forR.txt
 
 #Create ordered sample name file
 cat ${outdirectory}/sample_metadata_forR.txt | cut -f1 | grep -v "Sample" > ${outdirectory}/sample_order.txt
@@ -159,24 +159,24 @@ cat ${outdirectory}/sample_metadata_forR.txt | cut -f1 | grep -v "Sample" > ${ou
 ##
 ##########################################################################################
 if [[ "${bypassflag}" = "TRUE" ]]; then
-  perl ${metapipedir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -a -m ${metapipedir} -o ${outdirectory} -f ${filterPercent}
+  perl ${revampdir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -a -m ${revampdir} -o ${outdirectory} -f ${filterPercent}
   
   #This was an alternative before the autoflush (non buffered) alternative was added to the perl script.
   #echo
   #echo "Run the following in the directory: ${workingdirectory}"
   #echo
-  #echo "perl ${metapipedir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -a -m ${metapipedir} -o ${outdirectory} -f ${filterPercent}"
+  #echo "perl ${revampdir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -a -m ${revampdir} -o ${outdirectory} -f ${filterPercent}"
   #echo
   #echo "Hit any key when ready"
   #read mainmenuinput
 else
-  perl ${metapipedir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -m ${metapipedir} -o ${outdirectory} -f ${filterPercent}
+  perl ${revampdir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -m ${revampdir} -o ${outdirectory} -f ${filterPercent}
   
   #This was an alternative before the autoflush (non buffered) alternative was added to the perl script.
   #echo
   #echo "Run the following in the directory: ${workingdirectory}"
   #echo
-  #echo "perl ${metapipedir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -m ${metapipedir} -o ${outdirectory} -f ${filterPercent}"
+  #echo "perl ${revampdir}/assets/morphology_table_convert2taxonomy.pl -i ${inputspreadsheet} -m ${revampdir} -o ${outdirectory} -f ${filterPercent}"
   #echo
   #echo "Hit any key when ready"
   #read mainmenuinput
@@ -228,33 +228,33 @@ for ((f=1; f<=`awk '{print NF}' ${workingdirectory}/${outdirectory}/sample_metad
 
 #Phyloseq figures
 while read -r line
-  do mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/02_Barcharts/read_count
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/02_Barcharts/relative_abundance
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/03_Heatmaps/Taxonomy_merge_based
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/04_Alpha_Diversity/Taxonomy_merge_based
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/05_Ordination/Taxonomy_merge_based/read_count
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/05_Ordination/Taxonomy_merge_based/relative_abundance
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/05_Ordination/Taxonomy_merge_based/filterInclude_TOSPECIES_only/read_count
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/05_Ordination/Taxonomy_merge_based/filterInclude_TOSPECIES_only/relative_abundance
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/06_Network/Taxonomy_merge_based/read_count
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/06_Network/Taxonomy_merge_based/relative_abundance
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/07_Rarefaction_Curves
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/08_EnvironmentFit_Ordination/Taxonomy_merge_based
+  do mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/02_Barcharts/read_count
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/02_Barcharts/relative_abundance
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/03_Heatmaps/Taxonomy_merge_based
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/04_Alpha_Diversity/Taxonomy_merge_based
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/05_Ordination/Taxonomy_merge_based/read_count
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/05_Ordination/Taxonomy_merge_based/relative_abundance
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/05_Ordination/Taxonomy_merge_based/filterInclude_TOSPECIES_only/read_count
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/05_Ordination/Taxonomy_merge_based/filterInclude_TOSPECIES_only/relative_abundance
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/06_Network/Taxonomy_merge_based/read_count
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/06_Network/Taxonomy_merge_based/relative_abundance
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/07_Rarefaction_Curves
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/08_EnvironmentFit_Ordination/Taxonomy_merge_based
   
   if [[ "${providedTaxaOfInterest}" = "TRUE" ]]; then
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/Taxa_of_interest/02_Barcharts/read_count
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/Taxa_of_interest/02_Barcharts/relative_abundance
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/Taxa_of_interest/03_Heatmaps/Taxonomy_merge_based
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/Taxa_of_interest/06_Network/Taxonomy_merge_based/read_count
-  mkdir -p ${outdirectory}/morphology_MetaPipeTables_${line}/Figures/Taxa_of_interest/06_Network/Taxonomy_merge_based/relative_abundance
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/Taxa_of_interest/02_Barcharts/read_count
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/Taxa_of_interest/02_Barcharts/relative_abundance
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/Taxa_of_interest/03_Heatmaps/Taxonomy_merge_based
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/Taxa_of_interest/06_Network/Taxonomy_merge_based/read_count
+  mkdir -p ${outdirectory}/morphology_REVAMPtables_${line}/Figures/Taxa_of_interest/06_Network/Taxonomy_merge_based/relative_abundance
   fi
   
-  Rscript --vanilla ${metapipedir}/assets/phyloseq_collapsedOnTaxonomy_individualRun.R ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/Figures ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/ASVs_counts_NOUNKNOWNS.tsv ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${outdirectory} ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $filterNAs $groupsDefinedFlag $numberGroupsDefined $filterNAs $providedTaxaOfInterest $taxaOfInterestCategory ${workingdirectory}/${outdirectory}/taxaOfInterest.txt $chemData $locationChemHeaders ${workingdirectory}/${outdirectory}/sample_order.txt ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt $filterPercent \
-    1>> ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/Figures/phyloseq_rscript_out.log 2>&1
+  Rscript --vanilla ${revampdir}/assets/phyloseq_collapsedOnTaxonomy_individualRun.R ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/Figures ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/ASVs_counts_NOUNKNOWNS.tsv ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${outdirectory} ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $filterNAs $groupsDefinedFlag $numberGroupsDefined $filterNAs $providedTaxaOfInterest $taxaOfInterestCategory ${workingdirectory}/${outdirectory}/taxaOfInterest.txt $chemData $locationChemHeaders ${workingdirectory}/${outdirectory}/sample_order.txt ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt $filterPercent \
+    1>> ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/Figures/phyloseq_rscript_out.log 2>&1
   #rm -f ${workingdirectory}/${outdirectory}/Figures/02_Barcharts/read_count/Rplots.pdf
   
-  Rscript --vanilla ${metapipedir}/assets/environment_fit_ordination_collapsedOnTaxonomy_individualrun.R ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/Figures ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $chemData $locationChemHeaders \
-    1>> ${workingdirectory}/${outdirectory}/morphology_MetaPipeTables_${line}/Figures/envfit_rscript_out.log 2>&1
+  Rscript --vanilla ${revampdir}/assets/environment_fit_ordination_collapsedOnTaxonomy_individualrun.R ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/Figures ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $chemData $locationChemHeaders \
+    1>> ${workingdirectory}/${outdirectory}/morphology_REVAMPtables_${line}/Figures/envfit_rscript_out.log 2>&1
   
 done < ${outdirectory}/unique_measurements_list.txt
 

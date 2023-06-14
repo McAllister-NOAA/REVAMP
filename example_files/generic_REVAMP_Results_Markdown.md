@@ -1,21 +1,21 @@
-# MetaPipe Results Markdown
+# REVAMP Results Markdown
 ---
 
 #### **Created by: 'Omics Group, NOAA PMEL/UW CICOES**
 
 ## Introduction
 
-**Text Describing what MetaPipe is for.** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur velit nisl, condimentum a enim quis, facilisis imperdiet augue. Vivamus suscipit aliquam felis pharetra ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur pharetra, augue a porta laoreet, tellus elit viverra arcu, ac vehicula felis metus nec eros. Ut tempus, nisl non malesuada venenatis, dui est viverra turpis, sed iaculis lectus lacus id ante. Mauris ac dui at risus auctor sollicitudin ac ac erat. Nulla tempor enim ac ipsum consectetur vestibulum. Phasellus vel massa eget dolor consectetur commodo a vitae neque.
+**Text Describing what REVAMP is for.** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur velit nisl, condimentum a enim quis, facilisis imperdiet augue. Vivamus suscipit aliquam felis pharetra ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur pharetra, augue a porta laoreet, tellus elit viverra arcu, ac vehicula felis metus nec eros. Ut tempus, nisl non malesuada venenatis, dui est viverra turpis, sed iaculis lectus lacus id ante. Mauris ac dui at risus auctor sollicitudin ac ac erat. Nulla tempor enim ac ipsum consectetur vestibulum. Phasellus vel massa eget dolor consectetur commodo a vitae neque.
 
 Duis vulputate felis sit amet elit pretium efficitur. Ut accumsan libero sed convallis cursus. Donec posuere ultrices dolor, sollicitudin molestie ante. Nulla quis quam in risus facilisis viverra. Proin suscipit sit amet magna eu mollis. Aenean rutrum ac nunc at aliquet. Nullam velit nisi, dignissim a interdum eget, hendrerit sit amet magna. Morbi leo nisi, aliquet id velit vel, malesuada pellentesque mauris. Maecenas interdum, felis nec ornare vestibulum, orci justo vestibulum nulla, non eleifend magna velit ullamcorper orci. Praesent sed facilisis libero. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean venenatis ipsum vel enim facilisis, vitae ornare libero vulputate. Donec eu massa pretium, auctor tortor ut, pretium mi. Vestibulum varius mi non porta faucibus. Vestibulum scelerisque diam vulputate tortor pellentesque, ac aliquet mi ullamcorper.
 
-If you use MetaPipe, please cite:
+If you use REVAMP, please cite:
 
 ```
-Metapipe citation. In preparation.
+REVAMP citation. In preparation.
 ```
 
-In addition, MetaPipe uses some third-party software that should also be cited:
+In addition, REVAMP uses some third-party software that should also be cited:
 
 ```
 dada2 (including blog post)
@@ -30,7 +30,7 @@ vegan
 
 ---
 
-## MetaPipe Directory Structure
+## REVAMP Directory Structure
 
 ```
 OUTDIR
@@ -76,11 +76,11 @@ Raw reads are first filtered using `cutadapt`, to identify and trim the PCR prim
 
 The `Figure` directory includes four primary choices for preference of data analysis (where applicable). The User can choose to look at figures where ASVs are considered a single ecological unit (`ASV_based`) or where ASVs have been collapsed so that each represents a single unique taxonomic hierarchy (`Taxonomy_merge_based`). Further, figures can be generated based on the raw count data (`read_count`) or based on the normalized relative percent abundance (`relative_abundance`).
 
-## MetaPipe Files of Interest
+## REVAMP Files of Interest
 
-All configuration files are copied to the MetaPipe results folder. `config_file.txt` controls all of the main options at the front end of MetaPipe. `figure_config_file.txt` controls all the options for the back end figure generation of MetaPipe. The provided sample metadata file is copied (`sample_metadata.txt`) and converted/cleaned for use in R (`sample_metadata_forR.txt`).
+All configuration files are copied to the REVAMP results folder. `config_file.txt` controls all of the main options at the front end of REVAMP. `figure_config_file.txt` controls all the options for the back end figure generation of REVAMP. The provided sample metadata file is copied (`sample_metadata.txt`) and converted/cleaned for use in R (`sample_metadata_forR.txt`).
 
-If you wish to start and stop MetaPipe at varying points along the pipeline, this can be done. The `progress.txt` file is used to track the completion of each checkpoint. If you wish to redo a checkpoint that has already passed, simply delete sequentially from the bottom of the `progress.txt` file until you have deleted the step you want to redo. **It is not recommended to delete a step in the middle while allowing the other steps to remain. It will break.**
+If you wish to start and stop REVAMP at varying points along the pipeline, this can be done. The `progress.txt` file is used to track the completion of each checkpoint. If you wish to redo a checkpoint that has already passed, simply delete sequentially from the bottom of the `progress.txt` file until you have deleted the step you want to redo. **It is not recommended to delete a step in the middle while allowing the other steps to remain. It will break.**
 
 Each R script outputs stdout and stderror to a log file within the R scripts primary directory. In addition, if you wish to customize or debug any R-based figure/file, you can open any of the R scripts in the `assets` folder. The second field of the tab-delimited file `Rscript_arguments.log` gives each of the positional arguments fed to each script during the pipeline. Simply uncomment the args block at the front end of the script and input each argument.
 
@@ -220,7 +220,7 @@ Alpha diversity metrics are presented in tabular form, as well as visually - inc
 
 ### Ordination
 
-Ordination can be a very fast method for comparing the similarities in biodiversity between samples. MetaPipe provides several ordinations, through NMDS and PCoA, colored and encircled based on the groupings, chemistry data, and replicates/sites given in the sample metadata. Note that the `Taxonomy_merge_based` folder contains a separate analysis using only those taxa assigned to the species level (`filterInclude_TOSPECIES_only`).
+Ordination can be a very fast method for comparing the similarities in biodiversity between samples. REVAMP provides several ordinations, through NMDS and PCoA, colored and encircled based on the groupings, chemistry data, and replicates/sites given in the sample metadata. Note that the `Taxonomy_merge_based` folder contains a separate analysis using only those taxa assigned to the species level (`filterInclude_TOSPECIES_only`).
 
 <figure>
 <img src="/Users/mcallister/Desktop/chris_test/18S/CP_all_RUN20220208_out/Figures/05_Ordination/ASV_based/relative_abundance/NMDS_ASVbased_samples_relabund_filtsamples_alltaxa.png" alt="NMDS_samples"/>
@@ -269,7 +269,7 @@ Network analysis can be a valuable tool for visualizing the distance/similaritie
 
 ### Environmental Fit Ordination
 
-Using the `vegan` R package, MetaPipe creates a new ordination plot (NMDS only) and runs environmental fitting on the continuos parameters given in the "chem" columns (i.e. non-controlled vocabulary, if given) of the sample metadata file, as well as on all the relative abundance percentages for each ASV. Output includes tables with the ordination coordinates (axes 1/2), r-squared, and p-value, as well as figures labelling all the samples in the new ordination space, encircling replicates/sites (if given), and ordination plots showing the "chem" values only (if given) and all vectors (including ASVs) at 0.001 and 0.05 p-value significance.
+Using the `vegan` R package, REVAMP creates a new ordination plot (NMDS only) and runs environmental fitting on the continuos parameters given in the "chem" columns (i.e. non-controlled vocabulary, if given) of the sample metadata file, as well as on all the relative abundance percentages for each ASV. Output includes tables with the ordination coordinates (axes 1/2), r-squared, and p-value, as well as figures labelling all the samples in the new ordination space, encircling replicates/sites (if given), and ordination plots showing the "chem" values only (if given) and all vectors (including ASVs) at 0.001 and 0.05 p-value significance.
 
 <figure>
 <img src="/Users/mcallister/Desktop/chris_test/18S/CP_all_RUN20220208_out/Figures/08_EnvironmentFit_Ordination/Taxonomy_merge_based/NMDS_vegan_TAXAbased_samples_relabund_filtsamples_alltaxa.png" alt="vegan_NMDS"/>
@@ -283,11 +283,11 @@ Using the `vegan` R package, MetaPipe creates a new ordination plot (NMDS only) 
 
 ### Taxa-of-Interest Folder
 
-If a file giving taxa of interest (at a given taxonomic hierarchy) is given, MetaPipe will create bar charts, heatmaps, and network figures showing only ASVs matching those taxonomies.
+If a file giving taxa of interest (at a given taxonomic hierarchy) is given, REVAMP will create bar charts, heatmaps, and network figures showing only ASVs matching those taxonomies.
 
 ### Replicate flag only
 
-If a `replicates` column is provided in the sample metadata file, MetaPipe will calculate some useful tables and figures. In the `processed_tables` directory, a directory named `replicate_based_detection` will be created. There, you can find tables of stats on the relative abundance of each ASV and how many replicates it was found in for each replicate group, as well as presence/absence tables suitable for importing into unmarked (R package) for performing occupancy modelling. In the `Figures` directory, `ReadsVSReplicateDetection` contains violin boxplots showing how variable ASV abundance is depending on how many replicates they are found in.
+If a `replicates` column is provided in the sample metadata file, REVAMP will calculate some useful tables and figures. In the `processed_tables` directory, a directory named `replicate_based_detection` will be created. There, you can find tables of stats on the relative abundance of each ASV and how many replicates it was found in for each replicate group, as well as presence/absence tables suitable for importing into unmarked (R package) for performing occupancy modelling. In the `Figures` directory, `ReadsVSReplicateDetection` contains violin boxplots showing how variable ASV abundance is depending on how many replicates they are found in.
 
 ---
 

@@ -3,10 +3,10 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/test_figs" #FIGURE OUT directory
-# args[2]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/ASV2Taxonomy/CP_all_out_barchart_forR.txt" #Location of barchart file from asv_taxonomy_processing_figureOuts.pl
-# args[3]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/sample_order.txt" #sample order file
-# args[4]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/ASV2Taxonomy/CP_all_out_barchart_forR_filtLowAbund_zzOther.txt" #filt low abund to zzOther file
+# args[1]<-"/PATH/test_figs" #FIGURE OUT directory
+# args[2]<-"/PATH/REVAMP/outdir/ASV2Taxonomy/X_barchart_forR.txt" #Location of barchart file from asv_taxonomy_processing_figureOuts.pl
+# args[3]<-"/PATH/REVAMP/outdir/sample_order.txt" #sample order file
+# args[4]<-"/PATH/REVAMP/outdir/ASV2Taxonomy/X_barchart_forR_filtLowAbund_zzOther.txt" #filt low abund to zzOther file
 ########################################
 library("ggplot2")
 library("dplyr")

@@ -3,7 +3,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/metapipe_run/COI/COI_WOAC_RUN3_debug/dada2" #working directory
+# args[1]<-"/PATH/REVAMP/outdir/dada2" #working directory
 # args[2]<-100 #minlength
 # args[3]<-TRUE #rm.phix
 # args[4]<-2 #truncQ

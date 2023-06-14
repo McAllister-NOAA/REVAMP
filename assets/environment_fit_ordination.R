@@ -3,14 +3,14 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/test_figs" #FIGURE OUT directory
-# args[2]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/processed_tables/ASVs_counts_NOUNKNOWNS_percentabund.tsv" #ASV rel abund
-# args[3]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/processed_tables/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv" #Taxonomy rel abund
-# args[4]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/sample_metadata_forR.txt" #sample metadata
+# args[1]<-"/PATH/REVAMP/outdir/Figures" #FIGURE OUT directory
+# args[2]<-"/PATH/REVAMP/outdir/processed_tables/ASVs_counts_NOUNKNOWNS_percentabund.tsv" #ASV rel abund
+# args[3]<-"/PATH/REVAMP/outdir/processed_tables/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv" #Taxonomy rel abund
+# args[4]<-"/PATH/REVAMP/outdir/sample_metadata_forR.txt" #sample metadata
 # args[5]<-"FALSE" #replicates flag
 # args[6]<-"TRUE" #sites flag
 # args[7]<-"TRUE" #chem data
-# args[8]<-"/Users/mcallister/Desktop/chris_test/18S/CP_all_out/chem_headers.txt" #location chem headers
+# args[8]<-"/PATH/REVAMP/outdir/chem_headers.txt" #location chem headers
 ########################################
 library("ggplot2")
 library("dplyr")

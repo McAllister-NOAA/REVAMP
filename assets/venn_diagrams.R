@@ -3,7 +3,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-#args[1]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/metapipe_run/noENVblast/marker_comparison_RESULTS/NEW_script_test/comp_out" #COMP OUT directory
+#args[1]<-"/PATH/REVAMP/comp_out" #COMP OUT directory
 #args[2]<-"3" #Count number of markers
 #args[3]<-"Species" #The taxonomic level to be considered (Kingdom, Phylum, Class, Order, Family, Genus, Species)
 #args[4]<-"Total" #"Total" or "Terminal" Unique Taxa

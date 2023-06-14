@@ -33,7 +33,7 @@ if ($options{h})
         print "-y = SILVAngs results/[ls]su/exports/*---otus.csv File\n";
         print "-z = SILVAngs results/[ls]su/stats/sequence_cluster_map/data/*.fa.clstr File\n";
         print "-r = Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt\n";
-        print "-m = Location of the metapipe directory\n";
+        print "-m = Location of the REVAMP directory\n";
         print "-h = This help message\n\n";
         die;
     }

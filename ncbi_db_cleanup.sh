@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Run from inside the folder where your nt database is held.
-#Run to update nt, taxonomy dmp, and prep files for metapipe.
+#Run to update nt, taxonomy dmp, and prep files for REVAMP.
 #Requires blast+, wget, and taxonomy-tools (https://github.com/pmenzel/taxonomy-tools), all in PATH
 echo "Date of last update to the nt database:" >> nt_lastupdate.txt
 date >> nt_lastupdate.txt
@@ -24,7 +24,7 @@ tar -xzf taxdump.tar.gz
 rm taxdump.tar.gz
 
 echo
-echo "Preparing files for Metapipe..."
+echo "Preparing files for REVAMP..."
 grep "genbank common name" names.dmp > common_names.dmp
 
 grep "scientific name" names.dmp | grep -i "uncultured" | cut -f1 > taxids_to_ignore.txt

@@ -3,11 +3,11 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/Angie/COI_27Aug21/MTeDNA/MTeDNA_out/Figures/01_Maps" #FIGURE OUT directory
-# args[2]<-"/Users/mcallister/Desktop/Angie/COI_27Aug21/MTeDNA/MTeDNA_out/sample_metadata_forR.txt" #sample metadata (only pass if lat and long column headers exist)
+# args[1]<-"/PATH/REVAMP/outdir/Figures/01_Maps" #FIGURE OUT directory
+# args[2]<-"/PATH/REVAMP/outdir/sample_metadata_forR.txt" #sample metadata (only pass if lat and long column headers exist)
 # args[3]<-FALSE #whether or not there are replicates (and thus identical coordinates)
 # args[4]<-TRUE #whether or not there are site labels in sample metadata
-# args[5]<-"/Users/mcallister/Desktop/Angie/COI_27Aug21/MTeDNA/MTeDNA_out/ASV2Taxonomy/MTeDNA_out_NO_UNKNOWNS_barchart.txt"
+# args[5]<-"/PATH/REVAMP/outdir/ASV2Taxonomy/MTeDNA_out_NO_UNKNOWNS_barchart.txt"
 # args[6]<-5 #Percent filter setting for pies and barcharts
 # args[7]<-5 #Pie chart scalling factor (also affects amount of scattering)
 ########################################

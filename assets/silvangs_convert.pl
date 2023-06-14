@@ -8,7 +8,7 @@ $|=1; #Autoflush so pauses within this script are pushed up to the shell script 
 # - - - - - H E A D E R - - - - - - - - - - - - - - - - -
 #Goals of script:
 #Import SILVAngs export ".../exports/x---xsu---otus.csv
-#Output tables for use in MetaPipe. Collapse on taxonomy versions only (Nanopore use).
+#Output tables for use in REVAMP. Collapse on taxonomy versions only (i.e. Nanopore use).
 #Create additional option for merged taxonomy from NCBI Eukaryotes.
 
 # - - - - - C O M M A N D    L I N E    O P T I O N S - - - - - - - -
@@ -20,7 +20,7 @@ if ($options{h})
         print "-i = SILVAngs export otu file (labelled csv but actually tab-delimited)\n";
         print "-c = cd-hit clustr file if submitted files are repset (optional)\n";
         print "-r = Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt\n";
-        print "-m = Location of metapipe directory\n";
+        print "-m = Location of REVAMP directory\n";
         print "-a = Switch to turn on merge of NCBI Eukaryote taxonomy assignments with SILVA Bacteria/Archaeal assignments\n";
         print "-f = Filter cutoff for zzOther\n";
         print "-o = Output directory\n";

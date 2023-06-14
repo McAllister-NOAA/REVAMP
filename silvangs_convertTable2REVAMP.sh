@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #NOTES: Require users to supply SILVAngs exports/x---[ls]su---otus.csv file from results archive.
-#Pair with sample_metadata.txt for creating figures (same as metapipe metadata file).
+#Pair with sample_metadata.txt for creating figures (same as REVAMP metadata file).
 ## Sample Names should be identical to names in the sample metadata file.
 ## Sample Names will be cleaned of illegal characters (only alphanumeric and underline allowed).
 ## This cleaning step will also be applied to the sample names in the metadata file (so they are the same).
 #
 #NO spaces or quotes or other weird characters in file paths
-#metapipe.sh must be in PATH
+#revamp.sh must be in PATH
 
 unset inputspreadsheet
 unset silvaRefpath
@@ -20,10 +20,10 @@ unset taxaOfInterestCategory
 
 workingdirectory=`pwd`
 
-unset metapipedir
+unset revampdir
 unset tempprogdir
-tempprogdir=`which metapipe.sh`
-metapipedir=`echo $tempprogdir | sed -E 's/\/metapipe\.sh$//'`
+tempprogdir=`which revamp.sh`
+revampdir=`echo $tempprogdir | sed -E 's/\/revamp\.sh$//'`
 myInvocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
 
 ##########################################################################################
@@ -76,7 +76,7 @@ while getopts ":i:s:r:n:d:m:o:t:c:f:y" opt; do
     y ) bypassflag=TRUE
       ;;
     \? ) echo "Invalid option: -$OPTARG"
-         echo "Usage: silvangs_convertTable2Metapipe.sh" #Invalid option provided
+         echo "Usage: silvangs_convertTable2REVAMP.sh" #Invalid option provided
          echo "       -i Input SILVAngs exports/x---[ls]su---otus.csv spreadsheet"
          echo "       -r Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt"
          echo "       -s Sample metadata file"
@@ -90,7 +90,7 @@ while getopts ":i:s:r:n:d:m:o:t:c:f:y" opt; do
          exit
       ;;
     : ) echo "Option is missing an argument: -$OPTARG"
-        echo "Usage: silvangs_convertTable2Metapipe.sh" #Arg for a called option not provided
+        echo "Usage: silvangs_convertTable2REVAMP.sh" #Arg for a called option not provided
         echo "       -i Input SILVAngs exports/x---[ls]su---otus.csv spreadsheet"
         echo "       -r Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt"
         echo "       -s Sample metadata file"
@@ -108,7 +108,7 @@ done
 shift $((OPTIND -1))
 
 if [ $OPTIND -eq 1 ]
-  then echo "Usage: silvangs_convertTable2Metapipe.sh" #No options passed
+  then echo "Usage: silvangs_convertTable2REVAMP.sh" #No options passed
         echo "       -i Input SILVAngs exports/x---[ls]su---otus.csv spreadsheet"
         echo "       -r Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt"
         echo "       -s Sample metadata file"
@@ -124,7 +124,7 @@ if [ $OPTIND -eq 1 ]
 
 if [[ $iflag -eq 0 || $sflag -eq 0 || $oflag -eq 0 || $fflag -eq 0 || $rflag -eq 0 ]]
   then echo "All options except -n, -t, -c, -m, and -d are required."
-        echo "Usage: silvangs_convertTable2Metapipe.sh" #Missing required options
+        echo "Usage: silvangs_convertTable2REVAMP.sh" #Missing required options
         echo "       -i Input SILVAngs exports/x---[ls]su---otus.csv spreadsheet"
         echo "       -r Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt"
         echo "       -s Sample metadata file"
@@ -165,7 +165,7 @@ if [[ "${providedTaxaOfInterest}" = "TRUE" ]]; then
   fi
 
 #Create sample metadata file with identical manipulation of sample names for downstream R work
-perl ${metapipedir}/assets/sampleMetadata_fileCleanup.pl -i ${samplemetafilepath} > ${outdirectory}/sample_metadata_forR.txt
+perl ${revampdir}/assets/sampleMetadata_fileCleanup.pl -i ${samplemetafilepath} > ${outdirectory}/sample_metadata_forR.txt
 
 #Create ordered sample name file
 cat ${outdirectory}/sample_metadata_forR.txt | cut -f1 | grep -v "Sample" > ${outdirectory}/sample_order.txt
@@ -180,15 +180,15 @@ cat ${outdirectory}/sample_metadata_forR.txt | cut -f1 | grep -v "Sample" > ${ou
 ##########################################################################################
 if [[ "${providedClusterInfo}" = "TRUE" ]]; then
   if [[ "${mergeNCBISILVAeuks}" = "TRUE" ]]; then
-    perl ${metapipedir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${metapipedir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath} -c ${clusterinfopath} -a
+    perl ${revampdir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${revampdir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath} -c ${clusterinfopath} -a
   else
-    perl ${metapipedir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${metapipedir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath} -c ${clusterinfopath}
+    perl ${revampdir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${revampdir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath} -c ${clusterinfopath}
   fi
 else
   if [[ "${mergeNCBISILVAeuks}" = "TRUE" ]]; then
-    perl ${metapipedir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${metapipedir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath} -a
+    perl ${revampdir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${revampdir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath} -a
   else
-    perl ${metapipedir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${metapipedir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath}
+    perl ${revampdir}/assets/silvangs_convert.pl -i ${inputspreadsheet} -m ${revampdir} -o ${outdirectory} -f ${filterPercent} -r ${silvaRefpath}
   fi
 fi
 
@@ -260,11 +260,11 @@ while read -r line
   fi
   
   #echo "${workingdirectory}/${outdirectory}/${line}_taxonomy/Figures ${workingdirectory}/${outdirectory}/${line}_taxonomy/silvangs_${line}_asvTaxonomyTable_NOUNKNOWNS.txt ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS.tsv ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${outdirectory} ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $filterNAs $groupsDefinedFlag $numberGroupsDefined $filterNAs $providedTaxaOfInterest $taxaOfInterestCategory ${workingdirectory}/${outdirectory}/taxaOfInterest.txt $chemData $locationChemHeaders ${workingdirectory}/${outdirectory}/sample_order.txt ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt $filterPercent"
-  Rscript --vanilla ${metapipedir}/assets/phyloseq_collapsedOnTaxonomy_individualRun.R ${workingdirectory}/${outdirectory}/${line}_taxonomy/Figures ${workingdirectory}/${outdirectory}/${line}_taxonomy/silvangs_${line}_asvTaxonomyTable_NOUNKNOWNS.txt ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS.tsv ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${outdirectory} ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $filterNAs $groupsDefinedFlag $numberGroupsDefined $filterNAs $providedTaxaOfInterest $taxaOfInterestCategory ${workingdirectory}/${outdirectory}/taxaOfInterest.txt $chemData $locationChemHeaders ${workingdirectory}/${outdirectory}/sample_order.txt ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt $filterPercent \
+  Rscript --vanilla ${revampdir}/assets/phyloseq_collapsedOnTaxonomy_individualRun.R ${workingdirectory}/${outdirectory}/${line}_taxonomy/Figures ${workingdirectory}/${outdirectory}/${line}_taxonomy/silvangs_${line}_asvTaxonomyTable_NOUNKNOWNS.txt ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS.tsv ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${outdirectory} ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $filterNAs $groupsDefinedFlag $numberGroupsDefined $filterNAs $providedTaxaOfInterest $taxaOfInterestCategory ${workingdirectory}/${outdirectory}/taxaOfInterest.txt $chemData $locationChemHeaders ${workingdirectory}/${outdirectory}/sample_order.txt ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt $filterPercent \
     1>> ${workingdirectory}/${outdirectory}/${line}_taxonomy/Figures/phyloseq_rscript_out.log 2>&1
   #rm -f ${workingdirectory}/${outdirectory}/Figures/02_Barcharts/read_count/Rplots.pdf
   
-  Rscript --vanilla ${metapipedir}/assets/environment_fit_ordination_collapsedOnTaxonomy_individualrun.R ${workingdirectory}/${outdirectory}/${line}_taxonomy/Figures ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $chemData $locationChemHeaders \
+  Rscript --vanilla ${revampdir}/assets/environment_fit_ordination_collapsedOnTaxonomy_individualrun.R ${workingdirectory}/${outdirectory}/${line}_taxonomy/Figures ${workingdirectory}/${outdirectory}/${line}_taxonomy/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites $chemData $locationChemHeaders \
     1>> ${workingdirectory}/${outdirectory}/${line}_taxonomy/Figures/envfit_rscript_out.log 2>&1
   
 done < ${outdirectory}/unique_TaxaFolders.txt

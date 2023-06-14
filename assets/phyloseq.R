@@ -3,9 +3,9 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/Angie/COI_27Aug21/MTeDNA/MTeDNA_out/Figures" #FIGURE OUT directory
-# args[2]<-"/Users/mcallister/Desktop/Angie/COI_27Aug21/MTeDNA" #Working directory
-# args[3]<-"MTeDNA_out" #outdirectory name
+# args[1]<-"/PATH/REVAMP/outdir/Figures" #FIGURE OUT directory
+# args[2]<-"/PATH/REVAMP/workingDir" #Working directory
+# args[3]<-"outdir" #outdirectory name
 # args[4]<-"TRUE" #control flag
 # args[5]<-"FALSE" #filter low quality samples flag
 # args[6]<-"FALSE" #replicateFlag
@@ -16,7 +16,7 @@ args <- commandArgs(trailingOnly = TRUE)
 # args[11]<-"TRUE" #groups defined in sample metadata file
 # args[12]<-"3" #number of groups defined in sample metadata file
 # args[13]<-"Order" #category to filter on for taxa of interest
-# args[14]<-"/Users/mcallister/Desktop/chris_test/18S/choice_taxa.txt" #location of taxa of interest one per line
+# args[14]<-"/PATH/REVAMP/outdir/choice_taxa.txt" #location of taxa of interest one per line
 # args[15]<-"FALSE" #whether chem data has been provided
 # args[16]<-"NULL" #location of chem header file (one per line)
 ########################################

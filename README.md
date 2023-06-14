@@ -1,20 +1,20 @@
-# MetaPipe
+# REVAMP
 
-Metabarcoding Pipeline - Currently In Development
+Rapid Exploration and Visualization through an Automated Metabarcoding Pipeline - Currently In Development
 
-Created by Sean McAllister, Matt Galaska, and Chris Paight
+Created by Sean McAllister, Chris Paight, Emily Norton, and Matt Galaska
 
-Developed by the 'Omics Group at <a class="ui-tooltip" title="Pacific Marine Environmental Laboratory"><span style="cursor: help;">PMEL</span></a> (<a class="ui-tooltip" title="National Oceanic and Atmospheric Administration"><span style="cursor: help;">NOAA</span></a>) in cooperation with <a class="ui-tooltip" title="Cooperative Institute for Climate, Ocean, & Ecosystem Studies"><span style="cursor: help;">CICOES</span></a> (<a class="ui-tooltip" title="University of Washington"><span style="cursor: help;">UW</span></a>)
+Developed by the Ocean Molecular Ecology (OME) Group at <a class="ui-tooltip" title="Pacific Marine Environmental Laboratory"><span style="cursor: help;">PMEL</span></a> (<a class="ui-tooltip" title="National Oceanic and Atmospheric Administration"><span style="cursor: help;">NOAA</span></a>) in cooperation with <a class="ui-tooltip" title="Cooperative Institute for Climate, Ocean, & Ecosystem Studies"><span style="cursor: help;">CICOES</span></a> (<a class="ui-tooltip" title="University of Washington"><span style="cursor: help;">UW</span></a>)
 
 ## Citation
 
-**If you find MetaPipe useful in your research, please cite...**
+**If you find REVAMP useful in your research, please cite...**
 
 ```
 
 ```
 
-**MetaPipe employs several programs internally, which should also be cited:**
+**REVAMP employs several programs internally, which should also be cited:**
 
 * dada2 (including blog post)
 * cutadapt
@@ -25,7 +25,7 @@ Developed by the 'Omics Group at <a class="ui-tooltip" title="Pacific Marine Env
 * vegan
 
 ## Wiki
-Check the MetaPipe Wiki for more information on how MetaPipe works.
+Check the REVAMP Wiki for more information on how REVAMP works.
 
 ## Installation
 ### Easy Installation
@@ -34,11 +34,11 @@ Docker TBD
 ### Installation outside of Docker
 
 ```
-git clone https://github.com/McAllister-NOAA/metapipe.git
+git clone https://github.com/McAllister-NOAA/REVAMP.git
 
 ```
 
-Add ```metapipe.sh``` to your PATH
+Add ```revamp.sh``` to your PATH
 
 Install the necessary dependencies, stand alone packages and in R (below)
 ##### Dependencies
@@ -83,7 +83,7 @@ sample lat/long
 replicate indication
 chemistry
 
-## MetaPipe Results
+## REVAMP Results
 TBD
 
 #### Legal Disclaimer

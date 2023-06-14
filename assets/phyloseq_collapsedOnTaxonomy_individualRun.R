@@ -3,12 +3,12 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/Figures" #FIGURE OUT directory
-# args[2]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/morphology_MetaPipeTables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt" #ASV to Taxonomy file to use
-# args[3]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/morphology_MetaPipeTables_Density____m3_/ASVs_counts_NOUNKNOWNS.tsv" #ASV counts with raw data
-# args[4]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/morphology_MetaPipeTables_Density____m3_/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv" #ASV counts with rel abundance data
+# args[1]<-"/PATH/REVAMP/outdir/Figures" #FIGURE OUT directory
+# args[2]<-"/PATH/REVAMP/outdir/morphology_REVAMPtables_ASV2Taxonomy/morphology_asvTaxonomyTable_NOUNKNOWNS.txt" #ASV to Taxonomy file to use
+# args[3]<-"/PATH/REVAMP/outdir/morphology_REVAMPtables_Density____m3_/ASVs_counts_NOUNKNOWNS.tsv" #ASV counts with raw data
+# args[4]<-"/PATH/REVAMP/outdir/morphology_REVAMPtables_Density____m3_/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv" #ASV counts with rel abundance data
 # args[5]<-"Morphology" #Out Name
-# args[6]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/sample_metadata_forR.txt" #sample metadata file
+# args[6]<-"/PATH/REVAMP/outdir/sample_metadata_forR.txt" #sample metadata file
 # args[7]<-"FALSE" #replicateFlag
 # args[8]<-"TRUE" #sitelabelFlag
 # args[9]<-"FALSE" #FILTER NAs where appropriate
@@ -17,11 +17,11 @@ args <- commandArgs(trailingOnly = TRUE)
 # args[12]<-"FALSE" #FILTER NAs where appropriate #DUPLICATED/UNUSED
 # args[13]<-"TRUE" #whether taxa of interest file is given
 # args[14]<-"Order" #category to filter on for taxa of interest
-# args[15]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/copepoda_orders_morph.txt" #location of taxa of interest one per line
+# args[15]<-"/PATH/REVAMP/outdir/copepoda_orders_morph.txt" #location of taxa of interest one per line
 # args[16]<-"TRUE" #whether chem data has been provided
-# args[17]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/chem_headers.txt" #location of chem header file (one per line)
-# args[18]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/sample_order.txt" #sample_order.txt
-# args[19]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/morphology_MetaPipeTables_Density____m3_/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt" #ASV taxonomy table with taxa filtered to zzOther below perc filter
+# args[17]<-"/PATH/REVAMP/outdir/chem_headers.txt" #location of chem header file (one per line)
+# args[18]<-"/PATH/REVAMP/outdir/sample_order.txt" #sample_order.txt
+# args[19]<-"/PATH/REVAMP/outdir/morphology_REVAMPtables_Density____m3_/ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt" #ASV taxonomy table with taxa filtered to zzOther below perc filter
 # args[20]<-"5" #percent filter for taxa
 ########################################
 library("ggplot2")

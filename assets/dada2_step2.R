@@ -3,7 +3,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-#args[1]<-"/Users/mcallister/Desktop/test_out/dada2" #working directory
+#args[1]<-"/PATH/REVAMP/outdir/dada2" #working directory
 #args[2]<-32000*0.7 #memory size Mb
 
 ########################################

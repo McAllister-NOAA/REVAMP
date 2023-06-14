@@ -17,7 +17,7 @@ use List::MoreUtils qw(uniq);
 #   2) Enter the ASV2Taxonomy folder from one of your runs. Move contents to "ORIGINAL_RUN".
 #   3) Run this script from the ASV2Taxonomy folder.
 #   4) Confirm that "taxonomyscriptFinished=TRUE" in the progress.txt file.
-#   5) Rerun metapipe to complete tables/figures.
+#   5) Rerun REVAMP to complete tables/figures.
 
 
 # - - - - - C O M M A N D    L I N E    O P T I O N S - - - - - - - -
@@ -32,7 +32,7 @@ if ($options{h})
         print "-n = Allin Output basename\n";
         print "-o = List of samples (one per line) in the order you want them exported. Must be exact matches to ASV counts table.\n";
         print "       Does not have to include all samples. (optional)\n";
-        print "-m = Metapipe directory\n";
+        print "-m = REVAMP directory\n";
         print "-h = This help message\n\n";
         die;
     }

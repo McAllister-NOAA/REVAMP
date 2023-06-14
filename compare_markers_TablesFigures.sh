@@ -8,7 +8,7 @@
 # Note: If the "group#" do not align between marker sample metadata files, those groups will not match across markers and resulting figures based on groups should be ignored.
 
 #NO spaces or quotes or other weird characters in file paths
-#metapipe.sh must be in PATH
+#revamp.sh must be in PATH
 
 unset inputfolder
 unset outdirectory
@@ -19,10 +19,10 @@ unset refMarker
 
 workingdirectory=`pwd`
 
-unset metapipedir
+unset revampdir
 unset tempprogdir
-tempprogdir=`which metapipe.sh`
-metapipedir=`echo $tempprogdir | sed -E 's/\/metapipe\.sh$//'`
+tempprogdir=`which revamp.sh`
+revampdir=`echo $tempprogdir | sed -E 's/\/revamp\.sh$//'`
 myInvocation="$(printf %q "$BASH_SOURCE")$((($#)) && printf ' %q' "$@")"
 
 ##########################################################################################
@@ -154,9 +154,9 @@ fi
 ##
 ##########################################################################################
 if [[ "${providedTaxaOfInterest}" = "TRUE" ]]; then
-  perl ${metapipedir}/assets/compare_markers.pl -i ${inputdirectory}/ASV_taxonomy -o ${outdirectory}/Tables -f ${outdirectory}/taxaOfInterest.txt -l ${taxaOfInterestCategory}
+  perl ${revampdir}/assets/compare_markers.pl -i ${inputdirectory}/ASV_taxonomy -o ${outdirectory}/Tables -f ${outdirectory}/taxaOfInterest.txt -l ${taxaOfInterestCategory}
 else
-  perl ${metapipedir}/assets/compare_markers.pl -i ${inputdirectory}/ASV_taxonomy -o ${outdirectory}/Tables
+  perl ${revampdir}/assets/compare_markers.pl -i ${inputdirectory}/ASV_taxonomy -o ${outdirectory}/Tables
 fi
 
 ##########################################################################################
@@ -167,7 +167,7 @@ fi
 ##    Run perl script compare_marker_cleanup.pl in preparation for R phyloseq script
 ##
 ##########################################################################################
-perl ${metapipedir}/assets/compare_marker_cleanup.pl -i $inputdirectory -o $outdirectory
+perl ${revampdir}/assets/compare_marker_cleanup.pl -i $inputdirectory -o $outdirectory
 
 ##########################################################################################
 ##########################################################################################
@@ -178,7 +178,7 @@ perl ${metapipedir}/assets/compare_marker_cleanup.pl -i $inputdirectory -o $outd
 ##
 ##########################################################################################
 if [[ "${runHumanReadableComparisons}" = "TRUE" ]]; then
-  perl ${metapipedir}/assets/compare_humanReadableTables.pl -i ${inputdirectory}/Taxa_relabund_Human -r $refMarker -s ${outdirectory}/Tables/HumanReadable/sampleEquivalents.txt > ${outdirectory}/Tables/HumanReadable/comparison_HumanReadableTables_2_Reference.txt
+  perl ${revampdir}/assets/compare_humanReadableTables.pl -i ${inputdirectory}/Taxa_relabund_Human -r $refMarker -s ${outdirectory}/Tables/HumanReadable/sampleEquivalents.txt > ${outdirectory}/Tables/HumanReadable/comparison_HumanReadableTables_2_Reference.txt
 fi
 
 ##########################################################################################
@@ -218,7 +218,7 @@ for ((f=1; f<=`awk '{print NF}' ${workingdirectory}/${outdirectory}/MergedMarker
   numberGroupsDefined=$highestgroupnum
 
 #Phyloseq figures
-Rscript --vanilla ${metapipedir}/assets/phyloseq_mergedMarkerComparison.R ${workingdirectory}/${outdirectory} ${workingdirectory}/${outdirectory}/MergedMarkers_asvTaxonomyTable_NOUNKNOWNS.txt ${workingdirectory}/${outdirectory}/MergedMarkers_ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.txt ${workingdirectory}/${outdirectory}/MergedMarkers_sample_metadata_forR.txt $replicates $sites $groupsDefinedFlag $numberGroupsDefined $providedTaxaOfInterest $taxaOfInterestCategory ${workingdirectory}/${outdirectory}/taxaOfInterest.txt \
+Rscript --vanilla ${revampdir}/assets/phyloseq_mergedMarkerComparison.R ${workingdirectory}/${outdirectory} ${workingdirectory}/${outdirectory}/MergedMarkers_asvTaxonomyTable_NOUNKNOWNS.txt ${workingdirectory}/${outdirectory}/MergedMarkers_ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.txt ${workingdirectory}/${outdirectory}/MergedMarkers_sample_metadata_forR.txt $replicates $sites $groupsDefinedFlag $numberGroupsDefined $providedTaxaOfInterest $taxaOfInterestCategory ${workingdirectory}/${outdirectory}/taxaOfInterest.txt \
     1>> ${workingdirectory}/${outdirectory}/phyloseq_rscript_out.log 2>&1
 
 rm -f ${workingdirectory}/${outdirectory}/Figures/Ordination/Rplots.pdf
@@ -233,7 +233,7 @@ for i in "${uniqueTotTerm[@]}"
 do
   for j in "${hierarchyArr[@]}"
   do
-    Rscript --vanilla ${metapipedir}/assets/venn_diagrams.R ${workingdirectory}/${outdirectory} $numVennComp $j $i \
+    Rscript --vanilla ${revampdir}/assets/venn_diagrams.R ${workingdirectory}/${outdirectory} $numVennComp $j $i \
       1>> ${workingdirectory}/${outdirectory}/venn_rscript_out.log 2>&1
   done
 done

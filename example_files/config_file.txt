@@ -1,4 +1,4 @@
-##This is the MetaPipe config file
+##This is the REVAMP config file
 
 ####################################################
 ##Frequently modified parameters

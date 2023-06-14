@@ -3,13 +3,13 @@ args <- commandArgs(trailingOnly = TRUE)
 
 ########################################
 #TEMP WHILE WORKING ON SCRIPT
-# args[1]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/Figures" #FIGURE OUT directory
-# args[2]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/morphology_MetaPipeTables_Density____m3_/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv" #Taxonomy rel abund
-# args[3]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/sample_metadata_forR.txt" #sample metadata
+# args[1]<-"/PATH/REVAMP/outdir/Figures" #FIGURE OUT directory
+# args[2]<-"/PATH/REVAMP/outdir/morphology_REVAMPtables_Density____m3_/ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv" #Taxonomy rel abund
+# args[3]<-"/PATH/REVAMP/outdir/sample_metadata_forR.txt" #sample metadata
 # args[4]<-"FALSE" #replicates flag
 # args[5]<-"TRUE" #sites flag
 # args[6]<-"TRUE" #chem data
-# args[7]<-"/Users/mcallister/Desktop/Illumina/1_WOAC/WOAC/morphology_out/chem_headers.txt" #location chem headers
+# args[7]<-"/PATH/REVAMP/outdir/chem_headers.txt" #location chem headers
 ########################################
 library("ggplot2")
 library("dplyr")
