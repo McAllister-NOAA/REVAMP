@@ -125,19 +125,68 @@ Description of arguments:
 * ```-k```: **OPTIONAL** Run REVAMP with this parameter after successful completion to free up disk space.
 
 ### Required input files
+
+#### Pipeline Configuration File (```-p```)
+Modify example file to fit your needs. Primers can contain any base designation from the [IUPAC nucleotide code](https://www.bioinformatics.org/sms/iupac.html) in addition to I (inosine), which is considered as an "N" position. The recommendation for the ```blastLengthCutoff``` is 90% of the total marker target length. Suggested default ```taxonomyCutoffs``` are (97,95,90,80,70,60) for rRNA genes and (95,92,87,77,67,60) for protein encoding genes. The ```blastMode``` parameter has three options, with ```allEnvOUT``` and ```mostEnvOUT``` using negative taxID exclusion lists in the BLASTn step. ```mostEnvOUT``` removes subjects with "uncultured", "environmental samples", "metagenome", and "unidentified" in their "scientific name" field. ```allEnvOUT``` additionally removes subjects with "unclassified" in the "scientific name" field. Optional parameter ```failedMerge_useDirection``` should only be used if a prior run of the pipeline has shown that the forward/reverse reads will not merge properly. Optional parameter ```removeASVsFILE``` can be used to remove specified ASVs (one per line) from analysis (useful for known contaminants). Controls on DADA2 parameters are provided.
+
+```
+##This is the REVAMP config file
+
+####################################################
+##Frequently modified parameters
+####################################################
+primerF=GYGGTGCATGGCCGTTSKTRGTT
+primerR=GTGTGYACAAAGGBCAGGGAC
+blastLengthCutoff=370 #bp length under which BLAST hits are not considered
+systemmemoryMB=32000 #MB of total system memory; uses only 70% of max
+locationNTdatabase=/path/to/NCBI/blastdb
+taxonomyCutoffs=97,95,90,80,70,60 #Percent ID cutoffs for ID to S,G,F,O,C,P
+failedMerge_useDirection=FORWARD #Use only FORWARD (R1) or REVERSE (R2) reads (OPTIONAL)
+removeASVsFILE=/path/to/file/remove_contaminants.txt (OPTIONAL)
+
+###DADA2 Filtering options:
+dada_minlength=120
+dada_phix=TRUE
+dada_trunQ=2
+dada_maxEE1=5
+dada_maxEE2=5
+dada_trimRight=0 #Recommended to look at fastq quality and trim ends of sequence data as needed.
+dada_trimLeft=0
+###
+
+####################################################
+##Infrequently changed default parameters
+####################################################
+blastMode=mostEnvOUT #options: allIN,allEnvOUT,mostEnvOUT
+```
+
+#### Figure Configuration File (```-f```)
+Modify example file to fit your needs. ```filterPercent``` controls the cutoff relative abundance that is used to place taxa into "zzOther" to simplify barchart figures. ```pieScale``` is an attempt to provide some control over the size of pie charts in the "mapPies"-labelled maps. ```removeNA``` removes any taxonomic assignment of "NA" from barchart figures. If ```filterLowQualSamples``` is "TRUE", then ```filterPercentLowQualSamples``` sets the cutoff for removing a sample from analysis, based on the average percentage of total reads of all other samples. Defining taxa of interest (```providedTaxaOfInterest``` "TRUE") can provide many additional figures focusing on only the listed taxa. The ```taxaOfInterestFile``` must contain a list of the taxa of interest (one per line), all from the same taxonomic level (in this case designated as "Order" for ```taxaOfInterestLevel```).
+
+```
+##This is the REVAMP figure config file
+###Figure options:
+filterPercent=5
+pieScale=5.7
+removeNA=FALSE
+
+###
+filterLowQualSamples=TRUE
+filterPercentLowQualSamples=10
+
+#TAXA of Interest: Provides specific figures.
+#List one name per line. All from same taxonomic level.
+providedTaxaOfInterest=TRUE
+taxaOfInterestFile=/path/to/file/choice_taxa.txt
+taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus, or Species
+```
+
+#### Sample Metadata File (```-s```)
+
+STOP HERE
+
+
 * Raw reads
-* Program settings
-primer sequence F
-primer sequence R
-force merge? T/F [F]
-DESeq rarefaction T/F [F]
-expected insert size (bp)
-sequence read length (bp)
-location of sample metadata file
-taxa depth (for figures)
-control samples (positive/negative)
-contaminant taxa list
-taxid of interest list
 
 * Sample metadata
 sample order
@@ -145,6 +194,8 @@ sample groups
 sample lat/long
 replicate indication
 chemistry
+control samples (positive/negative)
+
 
 ## REVAMP Results
 TBD
