@@ -22,7 +22,7 @@ IN REVIEW
 * DADA2 – [Callahan et al., 2016](https://doi.org/10.1038/nmeth.3869) ([useful tutorial](https://benjjneb.github.io/dada2/index.html))
 * BLASTn – [Camacho et al., 2009](https://doi.org/10.1186/1471-2105-10-421)
 * TaxonKit – [Shen and Ren, 2021](https://doi.org/10.1016/j.jgg.2021.03.006)
-* Krona Plots – [Ondov et al., 2011](https://doi.org/10.1186/1471-2105-12-385)
+* Krona – [Ondov et al., 2011](https://doi.org/10.1186/1471-2105-12-385)
 * phyloseq – [McMurdie and Holmes, 2013](https://doi.org/10.1371/journal.pone.0061217) ([useful tutorial](https://joey711.github.io/phyloseq/))
 * vegan – [Oksanen et al., 2020](https://cran.r-project.org/web/packages/vegan/)
 
@@ -64,45 +64,39 @@ If NCBI *nt* database files continually fail to download, try to run ```update_b
 
 #### Install the necessary dependencies for REVAMP
 
-STOP HERE
-
 NCBI databases (should be already installed; see above):
-* *nt* database
-* *taxonomy* database
+* *nt* database (download through ```update_blastdb.pl``` from the [BLAST+ executables](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)) 
+* *taxonomy* database (```wget https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz```)
 
 Stand alone tools:
-* R (Rscript) – v.4.0.3
-* blast+ - v.2.13.0+
-* cutadapt - v.2.8
-* taxonkit - v.0.5.0
-* TaxonomyTools (https://github.com/pmenzel/taxonomy-tools)
-* KronaTools (https://github.com/marbl/Krona/wiki/Installing)
-* subtree (taxonomy...)
+* wget ([HomeBrew](https://formulae.brew.sh/formula/wget) or [MacPorts](https://ports.macports.org/port/wget/) on Mac)
+* R (Rscript) - v.4.0.3
+* [Taxonomy Tools](https://github.com/pmenzel/taxonomy-tools)
+* [Cutadapt](https://cutadapt.readthedocs.io/en/stable/installation.html) - v.3.7
+* [BLAST+](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) - v.2.13.0+
+* [TaxonKit](https://bioinf.shenwei.me/taxonkit/download/) - v.0.5.0
+* [Krona](https://github.com/marbl/Krona/wiki) - v.2.7.1
 
 R packages:
-* dada2 – v.1.14.1
-* dbplyr - v.1.4.2
-* vegan - v.2.5-6
-* mapping packages
-* ggplot2 - v.3.3.0
-* BiocManager
-* phyloseq 
-* ggpubr
-* ggrepel
-* ggalt
-* mapdata
-* mapproj
-* marmap
-* scatterpie
-* janitor
-* spatstat
-* viridis
-* raster
-* rgdol
+* [dada2](https://benjjneb.github.io/dada2/dada-installation.html) – v.1.18.0
+* [phyloseq](https://joey711.github.io/phyloseq/install.html) - v.1.34.0
+* vegan - v.2.5-7
+* spatstat - v.1.64-1
+* dplyr - v.1.0.3
+* ggplot2 - v.3.3.3
+* ggrepel - v.0.8.2
+* ggpubr - v.0.4.0
+* ggalt - v.0.4.0
+* mapdata - v.2.3.0
+* [marmap](https://epante.wordpress.com/marmap/) - v.1.0.5
+* mapproj - v.1.2.7
+* scatterpie - v.0.1.5
+* janitor - v.2.1.0
+* VennDiagram - v.1.7.1
 
 Perl dependencies:
-* List::MoreUtils
-
+* [List::Util](https://metacpan.org/pod/List::Util)
+* [List::MoreUtils](https://metacpan.org/pod/List::MoreUtils)
 
 
 ## Toy Test dataset
