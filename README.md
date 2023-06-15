@@ -64,27 +64,44 @@ If NCBI *nt* database files continually fail to download, try to run ```update_b
 
 #### Install the necessary dependencies for REVAMP
 
-STOPPED HERE
+STOP HERE
+
+NCBI databases (should be already installed; see above):
+* *nt* database
+* *taxonomy* database
 
 Stand alone tools:
-* R (Rscript)
+* R (Rscript) – v.4.0.3
+* blast+ - v.2.13.0+
+* cutadapt - v.2.8
+* taxonkit - v.0.5.0
+* TaxonomyTools (https://github.com/pmenzel/taxonomy-tools)
+* KronaTools (https://github.com/marbl/Krona/wiki/Installing)
+* subtree (taxonomy...)
+
+R packages:
 * dada2 – v.1.14.1
 * dbplyr - v.1.4.2
 * vegan - v.2.5-6
 * mapping packages
 * ggplot2 - v.3.3.0
-* blastn - v.x
-* cutadapt - v.2.8
-* taxonkit - v.0.5.0
-* krona
-* subtree (taxonomy...)
-* perl : List::MoreUtils
-* And many more...
+* BiocManager
+* phyloseq 
+* ggpubr
+* ggrepel
+* ggalt
+* mapdata
+* mapproj
+* marmap
+* scatterpie
+* janitor
+* spatstat
+* viridis
+* raster
+* rgdol
 
-
-
-
-
+Perl dependencies:
+* List::MoreUtils
 
 
 
