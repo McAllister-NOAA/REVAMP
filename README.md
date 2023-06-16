@@ -182,10 +182,10 @@ taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus
 ```
 
 #### Sample Metadata File (```-s```)
-This important file links a sample to its metadata. At a minimum, users must provide ```Sample``` designations, with ```lat``` and ```long``` recommended. ```Sample``` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations) using the column headers from ```group1``` to ```group#```. Any columns that do not match the controlled vocabulary or ```group#``` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as "NA". Note that 
+This important file links a sample to its metadata. At a minimum, users must provide ```Sample``` designations, with ```lat``` and ```long``` recommended. ```Sample``` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations, including NMDS/PCoA encircling) using the column headers from ```group1``` to ```group#```. Any columns that do not match the controlled vocabulary or ```group#``` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as ```NA```. Note that while phyloseq can handle missing data, vegan does not calculate evironmental fitting with missing data. We recommend that the pipeline is run first with all samples/data columns, followed up with a run to test environmental fitting with the samples with missing metadata and/or metadata columns with missing data removed.
 
 Controlled vocabulary:
-* ```Sample``` = Sample name identical to ```X_R1.fastq.gz``` and ```X_R2.fastq.gz``` as found in the reads directory (```-r```). All sample names have ```MP_``` appended to the front and have non-alphanumeric characters converted to underscores to avoid programatic errors (e.g. R does not accept row/column headers that start with numbers).
+* ```Sample``` = Sample name identical to the ```X``` in ```X_R1.fastq.gz``` and ```X_R2.fastq.gz``` as found in the reads directory (```-r```). All sample names have ```MP_``` appended to the front and have non-alphanumeric characters converted to underscores to avoid programatic errors (e.g. R does not accept row/column headers that start with numbers).
 * ```lat``` = latitude decimal degrees
 * ```long``` = longitude decimal degrees
 * ```replicates``` = String designating replicate samples. Replicate samples are treated both independently and as an averaged aggregate for some figures. Additional replicate-specific figures and tables are created, in particular for occupancy modelling outside the pipeline.
@@ -193,11 +193,14 @@ Controlled vocabulary:
 * ```controls``` = Can be ```negative```, ```positive```, or ```NA```
 
 ```
-Sample	lat	long	sites	replicates    controls      group1 group2 pH_avg temp_degC     water_col_location
-
-
-
-
+Sample	lat	long	replicates    sites  controls      group1 group2 pH_avg temp_degC     water_col_location
+18cp45	47.594567	-124.497067	CL42   CL42	NA     AK_trip1      1      7.4    11.4   surface
+18cp46	47.594567	-124.497067	CL42   CL42	NA     AK_trip1      1      7.4    11.4   surface
+18cp6	47.594567	-124.497067	CL42B  CL42	NA     AK_trip1      2      7.15   3.2    deep
+E25_2B_DY20	59.90486667	-171.6984167	M5     M5     NA     AK_trip2      3      7.2    15.1   surface
+5-18S_S5_L001	33.97368541	-118.9126162	B5     B5     NA     CA     3      7.22   21.2   deep
+positive_control     NA     NA     NA     NA     positive      NA     NA     NA     NA     NA
+negative_control     NA     NA     NA     NA     negative      NA     NA     NA     NA     NA
 ```
 
 
