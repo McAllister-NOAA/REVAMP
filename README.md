@@ -182,8 +182,30 @@ taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus
 ```
 
 #### Sample Metadata File (```-s```)
+This important file links a sample to its metadata. At a minimum, users must provide ```Sample``` designations, with ```lat``` and ```long``` recommended. ```Sample``` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations) using the column headers from ```group1``` to ```group#```. Any columns that do not match the controlled vocabulary or ```group#``` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as "NA". Note that 
 
-STOP HERE
+Controlled vocabulary:
+* ```Sample``` = Sample name identical to ```X_R1.fastq.gz``` and ```X_R2.fastq.gz``` as found in the reads directory (```-r```). All sample names have ```MP_``` appended to the front and have non-alphanumeric characters converted to underscores to avoid programatic errors (e.g. R does not accept row/column headers that start with numbers).
+* ```lat``` = latitude decimal degrees
+* ```long``` = longitude decimal degrees
+* ```replicates``` = String designating replicate samples. Replicate samples are treated both independently and as an averaged aggregate for some figures. Additional replicate-specific figures and tables are created, in particular for occupancy modelling outside the pipeline.
+* ```sites``` = String designating samples taken from the same sites. Similar treatment to the ```replicates``` column in relation to averaged aggregate visualization.
+* ```controls``` = Can be ```negative```, ```positive```, or ```NA```
+
+```
+Sample	lat	long	sites	replicates    controls      group1 group2 pH_avg temp_degC     water_col_location
+
+
+
+
+```
+
+
+
+
+
+
+
 
 
 * Raw reads
