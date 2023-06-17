@@ -231,13 +231,46 @@ This flag will trigger two prompts for file locations:
 
 ## Stand alone applications
 
-### morphology_convertTable2REVAMP.sh
-
 ### silvangs_convertTable2REVAMP.sh
+Allows for the independent incorporation of SILVAngs output into the pipeline for the production of tables and figures only. Unlike the ```-e``` option in the main ```revamp.sh``` pipeline, this approach excludes initial quality control through ASV assignment. Ideal for use with single read data (e.g. Nanopore reads), producing the same figures and tables as the main pipeline. 
+
+#### Arguments
+```
+Usage: silvangs_convertTable2REVAMP.sh"
+       -i Input SILVAngs exports/x---[ls]su---otus.csv spreadsheet
+       -r Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt
+       -s Sample metadata file
+       -o Output directory
+       -f Filter percent cutoff for assignment to zzOther
+       -n Filter NAs from figures (optional)
+       -t Taxa of interest file (one per line) (optional)
+       -c Taxonomic category (e.g. Order) used in Taxa of interest file (required if -t called)
+       -m Merge NCBI Eukaryote taxa assignments with SILVA Bacteria/Archaea assignments (optional)
+       -d CD-HIT clustr mapping file if clustering done before hand (optional)
+```
+
+Description of arguments:
+* ```-i```: SILVAngs export file ```~/Downloads/results/ssu/exports/*---otus.csv```
+* ```-r```: Reference taxonomy map for current SILVA database (i.e. [tax_slv_ssu_138.1.txt](https://www.arb-silva.de/no_cache/download/archive/current/Exports/taxonomy/))
+* ```-s```: Sample metadata file, as above
+* ```-o```: Folder used for all pipeline outputs and organization
+* ```-f```: Percentage cut off for assigning low abundance taxa to zzOther
+* ```-n```: **OPTIONAL** Toggle for filering "NA" assignments from phyloseq figures.
+* ```-t```: **OPTIONAL** Toggle for providing a file of taxa of interest for additional figure generation.
+* ```-c```: **OPTIONAL;REQUIRED if ```-t``` is provided** Taxonomic level of the taxa provided in ```-t```.
+* ```-m```: **OPTIONAL** Creates a merged result folder where NCBI Eukaryote taxa assignments are applied from the SILVAngs export file when SILVA assignments are to "Mitochondria" or "Chloroplast".
+* ```-d```: **OPTIONAL** If read files were clustered with CD-HIT before supplying them to SILVAngs, provide that clustr file here to inflate read counts for clusters.
+
+STOP HERE
 
 ### mergeBLASTandSILVAngs_ASV2Taxonomy.pl
+The second allows for merging SILVAngs Bacterial/Archaeal assignments with BLASTn-based Eukaryotic assignments from two runs of the pipeline for a more complete assessment of all three lineages.
+
+### morphology_convertTable2REVAMP.sh
+The third allows for the production of figures and tables from simple taxonomy assignments (e.g. binomial species name or higher) with feature counts data (e.g. biomass or density measurements), such as what could be used for morphology-based environmental assessment. Each of these taxonomic assignments is traced to NCBI’s taxonomy database through TaxonKit (name2taxid), with user guidance. 
 
 ### compare_markers_TablesFigures.sh
+The last script allows for the comparison of marker genes (and the output from number three) by merging datasets and creating new tables and figures: 1) tables comparing counts and identity for shared taxonomies between markers; 2) Venn diagrams to compare taxonomy counts between markers; 3) merged taxonomy-based Bray-Curtis distance network figures comparing samples; 4) merged taxonomy-based ordination plots. 
 
 ## REVAMP Results
 TBD
