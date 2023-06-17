@@ -229,6 +229,9 @@ This flag will trigger two prompts for file locations:
 * "Enter the location of the SILVAngs ssu or lsu results directory (i.e. ~/Downloads/results/ssu)". This folder will contain the SILVAngs export file ```~/Downloads/results/ssu/exports/*---otus.csv``` and the SILVAngs cluster file ```~/Downloads/results/ssu/stats/sequence_cluster_map/data/*.fa.clstr```.
 * "Enter the location of the reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt". This file can be downloaded from the Arb SILVA [archive](https://www.arb-silva.de/no_cache/download/archive/current/Exports/taxonomy/).
 
+## REVAMP Results Directory
+TBD
+
 ## Stand alone applications
 
 ### silvangs_convertTable2REVAMP.sh
@@ -285,19 +288,58 @@ Description of arguments:
 * ```-m```: PATH to the REVAMP program directory.
 
 ### morphology_convertTable2REVAMP.sh
-Allows for the production of figures and tables from simple taxonomy assignments (e.g. binomial species name or higher) with feature counts data (e.g. biomass or density measurements), such as what could be used for morphology-based environmental assessment. Each of these taxonomic assignments is traced to NCBI’s taxonomy database through TaxonKit (name2taxid), with user guidance where needed.
+Allows for the production of figures and tables from simple taxonomy assignments (e.g. binomial species name or higher) with feature counts data (e.g. biomass or density measurements) per sample, such as what could be used for morphology-based environmental assessment. Each of these taxonomic assignments is traced to NCBI’s taxonomy database through TaxonKit (name2taxid), with user guidance where needed.
 
 #### Arguments
 ```
-
+Usage: morphology_convertTable2REVAMP.sh
+       -i Input morphology spreadsheet
+       -s Sample metadata file
+       -o Output directory
+       -f Filter percent cutoff for assignment to zzOther
+       -n Filter NAs from figures (optional)
+       -t Taxa of interest file (one per line) (optional)
+       -c Taxonomic category (e.g. Order) used in Taxa of interest file (required if -t called)
+       -y Automate filling in taxonkit output (recommended; optional)
 ```
 
+Description of arguments:
+* ```-i```: Input file in the format "Sample\tTaxonomy\tCount1...CountX" with headers. Samples should match the ```-s``` sample metadata file. Taxonomy can be binomial species names or higher taxonomic levels. Count data can be any abundance measurement (e.g. density or biomass measure for taxa in the sample), and as many measurements as you wish can be provided.
+* ```-s```: Sample metadata file, as above
+* ```-o```: Name of the output directory
+* ```-f```: Percentage cut off for assigning low abundance taxa to zzOther
+* ```-n```: **OPTIONAL** Toggle for filering "NA" assignments from phyloseq figures.
+* ```-t```: **OPTIONAL** Toggle for providing a file of taxa of interest for additional figure generation.
+* ```-c```: **OPTIONAL;REQUIRED if ```-t``` is provided** Taxonomic level of the taxa provided in ```-t```.
+* ```-y```: **OPTIONAL;RECOMMENDED** Automatically fills gaps in the taxonkit output as described in the main pipeline. Where a blank ```ORDER``` with known ```FAMILY``` would be assigned ```FAMILY__o``` to designate that it is the order that contains that family.
 
 ### compare_markers_TablesFigures.sh
-The last script allows for the comparison of marker genes (and the output from number three) by merging datasets and creating new tables and figures: 1) tables comparing counts and identity for shared taxonomies between markers; 2) Venn diagrams to compare taxonomy counts between markers; 3) merged taxonomy-based Bray-Curtis distance network figures comparing samples; 4) merged taxonomy-based ordination plots. 
+Allows for the comparison of marker genes and the output from ```morphology_convertTable2REVAMP.sh``` by merging datasets and creating new tables and figures.
+Tables and figures include:
+1. Tables comparing counts and identity for shared taxonomies between markers
+2. Venn diagrams to compare taxonomy counts between markers
+3. Merged taxonomy-based Bray-Curtis distance network figures comparing samples
+4. Merged taxonomy-based ordination plots. 
 
-## REVAMP Results
-TBD
+#### Arguments
+```
+Usage: compare_markers_TablesFigures.sh
+       -i Input folder with internal folders: ASV_relabund (req), ASV_taxonomy (req), Sample_metadata (req), and Taxa_relabund_Human (opt)
+          Each folder should have their corresponding files renamed to Marker.txt (i.e. COI.txt)
+       -o Output directory
+       -s Sample equivalents file (Marker tab MarkerSample tab ReferenceSample) (optional)
+       -r Reference marker file name (Marker.txt) (required if -s is called)
+       -t Taxa of interest file (one per line) (optional)
+       -c Taxonomic category (e.g. Order) used in Taxa of interest file (required if -t called)
+```
+
+Description of arguments:
+* ```-i```: Input directory containing the four specifically named folders as stated above. In the ```ASV_relabund``` folder, copy the file ```ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.txt``` from the ```processed_tables``` folder for each marker (relabel as ```Marker.txt```). In the ```ASV_taxonomy``` folder, copy the file ```outname_asvTaxonomyTable_NOUNKNOWNS.txt``` from the ```ASV2Taxonomy``` folder for each marker. In the ```Sample_metadata``` folder, copy the file ```sample_metadata_forR.txt``` from the main pipeline out directory for each marker. In the ```Taxa_relabund_Human``` folder, copy the file ```taxonomy2PercentAbundance_humanReadable.txt``` or ```taxonomy2PercentAbundance_humanReadable_NoRounding.txt``` from the ```ASV2Taxonomy``` folder for each marker.
+* ```-o```: Location of the output directory
+* ```-s```: **OPTIONAL;REQUIRED if ```Taxa_relabund_Human``` folder given** Tell the program what samples are equivalent between a marker and a "reference" marker chosen for assessment of the taxonomy2PercentAbundance files. Format is tab-delimited, with three columns: 1) marker name, 2) sample names from the marker, and 3) sample names as they are found in the reference marker.
+* ```-r```: **OPTIONAL;REQUIRED if ```-s``` is provided** Name of the reference marker
+* ```-t```: **OPTIONAL** Toggle for providing a file of taxa of interest for additional figure generation.
+* ```-c```: **OPTIONAL;REQUIRED if ```-t``` is provided** Taxonomic level of the taxa provided in ```-t```.
 
 #### Legal Disclaimer
 *This repository is a software product and is not official communication
