@@ -182,7 +182,7 @@ taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus
 ```
 
 #### Sample Metadata File (```-s```)
-This important file links a sample to its metadata. At a minimum, users must provide ```Sample``` designations, with ```lat``` and ```long``` recommended. ```Sample``` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations, including NMDS/PCoA encircling) using the column headers from ```group1``` to ```group#```. Any columns that do not match the controlled vocabulary or ```group#``` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as ```NA```. Note that while phyloseq can handle missing data, vegan does not calculate evironmental fitting with missing data. We recommend that the pipeline is run first with all samples/data columns, followed up with a run to test environmental fitting with the samples with missing metadata and/or metadata columns with missing data removed.
+This important file links a sample to its metadata. At a minimum, users must provide ```Sample``` designations, with ```lat``` and ```long``` recommended. ```Sample``` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations, including NMDS/PCoA encircling) using the column headers from ```group1``` to ```group#```. Any columns that do not match the controlled vocabulary or ```group#``` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as "NA". Note that while phyloseq can handle missing data, vegan does not calculate evironmental fitting with missing data. We recommend that the pipeline is run first with all samples/data columns, followed up with a run to test environmental fitting with the samples with missing metadata and/or metadata columns with missing data removed.
 
 Controlled vocabulary:
 * ```Sample``` = Sample name identical to the ```X``` in ```X_R1.fastq.gz``` and ```X_R2.fastq.gz``` as found in the reads directory (```-r```). All sample names have ```MP_``` appended to the front and have non-alphanumeric characters converted to underscores to avoid programatic errors (e.g. R does not accept row/column headers that start with numbers).
@@ -261,13 +261,37 @@ Description of arguments:
 * ```-m```: **OPTIONAL** Creates a merged result folder where NCBI Eukaryote taxa assignments are applied from the SILVAngs export file when SILVA assignments are to "Mitochondria" or "Chloroplast".
 * ```-d```: **OPTIONAL** If read files were clustered with CD-HIT before supplying them to SILVAngs, provide that clustr file here to inflate read counts for clusters.
 
-STOP HERE
-
 ### mergeBLASTandSILVAngs_ASV2Taxonomy.pl
-The second allows for merging SILVAngs Bacterial/Archaeal assignments with BLASTn-based Eukaryotic assignments from two runs of the pipeline for a more complete assessment of all three lineages.
+Allows for merging of two independent runs of the pipeline, one with regular REVAMP with BLASTn-based taxonomic assignments and one using SILVAngs taxonomic assignments (with ```-e``` in the main pipeline). In this case, SILVAngs Bacterial/Archaeal assignments are prioitized (originally developed and more accurate for these lineages), while Eukaryotic assignments are prioritized from the BLASTn-based approach (yields more specific assignments than SILVAngs). Runs must be on identical ASVs, which can be accomplished by running first the default pipeline, then copying the outdirectory and modifying ```progress.txt``` to start after the DADA2 checkpoint with ```-e``` flagged. This script effectively is the same as the ```taxonomyscriptFinished=TRUE``` checkpoint in ```progress.txt```, and the pipeline run in the merged directory can be continued from the main REVAMP pipeline after running it. 
+
+#### Arguments
+```
+-a = ASV counts table (make sure there is text in the upperleft)
+-b = ASV taxonomy table from BLAST run
+-s = ASV taxonomy table from SILVAngs run
+-n = Allin Output basename
+-o = List of samples (one per line) in the order you want them exported. Must be exact matches to ASV counts table.
+     Does not have to include all samples. (optional)
+-m = REVAMP directory
+-h = This help message
+```
+
+Description of arguments:
+* ```-a```: ASV counts table (```ASVs_counts.tsv```) from either run (should be the same)
+* ```-b```: ASV taxonomy table from BLASTn run (```outdir_asvTaxonomyTable.txt```)
+* ```-s```: ASV taxonomy table from SILVAngs run (```outdir_asvTaxonomyTable.txt```)
+* ```-n```: Out directory name for the merged run.
+* ```-o```: **OPTIONAL** Sample order file (normally there is one created in the out directory after REVAMP interprets the sample metadata file.
+* ```-m```: PATH to the REVAMP program directory.
 
 ### morphology_convertTable2REVAMP.sh
-The third allows for the production of figures and tables from simple taxonomy assignments (e.g. binomial species name or higher) with feature counts data (e.g. biomass or density measurements), such as what could be used for morphology-based environmental assessment. Each of these taxonomic assignments is traced to NCBI’s taxonomy database through TaxonKit (name2taxid), with user guidance. 
+Allows for the production of figures and tables from simple taxonomy assignments (e.g. binomial species name or higher) with feature counts data (e.g. biomass or density measurements), such as what could be used for morphology-based environmental assessment. Each of these taxonomic assignments is traced to NCBI’s taxonomy database through TaxonKit (name2taxid), with user guidance where needed.
+
+#### Arguments
+```
+
+```
+
 
 ### compare_markers_TablesFigures.sh
 The last script allows for the comparison of marker genes (and the output from number three) by merging datasets and creating new tables and figures: 1) tables comparing counts and identity for shared taxonomies between markers; 2) Venn diagrams to compare taxonomy counts between markers; 3) merged taxonomy-based Bray-Curtis distance network figures comparing samples; 4) merged taxonomy-based ordination plots. 
