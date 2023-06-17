@@ -229,8 +229,93 @@ This flag will trigger two prompts for file locations:
 * "Enter the location of the SILVAngs ssu or lsu results directory (i.e. ~/Downloads/results/ssu)". This folder will contain the SILVAngs export file ```~/Downloads/results/ssu/exports/*---otus.csv``` and the SILVAngs cluster file ```~/Downloads/results/ssu/stats/sequence_cluster_map/data/*.fa.clstr```.
 * "Enter the location of the reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt". This file can be downloaded from the Arb SILVA [archive](https://www.arb-silva.de/no_cache/download/archive/current/Exports/taxonomy/).
 
-## REVAMP Results Directory
-TBD
+## REVAMP Results
+
+### REVAMP Directory Structure
+```
+OUTDIR
+├── ASV2Taxonomy
+├── blast_results
+├── cutadapt
+├── dada2
+├── processed_tables
+│   └── replicate_based_detection (if replicates given)
+├── run_logs
+└── Figures
+    ├── 00_KRONA_plots
+    ├── 01_Maps
+    ├── 02_Barcharts
+    │   └── read_count & relative_abundance
+    ├── 03_Heatmaps
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── 04_Alpha_Diversity
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── 05_Ordination
+    │   ├── ASV_based: read_count & relative_abundance
+    │   └── Taxonomy_merge_based
+    │       ├── filterInclude_TOSPECIES_only
+    │       │   └── read_count & relative_abundance
+    │       └── read_count & relative_abundance
+    ├── 06_Network
+    │   ├── ASV_based: read_count & relative_abundance
+    │   └── Taxonomy_merge_based: read_count & relative_abundance
+    ├── 07_Rarefaction_Curves
+    ├── 08_EnvironmentFit_Ordination
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── ReadsVSReplicateDetection (if replicates given)
+    └── Taxa_of_interest (if given)
+        ├── 02_Barcharts
+        │   └── read_count & relative_abundance
+        ├── 03_Heatmaps
+        │   └── ASV_based & Taxonomy_merge_based
+        └── 06_Network
+            ├── ASV_based: read_count & relative_abundance
+            └── Taxonomy_merge_based: read_count & relative_abundance
+```
+
+All information printed to screen during a run is stored to `run.log`. If more than one run is done on the same folder, the directory `run_logs` is created and the previous `run.log` is renamed to append the date/time and moved to that directory.
+
+One feature of the REVAMP pipeline is the ability to continue from checkpoints, which is why data files produced by different checkpoints are maintained in their individual folders. Completion of each checkpoint is indicated in the ```progress.txt``` file, which sets environmental variables for REVAMP.
+
+Checkpoints (add or delete checkpoints to bypass on subsequent pipeline runs):
+* ```cutadaptFinished=TRUE```: Raw reads are quality controlled using `cutadapt` to remove adaptors and primers (`cutadapt` directory) 
+* ```dada2_Finished=TRUE```: Trimmed reads are analyzed by `dada2`, where they are quality trimmed, filtered, dereplicated, and merged before ASV assignment (`dada2` directory)
+* ```blastFinished=TRUE```: ASVs are then "blasted" using BLASTn against NCBI's *nt* (`blast_results` directory) 
+* ```blastformattingFinished=TRUE```: The btab outfile is reformatted to assign best blast hits to each ASV (`blast_results` directory)
+* ```taxonomyscriptFinished=TRUE```: ASVs are assigned to taxonomy (`ASV2Taxonomy` directory)
+* ```figuresFinished=TRUE```: Various table products (`processed_tables` directory) and figures (`Figures` directory) are generated.
+Note: If you wish to redo a checkpoint that has already passed, simply delete sequentially from the bottom of the `progress.txt` file until you have deleted the step you want to redo. **It is not recommended to delete a step in the middle while allowing the other steps to remain. It will break.**
+
+The `Figure` directory includes four primary choices for preference of data analysis (where applicable). The User can choose to look at figures where ASVs are considered a single ecological unit (`ASV_based`) or where ASVs have been collapsed so that each represents a single unique taxonomic hierarchy (`Taxonomy_merge_based`). Further, figures can be generated based on the raw count data (`read_count`) or based on the normalized relative percent abundance (`relative_abundance`).
+
+### REVAMP Files of Interest
+
+All configuration files are copied to the REVAMP results folder. `config_file.txt` controls all of the main options at the front end of REVAMP (is a copy of the file provided by ```-p```. `figure_config_file.txt` controls all the options for the back end figure generation of REVAMP (is a copy of the file provided by ```-f```. The provided sample metadata file is copied (`sample_metadata.txt`) and converted/cleaned for use in R (`sample_metadata_forR.txt`).
+
+Each R script outputs stdout and stderror to a log file within the R scripts primary directory. In addition, if you wish to customize or debug any R-based figure/file, you can open any of the R scripts in the `assets` folder. The second field of the tab-delimited file `Rscript_arguments.log` gives each of the positional arguments fed to each script during the pipeline. Simply uncomment the args block at the front end of the script and input each argument.
+
+Besides the outputs in the `processed_tables` and `Figures` directory, the User may also find these files useful:
+
+* `OUTDIR/sample_order.txt` - This file is created from the sample metadata file (```-s```), though it can be modified if the user desires a different order for figures
+* `OUTDIR/dada2/ASVs.fa` - This is the fasta file with ASV nucleotide sequences used in all subsequent steps
+* `OUTDIR/dada2/ASVs_counts.tsv` - This biom table is the original table showing read counts per ASV per sample
+* `OUTDIR/blast_results/ASV_blastn_nt.btab` - BLASTn tab-delimited output file
+* `OUTDIR/blast_results/ASV_blastn_nt_formatted.txt` - Shows the list of identical best hits for each ASV, with the taxIDs listed
+* `OUTDIR/ASV2Taxonomy/basic_ASV_taxonomy_stats.txt` - Counts for the number of ASVs by sample and the numbers of ASVs assigned to different taxonomic levels
+* `OUTDIR/ASV2Taxonomy/ASVs_counts_mergedOnTaxonomy.tsv` - This biom table shows the read counts per ASV per sample, where unique taxonomy is collapsed (summed) to be represented by only a single ASV
+* The ASV counts files are also represented in `OUTDIR/ASV2Taxonomy` with "Unknowns" removed
+* `OUTDIR/ASV2Taxonomy/outname_asvTaxonomyTable.txt` - This is the primary record for taxonomy assignments for each ASV (also available with "Unknowns" removed
+* `OUTDIR/ASV2Taxonomy/reformatted_taxonkit_out.txt` - This file shows all taxonomy records for taxIDs in the reformatted BLASTn file. Can be manually modified in the pipeline and/or gaps automatically filled as described.
+* `OUTDIR/ASV2Taxonomy/taxonomy2PercentAbundance_humanReadable.txt` - Relative abundance (%) for each unique taxonomic string by sample. In this file, numbers are rounded to two decimal places and any value less than 0.01% rounded is marked with a "D" to indicate detection.
+* `OUTDIR/ASV2Taxonomy/taxonomy2PercentAbundance_humanReadable_NoRounding.txt` - Same as the file above, but values are not rounded (and there are no "D" designations)
+* `OUTDIR/ASV2Taxonomy/outname_singleBlastHits_with_MULTItaxid.txt` - File showing the ASVs where at least one of the best blast hit sequences is marked as belonging to two or more taxonomic IDs in NCBI. REVAMP will consider the last common ancestor of such a hit if it is the only available (marked as "TRUE" in the "USED" column). However, if other single taxID hits are available, REVAMP with use those assignments instead (marked as "FALSE" in the "USED" column).
+* `OUTDIR/ASV2Taxonomy/OUTDIR_heatmap_multiASV.txt` - Shows a heatmap of read counts for taxonomic assignments with more than one ASV. This kind of result could show where multi-ASVs with the same taxonomy might be the result of erroneous sequence/chimeric error (i.e. one ASV with lots of reads with a few others with the same taxonomy but very few sporadic read hits) as well as which multi-ASVs might represent different ecotypes of the same taxa (i.e. multiple ASVs with believable read distrubution among samples).
+* `OUTDIR/ASV2Taxonomy/OUTDIR_unknown_asvids.txt` - File can help to track the reasons for "Unknown" assignments
+
+#### REVAMP `processed_tables` Folder
+
+
+#### REVAMP `Figures` Folder
 
 ## Stand alone applications
 
