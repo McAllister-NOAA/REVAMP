@@ -431,7 +431,7 @@ In addition to alpha diversity calculations based on the whole dataset, REVAMP a
 ##### 05_Ordination
 Ordination is a very powerful tool for using multivariate statistics to calculate and visualize relationships between samples based on sample composition. Here, both non-metric multidimensional scaling (NMDS; preference) and principal coordinate analysis (PCoA) are used to make ordination plots (as well as tables with coordinates and convex hull analyses). Ordination plots are made in four combinations: 1) ASV-based/read count, 2) ASV-based/relative abundance, 3) Taxonomy-merge-based/read count, and 4) Taxonomy-merge-based/relative abundance.
 
-|![ordination-01](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/827dceb5-5a6a-43d6-9357-288b898eb03e)|
+|![ordination-01](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/7ba8e4cb-6b11-481b-a5db-4e0e9a685c73)|
 |:--:|
 |Basic NMDS plot (ASV-based/read count) with samples labelled (can be removed in Illustrator) (`NMDS_ASVbased_samples_relabund_filtsamples_alltaxa.pdf`)|
 
