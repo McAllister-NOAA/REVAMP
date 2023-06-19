@@ -380,16 +380,57 @@ In addition, the following files are created in the `replicate_based_detection` 
 ```
 
 ##### 00_KRONA_plots
+<img width="1741" alt="Krona Plot" src="https://github.com/McAllister-NOAA/REVAMP/assets/60410177/2b17c26c-337d-4ccf-8cc7-9cbd0b968170">
+
+Interactive hierarchical data browser allows users to explore the biodiversity of each sample (`out_master_krona.html`) or summed reads from all samples in the run (`out_samplesSummedKRONA.html`) at any taxonomic level they desire. In the upper right corner, a summary of the read count for each selected taxa is displayed. Results are searchable.
 
 ##### 01_Maps
+![maos](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/fa2477b1-d84e-4d34-94d5-15659924d038)
+
+Three types of maps are created from the latitude and longitude data given in the sample metadata file, including a basic map, a bathymetric map, both with data points (scattered for visibility), and a basic map with the data points replaced with pie charts showing the unique terminal taxa found in each sample.
 
 ##### 02_Barcharts
+Barcharts are useful for exploring both read depth (sequencing effort) and patterns in relative abundance. Note that relative sequence abundance does not necessarily equate to relative abundance of an organism in the sample, as several factors can influence read depth.
+
+Many bar charts are produced by the pipeline, separated into read-count-centric and relative-abundance-centric figures. Figures are created at different taxonomic levels (Phylum to Species), as well as for all unique terminal taxa (no matter the depth). In addition, the `filterPercent` from the figure configuration file (`-f`) is used to simplify figures by placing taxa less than the designated percentage of total community into the "zzOther" category. This can make viewing of the figure much easier. If there are still too many colors to ascertain the differences between taxa, one method for exploring the bar charts is to load them (and their legend) into Adobe Illustrator and to use the "Select"/"Same"/"Fill Color" feature to select all the same taxa.
+
+|![barcharts-01](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/a8a09488-b6aa-4c35-a3ed-c985622ebfa1)|
+|:--:|
+|Bar charts comparing read-count- and relative-abundance-centric figures|
+
+|![barcharts-03](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/7569b6b7-7da3-421b-9067-4ea66924a612)|
+|:--:|
+|Bar chart showing site-averaged relative abundance|
+
+|![barcharts-02](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/7bcc1860-c3e6-446e-a982-e2628f98e928)|
+|:--:|
+|Bar chart showing unique terminal taxa. This figure filters taxa less than the designated percent relative abundance to "zzOther", though the legend is shown to highlight the complexity of such a figure if this filtering is not done.|
 
 ##### 03_Heatmaps
+![heatmap](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/6222b512-cf32-4683-87be-862a3278411c)
+
+Heatmaps can be useful for looking at patterns in ASV presence/absence and relative abundance between samples. Figures are created that order samples by the sample metadata file (`-s`), or by clustering samples by Jaccard similarity using the NMDS ordination method. In both cases, ASV's are ordered using the NMDS ordination method based on Jaccard distance. Heatmaps are created for ASV-based and merged-Taxonomy-based datasets. In addition (as in the figure above), the site- or replicate-grouped datasets are used for alternative heatmaps.
 
 ##### 04_Alpha_Diversity
+In addition to creating tables for alpha diversity metrics, REVAMP creates several figures to visualize alpha diversity, including in relation to all groupings and other metadata columns. 
+
+|![alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures_group3Colored](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/f5032842-d114-4e4f-ac2c-8cf60ab8a768)|
+|:--:|
+|Alpha diversity on a per sample basis, colored by region|
+
+|![alphaDiversity_ASVs_normalized_siteClusteredSamples_alltaxa_allMeasures_group2Colored](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/9fd9d986-8373-44c6-9419-0aa2c2d390e1)|
+|:--:|
+|Alpha diversity with samples from the same sites displayed on the same x-axis column while still calculated separately (i.e. site-clustered). Colored by depth.|
+
+|![alphaDiversity_ASVs_normalized_siteGroupedSamples_alltaxa_allMeasures_group2Colored](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/70e4a0f3-8950-43fe-b407-2eb005aefc5c)|
+|:--:|
+|Alpha diversity with samples from the same sites averaged and calculated as a single aggregated sample. Since most sites included both surface and deep samples, the concatenated sample metadata is not as useful for this example, but this can highlight patterns of missing data (i.e. red and green dots in the figure are missing representatives from the other depth regime).|
+
+In addition to alpha diversity calculations based on the whole dataset, REVAMP also calculates alpha diversity with subsets of the data that include only those ASVs that have a complete taxonomy to the desired depth (made from Phylum to Species), as well as figures based on the alpha diversity metrics calculated for those ASVs complete to the Species level. 
 
 ##### 05_Ordination
+
+
 
 ##### 06_Network
 
