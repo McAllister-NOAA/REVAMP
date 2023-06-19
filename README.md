@@ -448,6 +448,15 @@ Ordination is a very powerful tool for using multivariate statistics to calculat
 |NMDS plot faceted by Phylum and colored by Genus (`NMDS_ASVbased_taxa_relabund_filtsamples_alltaxa_facetPhylum_colorGenus.pdf`)|
 
 ##### 06_Network
+Network figures are useful for organizing information about sample relatedness. In the figures produced by REVAMP, network figures are created for samples and ASVs at 0.1 Bray-Curtis distance increments. Only samples with a smaller distance than the distance metric cutoff have a line drawn between them. In this way, users can visualize the relationships of samples and ASVs. In the figures below, the figures at 0.2 and 0.9 distance are not very useful, while those in the middle show clusters of related samples/ASVs.
+
+|![network-01](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/6a60bb4d-45e2-4384-8e90-40b3c423de52)|
+|:--:|
+|Network figure plotting samples and colored by sample site (if given) (`Network_ASVbased_samples_relabund_filtsamples_gte1perctaxa_dist0.2_SampleLabeled_colorSites.pdf`, etc.)|
+
+|![network-02](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/878776f6-897d-45b2-b9c1-3b1b740b9c1d)|
+|:--:|
+|Network figure plotting ASVs (`Network_ASVbased_taxa_relabund_filtsamples_gte1perctaxa_dist0.2_ASVLabeled.pdf`, etc.)|
 
 ##### 07_Rarefaction_Curves
 
