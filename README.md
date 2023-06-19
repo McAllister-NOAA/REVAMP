@@ -33,7 +33,7 @@ Many other auxiliary R packages make the figures possible: see dependencies.
 Docker container in development
 
 ### Installation outside of Docker
-REVAMP was developed and test on MacOS 12.6.3. Additional portability is under development with Docker container.
+REVAMP was developed and tested on MacOS 12.6.3. Additional portability is under development with Docker container.
 
 ```
 cd (location of choice: e.g. /Users/mcallister/software/)
