@@ -459,10 +459,27 @@ Network figures are useful for organizing information about sample relatedness. 
 |Network figure plotting ASVs (`Network_ASVbased_taxa_relabund_filtsamples_gte1perctaxa_dist0.2_ASVLabeled.pdf`, etc.)|
 
 ##### 07_Rarefaction_Curves
+Rarefaction curves can highlight diversity difference between sample as well as samples with inadequate read depth (below `RarefactionCurve_ASVbased_readcount_allsamples_alltaxa.pdf`).
+
+![RarefactionCurve_ASVbased_readcount_allsamples_alltaxa](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/851833c8-c179-4ceb-b56c-a26e65842bc3)
 
 ##### 08_EnvironmentFit_Ordination
+The R package `vegan` is used to run the environmental fitting, which means that the NMDS is recalculated by `vegan`. New figures and tables are created in this folder to show the new coordinates so as not to confuse assessment.
+
+|![environfit-01](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/d303123c-29b4-4504-b1f9-ed1a6988c1de)|
+|:--:|
+|`vegan`-based NMDS showing labelled samples (left; `NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa.pdf`) and encircled samples based on site name (right; `NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_encircleSites.pdf`).|
+
+Each variable's goodness of fit (r^2) and statistical probability (p-value) is stored in a table. ASV-based or taxonomy-merge-based relative abundance is also tested as a variable, so that organisms significantly structuring the ordination space can be visualized. Figures are generated displaying "chemistry" (non-controlled vocabulary columns) and ASV variables ≤0.05 p-value, "chemistry" and ASV variables ≤0.01 p-value, and all given metadata columns.
+
+|![environfit-02](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/8c13d830-086e-4852-baff-36d15871685b)|
+|:--:|
+|`vegan`-based NMDS overlayed with A) variables significant at ≤0.05 p-value (`NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.05.pdf`), B) variables significant at ≤0.01 p-value (`NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.001.pdf`), and C) all "chemistry" variables (`NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_chemOnly.pdf`)|
 
 ##### ReadsVSReplicateDetection (if `replicates` metadata column given)
+In addition to the 
+
+
 
 ##### Taxa_of_interest (if a `taxaOfInterestFile` is given with appropriate `taxaOfInterestLevel` and `providedTaxaOfInterest=TRUE` in Figure configuration file `-f`)
 
