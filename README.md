@@ -314,7 +314,37 @@ Besides the outputs in the `processed_tables` and `Figures` directory, the User 
 
 #### REVAMP `processed_tables` Folder
 
-Any counts file modified after initial assignments in DADA2 is stored in the `processed_tables` folder.
+Any counts file modified after initial assignments in DADA2 is stored in the `processed_tables` folder. The files created depend on whether sample metadata columns for `controls`, `replicates`, and/or `sites` are provided.
+
+At a minimum:
+* `ASVs_counts_NOUNKNOWNS_percentabund.tsv` = Read counts converted into relative percent abundance with ASVs with unknown taxonomic assignments removed from total.
+* `ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund.tsv` = Same as above, except that reads across ASVs with identical taxonomic assignments are summed prior to the calculation. One ASV name is chosen as the representative for the group, and the rest are removed from the file.
+* `ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt` = ASV taxonomy table built to simplify figures based on `filterPercent`, where the taxonomy at any hierarchical level is assigned to "zzOther" if it falls below the `filterPercent` cut off. 
+
+If a `controls` metadata column is given, those samples are removed from downstream analysis:
+* `ASVs_counts_controlsRemoved.tsv` = ASV counts with the control samples removed
+* `ASVs_counts_NOUNKNOWNS_controlsRemoved.tsv` = ASV counts with control samples and unknown ASVs removed
+* `ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_controlsRemoved.tsv` = ASV counts collapsed on identical taxonomic assignments, with control samples removed
+
+If either `replicates` or `sites` metadata columns are given, then an additional set of files is created, whereby samples with identical `replicates` or `sites` labels are grouped together by averaging relative abundance. This also concatenates the sample metadata file, combining and dereplicating entries for each metadata column.
+
+If either `replicates` or `sites` metadata columns are given:
+* `ASVs_counts_NOUNKNOWNS_percentabund_groupedByReplicates.tsv`
+* `ASVs_counts_NOUNKNOWNS_percentabund_groupedBySites.tsv`
+* `ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund_groupedByReplicates.tsv`
+* `ASVs_counts_NOUNKNOWNS_collapsedOnTaxonomy_percentabund_groupedBySites.tsv`
+* `sample_metadata_NOUNKNOWNS_percentabund_groupedByReplicates.tsv`
+* `sample_metadata_NOUNKNOWNS_percentabund_groupedBySites.tsv`
+
+In addition, the following files are created in the `replicate_based_detection` folder if a `replicates` sample metadata column is given:
+* `compRelAbund_replicateDetection_ASVbased_NoUnknowns_filtsamples.txt` = Stats file on each ASV counts by replicates without ASVs with an unknown taxonomic assignment.
+* `compRelAbund_replicateDetection_ASVbased_withUnknowns_filtsamples.txt` = Stats file on each ASV counts by replicates with ASVs with an unknown taxonomic assignment.
+* `compRelAbund_replicateDetection_TAXAbased_NoUnknowns_filtsamples.txt` = Stats file on ASV counts by replicates for ASVs collapsed on identical taxonomic assignments, no unknowns.
+* `presenceabsence_unmarked_ASVbased_NoUnknowns_filtsamples.txt` = Input file for Unmarked with presence/absence indicated for each ASV by replicate. No unknowns.
+* `presenceabsence_unmarked_ASVbased_withUnknowns_filtsamples.txt` = Input file for Unmarked with presence/absence indicated for each ASV by replicate. With unknowns.
+* `presenceabsence_unmarked_TAXAbased_NoUnknowns_filtsamples.txt` = Input file for Unmarked with presence/absence indicated for each ASV by replicate. No unknowns. Collapsed on taxonomy.
+
+
 
 
 
