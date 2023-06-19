@@ -396,41 +396,56 @@ Many bar charts are produced by the pipeline, separated into read-count-centric 
 
 |![barcharts-01](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/a8a09488-b6aa-4c35-a3ed-c985622ebfa1)|
 |:--:|
-|Bar charts comparing read-count- and relative-abundance-centric figures|
+|Bar charts comparing read-count- (`barplot_readcount_allsamples_alltaxa_Class.pdf`) and relative-abundance-centric (`barplot_relabund_filtsamples_alltaxa_Class.pdf`) figures|
 
 |![barcharts-03](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/7569b6b7-7da3-421b-9067-4ea66924a612)|
 |:--:|
-|Bar chart showing site-averaged relative abundance|
+|Bar chart showing site-averaged relative abundance (`barplot_relabund_siteGroupedSamples_alltaxa_Class.pdf`)|
 
 |![barcharts-02](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/7bcc1860-c3e6-446e-a982-e2628f98e928)|
 |:--:|
-|Bar chart showing unique terminal taxa. This figure filters taxa less than the designated percent relative abundance to "zzOther", though the legend is shown to highlight the complexity of such a figure if this filtering is not done.|
+|Bar chart showing unique terminal taxa (`barplot_relabund_allsamples_filtLowAbundTaxa_to_zzOther_uniqueTerminalTaxa_noUnknowns.pdf`). This figure filters taxa less than the designated percent relative abundance to "zzOther", though the legend is shown to highlight the complexity of such a figure if this filtering is not done (`barplot_relabund_allsamples_uniqueTerminalTaxa_noUnknowns_legend.pdf`).|
 
 ##### 03_Heatmaps
 ![heatmap](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/6222b512-cf32-4683-87be-862a3278411c)
 
-Heatmaps can be useful for looking at patterns in ASV presence/absence and relative abundance between samples. Figures are created that order samples by the sample metadata file (`-s`), or by clustering samples by Jaccard similarity using the NMDS ordination method. In both cases, ASV's are ordered using the NMDS ordination method based on Jaccard distance. Heatmaps are created for ASV-based and merged-Taxonomy-based datasets. In addition (as in the figure above), the site- or replicate-grouped datasets are used for alternative heatmaps.
+Heatmaps can be useful for looking at patterns in ASV presence/absence and relative abundance between samples (`heatmap_ASVs_relabund_filtsamples_alltaxa_clustSamples.pdf`). Figures are created that order samples by the sample metadata file (`-s`), or by clustering samples by Jaccard similarity using the NMDS ordination method. In both cases, ASV's are ordered using the NMDS ordination method based on Jaccard distance. Heatmaps are created for ASV-based and merged-Taxonomy-based datasets. In addition (as in the figure above, right side), the site- or replicate-grouped datasets are used for alternative heatmaps (`heatmap_ASVs_relabund_siteGroupedSamples_alltaxa_clustSites.pdf`).
 
 ##### 04_Alpha_Diversity
 In addition to creating tables for alpha diversity metrics, REVAMP creates several figures to visualize alpha diversity, including in relation to all groupings and other metadata columns. 
 
 |![alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures_group3Colored](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/f5032842-d114-4e4f-ac2c-8cf60ab8a768)|
 |:--:|
-|Alpha diversity on a per sample basis, colored by region|
+|Alpha diversity on a per sample basis, colored by region (`alphaDiversity_ASVs_normalized_filtsamples_alltaxa_allMeasures_group3Colored.pdf`)|
 
 |![alphaDiversity_ASVs_normalized_siteClusteredSamples_alltaxa_allMeasures_group2Colored](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/9fd9d986-8373-44c6-9419-0aa2c2d390e1)|
 |:--:|
-|Alpha diversity with samples from the same sites displayed on the same x-axis column while still calculated separately (i.e. site-clustered). Colored by depth.|
+|Alpha diversity with samples from the same sites displayed on the same x-axis column while still calculated separately (i.e. site-clustered). Colored by depth. (`alphaDiversity_ASVs_normalized_siteClusteredSamples_alltaxa_allMeasures_group2Colored.pdf`)|
 
 |![alphaDiversity_ASVs_normalized_siteGroupedSamples_alltaxa_allMeasures_group2Colored](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/70e4a0f3-8950-43fe-b407-2eb005aefc5c)|
 |:--:|
-|Alpha diversity with samples from the same sites averaged and calculated as a single aggregated sample. Since most sites included both surface and deep samples, the concatenated sample metadata is not as useful for this example, but this can highlight patterns of missing data (i.e. red and green dots in the figure are missing representatives from the other depth regime).|
+|Alpha diversity with samples from the same sites averaged and calculated as a single aggregated sample (`alphaDiversity_ASVs_normalized_siteGroupedSamples_alltaxa_allMeasures_group2Colored.pdf`). Since most sites included both surface and deep samples, the concatenated sample metadata is not as useful for this example, but this can highlight patterns of missing data (i.e. red and green dots in the figure are missing representatives from the other depth regime).|
 
 In addition to alpha diversity calculations based on the whole dataset, REVAMP also calculates alpha diversity with subsets of the data that include only those ASVs that have a complete taxonomy to the desired depth (made from Phylum to Species), as well as figures based on the alpha diversity metrics calculated for those ASVs complete to the Species level. 
 
 ##### 05_Ordination
+Ordination is a very powerful tool for using multivariate statistics to calculate and visualize relationships between samples based on sample composition. Here, both non-metric multidimensional scaling (NMDS; preference) and principal coordinate analysis (PCoA) are used to make ordination plots (as well as tables with coordinates and convex hull analyses). Ordination plots are made in four combinations: 1) ASV-based/read count, 2) ASV-based/relative abundance, 3) Taxonomy-merge-based/read count, and 4) Taxonomy-merge-based/relative abundance.
 
+|![ordination-01](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/827dceb5-5a6a-43d6-9357-288b898eb03e)|
+|:--:|
+|Basic NMDS plot (ASV-based/read count) with samples labelled (can be removed in Illustrator) (`NMDS_ASVbased_samples_relabund_filtsamples_alltaxa.pdf`)|
 
+|![ordination-02](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/3e4c425f-edea-40e6-874d-72ebd0cc7dce)|
+|:--:|
+|Examples of coloring (data points) and encircling (outline of identical metadata categories) of NMDS plot. A) Coloring and encircling based on metadata group (`NMDS_ASVbased_samples_relabund_filtsamples_alltaxa_group3Colored_encircleGroup.pdf`). B) Coloring based on metadata group and encircling sites (`NMDS_ASVbased_samples_relabund_filtsamples_alltaxa_group3Colored_encircleSites.pdf`). C) Coloring based on temperature (`NMDS_ASVbased_samples_relabund_filtsamples_alltaxa_chem_temperature_degC_Colored.pdf`).|
+
+|![ordination-03](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/99d5ac0a-5245-417a-9e92-852cf2b28bad)|
+|:--:|
+|Biplot of samples and ASVs in same ordination space. Default is to color by Phylum. (`NMDS_ASVbased_taxa_relabund_filtsamples_alltaxa_biplot.pdf`)|
+
+|![ordination-04](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/24249da1-2f11-49b9-9611-1755fada24bd)|
+|:--:|
+|NMDS plot faceted by Phylum and colored by Genus (`NMDS_ASVbased_taxa_relabund_filtsamples_alltaxa_facetPhylum_colorGenus.pdf`)|
 
 ##### 06_Network
 
