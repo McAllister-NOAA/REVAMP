@@ -344,11 +344,73 @@ In addition, the following files are created in the `replicate_based_detection` 
 * `presenceabsence_unmarked_ASVbased_withUnknowns_filtsamples.txt` = Input file for Unmarked with presence/absence indicated for each ASV by replicate. With unknowns.
 * `presenceabsence_unmarked_TAXAbased_NoUnknowns_filtsamples.txt` = Input file for Unmarked with presence/absence indicated for each ASV by replicate. No unknowns. Collapsed on taxonomy.
 
-
-
-
-
 #### REVAMP `Figures` Folder
+
+```
+└── Figures
+    ├── 00_KRONA_plots
+    ├── 01_Maps
+    ├── 02_Barcharts
+    │   └── read_count & relative_abundance
+    ├── 03_Heatmaps
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── 04_Alpha_Diversity
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── 05_Ordination
+    │   ├── ASV_based: read_count & relative_abundance
+    │   └── Taxonomy_merge_based
+    │       ├── filterInclude_TOSPECIES_only
+    │       │   └── read_count & relative_abundance
+    │       └── read_count & relative_abundance
+    ├── 06_Network
+    │   ├── ASV_based: read_count & relative_abundance
+    │   └── Taxonomy_merge_based: read_count & relative_abundance
+    ├── 07_Rarefaction_Curves
+    ├── 08_EnvironmentFit_Ordination
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── ReadsVSReplicateDetection (if replicates given)
+    └── Taxa_of_interest (if given)
+        ├── 02_Barcharts
+        │   └── read_count & relative_abundance
+        ├── 03_Heatmaps
+        │   └── ASV_based & Taxonomy_merge_based
+        └── 06_Network
+            ├── ASV_based: read_count & relative_abundance
+            └── Taxonomy_merge_based: read_count & relative_abundance
+```
+
+##### 00_KRONA_plots
+
+##### 01_Maps
+
+##### 02_Barcharts
+
+##### 03_Heatmaps
+
+##### 04_Alpha_Diversity
+
+##### 05_Ordination
+
+##### 06_Network
+
+##### 07_Rarefaction_Curves
+
+##### 08_EnvironmentFit_Ordination
+
+##### ReadsVSReplicateDetection (if `replicates` metadata column given)
+
+##### Taxa_of_interest (if a `taxaOfInterestFile` is given with appropriate `taxaOfInterestLevel` and `providedTaxaOfInterest=TRUE` in Figure configuration file `-f`)
+
+#TAXA of Interest: Provides specific figures.
+#List one name per line. All from same taxonomic level.
+providedTaxaOfInterest=TRUE
+taxaOfInterestFile=/path/to/file/choice_taxa.txt
+taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus, or Species
+
+
+
+
+
 
 ## Stand alone applications
 
