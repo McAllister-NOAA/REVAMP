@@ -1,0 +1,8 @@
+Sample	lat	long	replicates    sites  controls      group1 group2 pH_avg temp_degC     water_col_location
+18cp45	47.594567	-124.497067	CL42   CL42	NA     AK_trip1      1      7.4    11.4   surface
+18cp46	47.594567	-124.497067	CL42   CL42	NA     AK_trip1      1      7.4    11.4   surface
+18cp6	47.594567	-124.497067	CL42B  CL42	NA     AK_trip1      2      7.15   3.2    deep
+E25_2B_DY20	59.90486667	-171.6984167	M5     M5     NA     AK_trip2      3      7.2    15.1   surface
+5-18S_S5_L001	33.97368541	-118.9126162	B5     B5     NA     CA     3      7.22   21.2   deep
+positive_control     NA     NA     NA     NA     positive      NA     NA     NA     NA     NA
+negative_control     NA     NA     NA     NA     negative      NA     NA     NA     NA     NA

@@ -6,10 +6,11 @@
 primerF=GYGGTGCATGGCCGTTSKTRGTT
 primerR=GTGTGYACAAAGGBCAGGGAC
 blastLengthCutoff=370 #bp length under which BLAST hits are not considered
-systemmemoryMB=32000
-locationNTdatabase=/Users/mcallister/software/blastdb
+systemmemoryMB=32000 #MB of total system memory; uses only 70% of max
+locationNTdatabase=/path/to/NCBI/blastdb
 taxonomyCutoffs=97,95,90,80,70,60 #Percent ID cutoffs for ID to S,G,F,O,C,P
-#removeASVsFILE=/Users/mcallister/Desktop/chris_test/remove_contaminants.txt
+failedMerge_useDirection=FORWARD #Use only FORWARD (R1) or REVERSE (R2) reads (OPTIONAL)
+removeASVsFILE=/path/to/file/remove_contaminants.txt (OPTIONAL)
 
 ###DADA2 Filtering options:
 dada_minlength=120
@@ -17,11 +18,11 @@ dada_phix=TRUE
 dada_trunQ=2
 dada_maxEE1=5
 dada_maxEE2=5
-dada_trimRight=0
+dada_trimRight=0 #Recommended to look at fastq quality and trim ends of sequence data as needed.
 dada_trimLeft=0
 ###
 
 ####################################################
 ##Infrequently changed default parameters
 ####################################################
-blastMode=mostEnvOUT #options: allIN,allEnvOUT,mostEnvOUT
+blastMode=mostEnvOUT #options: allIN, allEnvOUT, mostEnvOUT

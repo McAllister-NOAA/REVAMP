@@ -1,4 +1,6 @@
 cutadaptFinished=TRUE
 dada2_Finished=TRUE
 blastFinished=TRUE
+blastformattingFinished=TRUE
 taxonomyscriptFinished=TRUE
+figuresFinished=TRUE

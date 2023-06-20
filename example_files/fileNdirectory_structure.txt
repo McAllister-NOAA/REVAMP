@@ -4,7 +4,6 @@ OUTDIR
 │   ├── ASVs_counts_mergedOnTaxonomy.tsv
 │   ├── ASVs_counts_mergedOnTaxonomy_NOUNKNOWNS.tsv
 │   ├── OUTDIR_NO_UNKNOWNS_barchart.txt
-│   ├── OUTDIR_SPECIESlevel_commonNames_for_barchart.txt
 │   ├── OUTDIR_allin_TaxonomyASVSampleCount_byline.txt
 │   ├── OUTDIR_asvTaxonomyTable.txt
 │   ├── OUTDIR_asvTaxonomyTable_NOUNKNOWNS.txt
@@ -12,6 +11,7 @@ OUTDIR
 │   ├── OUTDIR_barchart_forR.txt
 │   ├── OUTDIR_barchart_forR_filtLowAbund_zzOther.txt
 │   ├── OUTDIR_heatmap_multiASV.txt
+│   ├── OUTDIR_singleBlastHits_with_MULTItaxid.txt
 │   ├── OUTDIR_taxid_to_commonname_ALL.txt
 │   ├── OUTDIR_unique_terminaltaxa.txt
 │   ├── OUTDIR_unique_terminaltaxa_w_taxids.txt
@@ -24,7 +24,9 @@ OUTDIR
 │   ├── reformatted_taxonkit_out.txt
 │   ├── reformatted_taxonkit_out_ORIGINAL.txt
 │   ├── taxids.txt
-│   └── taxonkit_out.txt
+│   ├── taxonkit_out.txt
+│   ├── taxonomy2PercentAbundance_humanReadable.txt
+│   └── taxonomy2PercentAbundance_humanReadable_NoRounding.txt
 ├── Figures
 │   ├── 00_KRONA_plots
 │   │   ├── OUTDIR_master_krona.html
@@ -43,14 +45,14 @@ OUTDIR
 │   │   │   ├── barplot_readcount_allsamples_alltaxa_Phylum.pdf + legend
 │   │   │   ├── barplot_readcount_allsamples_uniqueTerminalTaxa_noUnknowns.pdf + legend
 │   │   │   ├── barplot_readcount_allsamples_uniqueTerminalTaxa_withUnknowns.pdf + legend
-│   │   │   ├── barplot_readcount_filtsamples_alltaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
-│   │   │   └── barplot_readcount_filtsamples_filtLT5PERCtaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
+│   │   │   ├── barplot_readcount_all/filtsamples_alltaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
+│   │   │   └── barplot_readcount_filtsamples_filtLT#PERCtaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
 │   │   └── relative_abundance
 │   │       ├── SAME FILES as read_count (diff names) +
 │   │       ├── barplot_relabund_allsamples_filtLowAbundTaxa_to_zzOther_uniqueTerminalTaxa_noUnknowns.pdf + legend
 │   │       ├── barplot_relabund_filtsamples_alltaxa_Phylum_ASVsShown.pdf
 │   │       ├── barplot_relabund_[replicate,site]GroupedSamples_alltaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
-│   │       └── barplot_relabund_[replicate,site]GroupedSamples_filtLT5PERCtaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
+│   │       └── barplot_relabund_[replicate,site]GroupedSamples_filtLT#PERCtaxa_[Phylum,Class,Order,Family,Genus,Species].pdf + legend
 │   ├── 03_Heatmaps
 │   │   ├── ASV_based
 │   │   │   ├── heatmap_ASVs_relabund_filtsamples_alltaxa_clustSamples.pdf
@@ -220,14 +222,15 @@ OUTDIR
 │   └── phyloseq_rscript_out.log
 ├── Rscript_arguments.log
 ├── blast_results
-│   ├── ASV_blastn_nt.btab.gz
+│   ├── ASV_blastn_nt.btab
 │   ├── ASV_blastn_nt_formatted.txt
 │   ├── blastreformatting_rscript_out.log
 │   └── checkmaxtargetseqs.txt
 ├── chem_headers.txt
 ├── config_file.txt
 ├── cutadapt
-│   └── cutadapt_primer_trimming_stats.txt
+│   ├── cutadapt_primer_trimming_stats.txt
+│   └── MP_SAMPLE_R[12]_trimmed.fq.gz
 ├── dada2
 │   ├── ASVs.fa
 │   ├── ASVs_counts.tsv
@@ -239,7 +242,8 @@ OUTDIR
 │   ├── rawFQualityPlot.pdf
 │   ├── rawRQualityPlot.pdf
 │   ├── trimFQualityPlot.pdf
-│   └── trimRQualityPlot.pdf
+│   ├── trimRQualityPlot.pdf
+│   └── MP_SAMPLE_R[12]_filtered.fq.gz
 ├── figure_config_file.txt
 ├── processed_tables
 │   ├── ASVTaxonomyTable_NOUNKNOWNS_replaceLowAbund2zzOther.txt

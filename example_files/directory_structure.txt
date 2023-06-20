@@ -1,34 +1,38 @@
 OUTDIR
-├── run_logs
+├── ASV2Taxonomy
+├── blast_results
 ├── cutadapt
 ├── dada2
-├── blast_results
-├── ASV2Taxonomy
 ├── processed_tables
-│   └── replicate_based_detection (if replicates given)
+│   └── replicate_based_detection (if replicates given)
+├── run_logs
 └── Figures
-    ├── 00_KRONA_plots
-    ├── 01_Maps
-    ├── 02_Barcharts
-    │   └── read_count & relative_abundance
-    ├── 03_Heatmaps
-    │   └── ASV_based & Taxonomy_merge_based
-    ├── 04_Alpha_Diversity
-    │   └── ASV_based & Taxonomy_merge_based
-    ├── 05_Ordination
-    │   ├── ASV_based: read_count & relative_abundance
-    │   └── Taxonomy_merge_based
-    │       ├── filterInclude_TOSPECIES_only
-    │       │   └── read_count & relative_abundance
-    │       └── read_count & relative_abundance
-    ├── 06_Network
-    │   ├── ASV_based: read_count & relative_abundance
-    │   └── Taxonomy_merge_based: read_count & relative_abundance
-    ├── 07_Rarefaction_Curves
-    ├── 08_EnvironmentFit_Ordination
-    │   └── ASV_based & Taxonomy_merge_based
-    ├── ReadsVSReplicateDetection (if replicates given)
-    └── Taxa_of_interest (if given)
-        ├── 02_Barcharts
-        ├── 03_Heatmaps
-        └── 06_Network
+    ├── 00_KRONA_plots
+    ├── 01_Maps
+    ├── 02_Barcharts
+    │   └── read_count & relative_abundance
+    ├── 03_Heatmaps
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── 04_Alpha_Diversity
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── 05_Ordination
+    │   ├── ASV_based: read_count & relative_abundance
+    │   └── Taxonomy_merge_based
+    │       ├── filterInclude_TOSPECIES_only
+    │       │   └── read_count & relative_abundance
+    │       └── read_count & relative_abundance
+    ├── 06_Network
+    │   ├── ASV_based: read_count & relative_abundance
+    │   └── Taxonomy_merge_based: read_count & relative_abundance
+    ├── 07_Rarefaction_Curves
+    ├── 08_EnvironmentFit_Ordination
+    │   └── ASV_based & Taxonomy_merge_based
+    ├── ReadsVSReplicateDetection (if replicates given)
+    └── Taxa_of_interest (if given)
+        ├── 02_Barcharts
+        │   └── read_count & relative_abundance
+        ├── 03_Heatmaps
+        │   └── ASV_based & Taxonomy_merge_based
+        └── 06_Network
+            ├── ASV_based: read_count & relative_abundance
+            └── Taxonomy_merge_based: read_count & relative_abundance
