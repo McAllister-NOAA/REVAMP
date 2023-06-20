@@ -16,7 +16,7 @@ Developed by the **Ocean Molecular Ecology** ([OME](https://www.pmel.noaa.gov/oc
 IN REVIEW
 ```
 
-**REVAMP is a wrapper for severl tools, which should also be cited:**
+**REVAMP is a wrapper for several tools, which should also be cited:**
 
 * Cutadapt – [Martin, 2011](https://doi.org/10.14806/ej.17.1.200)
 * DADA2 – [Callahan et al., 2016](https://doi.org/10.1038/nmeth.3869) ([useful tutorial](https://benjjneb.github.io/dada2/index.html))
@@ -65,7 +65,7 @@ NCBI databases (should be already installed; see above):
 * *nt* database (download through `update_blastdb.pl` from the [BLAST+ executables](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)) 
 * *taxonomy* database (`wget https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz`)
 
-Stand alone tools:
+Stand-alone tools:
 * wget ([HomeBrew](https://formulae.brew.sh/formula/wget) or [MacPorts](https://ports.macports.org/port/wget/) on Mac)
 * R (Rscript) - v.4.0.3
 * [Taxonomy Tools](https://github.com/pmenzel/taxonomy-tools)
@@ -157,11 +157,11 @@ dada_trimLeft=0
 ####################################################
 ##Infrequently changed default parameters
 ####################################################
-blastMode=mostEnvOUT #options: allIN,allEnvOUT,mostEnvOUT
+blastMode=mostEnvOUT #options: allIN, allEnvOUT, mostEnvOUT
 ```
 
 #### Figure Configuration File (`-f`)
-Modify example file to fit your needs. `filterPercent` controls the cutoff relative abundance that is used to place taxa into "zzOther" to simplify barchart figures. `pieScale` is an attempt to provide some control over the size of pie charts in the "mapPies"-labelled maps. `removeNA` removes any taxonomic assignment of "NA" from barchart figures. If `filterLowQualSamples` is "TRUE", then `filterPercentLowQualSamples` sets the cutoff for removing a sample from analysis, based on the average percentage of total reads of all other samples. Defining taxa of interest (`providedTaxaOfInterest` "TRUE") can provide many additional figures focusing on only the listed taxa. The `taxaOfInterestFile` must contain a list of the taxa of interest (one per line), all from the same taxonomic level (in this case designated as "Order" for `taxaOfInterestLevel`).
+Modify example file to fit your needs. `filterPercent` controls the cutoff relative abundance that is used to place taxa into "zzOther" to simplify bar chart figures. `pieScale` is an attempt to provide some control over the size of pie charts in the "mapPies"-labelled maps. `removeNA` removes any taxonomic assignment of "NA" from bar chart figures. If `filterLowQualSamples` is "TRUE", then `filterPercentLowQualSamples` sets the cutoff for removing a sample from analysis, based on the average percentage of total reads of all other samples. Defining taxa of interest (`providedTaxaOfInterest` "TRUE") can provide many additional figures focusing on only the listed taxa. The `taxaOfInterestFile` must contain a list of the taxa of interest (one per line), all from the same taxonomic level (in this case designated as "Order" for `taxaOfInterestLevel`).
 
 ```
 ##This is the REVAMP figure config file
@@ -182,10 +182,10 @@ taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus
 ```
 
 #### Sample Metadata File (`-s`)
-This important file links a sample to its metadata. At a minimum, users must provide `Sample` designations, with `lat` and `long` recommended. `Sample` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations, including NMDS/PCoA encircling) using the column headers from `group1` to `group#`. Any columns that do not match the controlled vocabulary or `group#` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as "NA". Note that while phyloseq can handle missing data, vegan does not calculate evironmental fitting with missing data. We recommend that the pipeline is run first with all samples/data columns, followed up with a run to test environmental fitting with the samples with missing metadata and/or metadata columns with missing data removed.
+This important file links a sample to its metadata. At a minimum, users must provide `Sample` designations, with `lat` and `long` recommended. `Sample` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations, including NMDS/PCoA encircling) using the column headers from `group1` to `group#`. Any columns that do not match the controlled vocabulary or `group#` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as "NA". Note that while phyloseq can handle missing data, vegan does not calculate environmental fitting with missing data. We recommend that the pipeline is run first with all samples/data columns, followed up with a run to test environmental fitting with the samples with missing metadata and/or metadata columns with missing data removed.
 
 Controlled vocabulary:
-* `Sample` = Sample name identical to the "X" in `X_R1.fastq.gz` and `X_R2.fastq.gz` as found in the reads directory (`-r`). All sample names have "MP_" appended to the front and have non-alphanumeric characters converted to underscores to avoid programatic errors (e.g. R does not accept row/column headers that start with numbers).
+* `Sample` = Sample name identical to the "X" in `X_R1.fastq.gz` and `X_R2.fastq.gz` as found in the reads directory (`-r`). All sample names have "MP_" appended to the front and have non-alphanumeric characters converted to underscores to avoid programmatic errors (e.g. R does not accept row/column headers that start with numbers).
 * `lat` = latitude decimal degrees
 * `long` = longitude decimal degrees
 * `replicates` = String designating replicate samples. Replicate samples are treated both independently and as an averaged aggregate for some figures. Additional replicate-specific figures and tables are created, in particular for occupancy modelling outside the pipeline.
@@ -281,7 +281,7 @@ Checkpoints (add or delete checkpoints to bypass on subsequent pipeline runs):
 * `cutadaptFinished=TRUE`: Raw reads are quality controlled using `cutadapt` to remove adaptors and primers (`cutadapt` directory) 
 * `dada2_Finished=TRUE`: Trimmed reads are analyzed by `dada2`, where they are quality trimmed, filtered, dereplicated, and merged before ASV assignment (`dada2` directory)
 * `blastFinished=TRUE`: ASVs are then "blasted" using BLASTn against NCBI's *nt* (`blast_results` directory) 
-* `blastformattingFinished=TRUE`: The btab outfile is reformatted to assign best blast hits to each ASV (`blast_results` directory)
+* `blastformattingFinished=TRUE`: The btab out file is reformatted to assign best blast hits to each ASV (`blast_results` directory)
 * `taxonomyscriptFinished=TRUE`: ASVs are assigned to taxonomy (`ASV2Taxonomy` directory)
 * `figuresFinished=TRUE`: Various table products (`processed_tables` directory) and figures (`Figures` directory) are generated.
 Note: If you wish to redo a checkpoint that has already passed, simply delete sequentially from the bottom of the `progress.txt` file until you have deleted the step you want to redo. **It is not recommended to delete a step in the middle while allowing the other steps to remain. It will break.**
@@ -290,7 +290,7 @@ The `Figure` directory includes four primary choices for preference of data anal
 
 ### REVAMP Files of Interest
 
-All configuration files are copied to the REVAMP results folder. `config_file.txt` controls all of the main options at the front end of REVAMP (is a copy of the file provided by `-p`. `figure_config_file.txt` controls all the options for the back end figure generation of REVAMP (is a copy of the file provided by `-f`. The provided sample metadata file is copied (`sample_metadata.txt`) and converted/cleaned for use in R (`sample_metadata_forR.txt`).
+All configuration files are copied to the REVAMP results folder. `config_file.txt` controls all of the main options at the front end of REVAMP (is a copy of the file provided by `-p`. `figure_config_file.txt` controls all the options for the back-end figure generation of REVAMP (is a copy of the file provided by `-f`. The provided sample metadata file is copied (`sample_metadata.txt`) and converted/cleaned for use in R (`sample_metadata_forR.txt`).
 
 Each R script outputs stdout and stderror to a log file within the R scripts primary directory. In addition, if you wish to customize or debug any R-based figure/file, you can open any of the R scripts in the `assets` folder. The second field of the tab-delimited file `Rscript_arguments.log` gives each of the positional arguments fed to each script during the pipeline. Simply uncomment the args block at the front end of the script and input each argument.
 
@@ -309,7 +309,7 @@ Besides the outputs in the `processed_tables` and `Figures` directory, the User 
 * `OUTDIR/ASV2Taxonomy/taxonomy2PercentAbundance_humanReadable.txt` - Relative abundance (%) for each unique taxonomic string by sample. In this file, numbers are rounded to two decimal places and any value less than 0.01% rounded is marked with a "D" to indicate detection.
 * `OUTDIR/ASV2Taxonomy/taxonomy2PercentAbundance_humanReadable_NoRounding.txt` - Same as the file above, but values are not rounded (and there are no "D" designations)
 * `OUTDIR/ASV2Taxonomy/outname_singleBlastHits_with_MULTItaxid.txt` - File showing the ASVs where at least one of the best blast hit sequences is marked as belonging to two or more taxonomic IDs in NCBI. REVAMP will consider the last common ancestor of such a hit if it is the only available (marked as "TRUE" in the "USED" column). However, if other single taxID hits are available, REVAMP with use those assignments instead (marked as "FALSE" in the "USED" column).
-* `OUTDIR/ASV2Taxonomy/OUTDIR_heatmap_multiASV.txt` - Shows a heatmap of read counts for taxonomic assignments with more than one ASV. This kind of result could show where multi-ASVs with the same taxonomy might be the result of erroneous sequence/chimeric error (i.e. one ASV with lots of reads with a few others with the same taxonomy but very few sporadic read hits) as well as which multi-ASVs might represent different ecotypes of the same taxa (i.e. multiple ASVs with believable read distrubution among samples).
+* `OUTDIR/ASV2Taxonomy/OUTDIR_heatmap_multiASV.txt` - Shows a heatmap of read counts for taxonomic assignments with more than one ASV. This kind of result could show where multi-ASVs with the same taxonomy might be the result of erroneous sequence/chimeric error (i.e. one ASV with lots of reads with a few others with the same taxonomy but very few sporadic read hits) as well as which multi-ASVs might represent different ecotypes of the same taxa (i.e. multiple ASVs with believable read distribution among samples).
 * `OUTDIR/ASV2Taxonomy/OUTDIR_unknown_asvids.txt` - File can help to track the reasons for "Unknown" assignments
 
 #### REVAMP `processed_tables` Folder
@@ -390,7 +390,7 @@ Interactive hierarchical data browser allows users to explore the biodiversity o
 Three types of maps are created from the latitude and longitude data given in the sample metadata file, including a basic map, a bathymetric map, both with data points (scattered for visibility), and a basic map with the data points replaced with pie charts showing the unique terminal taxa found in each sample.
 
 ##### 02_Barcharts
-Barcharts are useful for exploring both read depth (sequencing effort) and patterns in relative abundance. Note that relative sequence abundance does not necessarily equate to relative abundance of an organism in the sample, as several factors can influence read depth.
+Bar charts are useful for exploring both read depth (sequencing effort) and patterns in relative abundance. Note that relative sequence abundance does not necessarily equate to relative abundance of an organism in the sample, as several factors can influence read depth.
 
 Many bar charts are produced by the pipeline, separated into read-count-centric and relative-abundance-centric figures. Figures are created at different taxonomic levels (Phylum to Species), as well as for all unique terminal taxa (no matter the depth). In addition, the `filterPercent` from the figure configuration file (`-f`) is used to simplify figures by placing taxa less than the designated percentage of total community into the "zzOther" category. This can make viewing of the figure much easier. If there are still too many colors to ascertain the differences between taxa, one method for exploring the bar charts is to load them (and their legend) into Adobe Illustrator and to use the "Select"/"Same"/"Fill Color" feature to select all the same taxa.
 
@@ -485,7 +485,7 @@ In addition to the tables created in the `processed_tables` folder, REVAMP creat
 ##### Taxa_of_interest (if set in Figure configuration file `-f`)
 REVAMP can create a subset of figures (where appropriate), if the user provides a list of taxonomies of interest (must be same taxonomic level). The user must set the following parameters in the Figure configuration file (`-f`): `providedTaxaOfInterest=TRUE`, `taxaOfInterestLevel` (Options: Kingdom, Phylum, Class, Order, Family, Genus, or Species), and `taxaOfInterestFile` (one taxa per line). Figures created include only: 02_Barcharts, 03_Heatmaps, and 06_Network.
 
-## Stand alone applications
+## Stand-alone applications
 
 ### silvangs_convertTable2REVAMP.sh
 Allows for the independent incorporation of SILVAngs output into the pipeline for the production of tables and figures only. Unlike the `-e` option in the main `revamp.sh` pipeline, this approach excludes initial quality control through ASV assignment. Ideal for use with single read data (e.g. Nanopore reads), producing the same figures and tables as the main pipeline. 
@@ -511,18 +511,18 @@ Description of arguments:
 * `-s`: Sample metadata file, as above
 * `-o`: Folder used for all pipeline outputs and organization
 * `-f`: Percentage cut off for assigning low abundance taxa to zzOther
-* `-n`: **OPTIONAL** Toggle for filering "NA" assignments from phyloseq figures.
+* `-n`: **OPTIONAL** Toggle for filtering "NA" assignments from phyloseq figures.
 * `-t`: **OPTIONAL** Toggle for providing a file of taxa of interest for additional figure generation.
 * `-c`: **OPTIONAL;REQUIRED if `-t` is provided** Taxonomic level of the taxa provided in `-t`.
 * `-m`: **OPTIONAL** Creates a merged result folder where NCBI Eukaryote taxa assignments are applied from the SILVAngs export file when SILVA assignments are to "Mitochondria" or "Chloroplast".
 * `-d`: **OPTIONAL** If read files were clustered with CD-HIT before supplying them to SILVAngs, provide that clustr file here to inflate read counts for clusters.
 
 ### mergeBLASTandSILVAngs_ASV2Taxonomy.pl
-Allows for merging of two independent runs of the pipeline, one with regular REVAMP with BLASTn-based taxonomic assignments and one using SILVAngs taxonomic assignments (with `-e` in the main pipeline). In this case, SILVAngs Bacterial/Archaeal assignments are prioitized (originally developed and more accurate for these lineages), while Eukaryotic assignments are prioritized from the BLASTn-based approach (yields more specific assignments than SILVAngs). Runs must be on identical ASVs, which can be accomplished by running first the default pipeline, then copying the outdirectory and modifying `progress.txt` to start after the DADA2 checkpoint with `-e` flagged. This script effectively is the same as the `taxonomyscriptFinished=TRUE` checkpoint in `progress.txt`, and the pipeline run in the merged directory can be continued from the main REVAMP pipeline after running it. 
+Allows for merging of two independent runs of the pipeline, one with regular REVAMP with BLASTn-based taxonomic assignments and one using SILVAngs taxonomic assignments (with `-e` in the main pipeline). In this case, SILVAngs Bacterial/Archaeal assignments are prioritized (originally developed and more accurate for these lineages), while Eukaryotic assignments are prioritized from the BLASTn-based approach (yields more specific assignments than SILVAngs). Runs must be on identical ASVs, which can be accomplished by running first the default pipeline, then copying the outdirectory and modifying `progress.txt` to start after the DADA2 checkpoint with `-e` flagged. This script effectively is the same as the `taxonomyscriptFinished=TRUE` checkpoint in `progress.txt`, and the pipeline run in the merged directory can be continued from the main REVAMP pipeline after running it. 
 
 #### Arguments
 ```
--a = ASV counts table (make sure there is text in the upperleft)
+-a = ASV counts table (make sure there is text in the upper left)
 -b = ASV taxonomy table from BLAST run
 -s = ASV taxonomy table from SILVAngs run
 -n = Allin Output basename
@@ -561,7 +561,7 @@ Description of arguments:
 * `-s`: Sample metadata file, as above
 * `-o`: Name of the output directory
 * `-f`: Percentage cut off for assigning low abundance taxa to zzOther
-* `-n`: **OPTIONAL** Toggle for filering "NA" assignments from phyloseq figures.
+* `-n`: **OPTIONAL** Toggle for filtering "NA" assignments from phyloseq figures.
 * `-t`: **OPTIONAL** Toggle for providing a file of taxa of interest for additional figure generation.
 * `-c`: **OPTIONAL;REQUIRED if `-t` is provided** Taxonomic level of the taxa provided in `-t`.
 * `-y`: **OPTIONAL;RECOMMENDED** Automatically fills gaps in the taxonkit output as described in the main pipeline. Where a blank "ORDER" with known "FAMILY" would be assigned "FAMILY__o" to designate that it is the order that contains that family.
