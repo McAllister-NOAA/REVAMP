@@ -185,7 +185,7 @@ taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus
 This important file links a sample to its metadata. At a minimum, users must provide `Sample` designations, with `lat` and `long` recommended. `Sample` should be the first column; however, the order of other columns does not matter. Sample order (i.e. row order) is used for organizing figures. In addition to the controlled vocabulary (below), a user can provide an unlimited number of groupings (applied to visualizations, including NMDS/PCoA encircling) using the column headers from `group1` to `group#`. Any columns that do not match the controlled vocabulary or `group#` are assigned to metadata and can be discrete or continuous variables (e.g. chemical/physical measurements, other observations). Any missing data should be filled in as "NA". Note that while phyloseq can handle missing data, vegan does not calculate environmental fitting with missing data. We recommend that the pipeline is run first with all samples/data columns, followed up with a run to test environmental fitting with the samples with missing metadata and/or metadata columns with missing data removed.
 
 Controlled vocabulary:
-* `Sample` = Sample name identical to the "X" in `X_R1.fastq.gz` and `X_R2.fastq.gz` as found in the reads directory (`-r`). All sample names have "MP_" appended to the front and have non-alphanumeric characters converted to underscores to avoid programmatic errors (e.g. R does not accept row/column headers that start with numbers).
+* `Sample` = Sample name identical to the "\*" in `*_R1.fastq.gz` and `*_R2.fastq.gz` as found in the reads directory (`-r`). All sample names have "MP_" appended to the front and have non-alphanumeric characters converted to underscores to avoid programmatic errors (e.g. R does not accept row/column headers that start with numbers).
 * `lat` = latitude decimal degrees
 * `long` = longitude decimal degrees
 * `replicates` = String designating replicate samples. Replicate samples are treated both independently and as an averaged aggregate for some figures. Additional replicate-specific figures and tables are created, in particular for occupancy modelling outside the pipeline.
@@ -217,7 +217,7 @@ MP_negative_control     NA     NA     NA     NA     negative      NA     NA     
 ```
 
 #### Reads directory (`-r`)
-Contains forward and reverse reads in the format `X_R1.fastq.gz` and `X_R2.fastq.gz`, respectively, where "X" matches sample names in the sample metadata (`-s`) file. Fastq files must be gzipped.
+Contains forward and reverse reads in the format `*_R1.fastq.gz` and `*_R2.fastq.gz`, respectively, where "\*" matches sample names in the sample metadata (`-s`) file. Fastq files must be gzipped.
 
 ### Optional input files
 
@@ -593,6 +593,11 @@ Description of arguments:
 * `-r`: **OPTIONAL;REQUIRED if `-s` is provided** Name of the reference marker
 * `-t`: **OPTIONAL** Toggle for providing a file of taxa of interest for additional figure generation.
 * `-c`: **OPTIONAL;REQUIRED if `-t` is provided** Taxonomic level of the taxa provided in `-t`.
+
+## Miscellaneous uses
+
+### Filtering BLAST data by release date
+One beneficial application of the REVAMP pipeline is the assessment of marker genes and database quality over time. By filtering NCBI's GenBank sequences from the BLASTn results based on when they were released, REVAMP allows a user to determine the effect of adding reference organisms to the database, and how effective that database is at resolving different marker genes to Species, Genus, Family, Order, and Class. See the docs on this repository: [BLAST_dateFiltering](https://github.com/McAllister-NOAA/BLAST_dateFiltering).
 
 #### Legal Disclaimer
 *This repository is a software product and is not official communication
