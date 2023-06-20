@@ -6,6 +6,10 @@ Created by Sean M. McAllister, Christopher Paight, Emily L. Norton, and Matthew 
 
 **REVAMP** is designed to streamline the processing of metabarcoding data from raw fastq data files to the generation of information and visuals. The purpose is to standardize methods for rapid assessments of molecular ecology datasets, including those for environmental DNA (eDNA) monitoring.
 
+Flow chart showing REVAMP features and workflow:
+![FlowChart Figure](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/909f0b30-5bb1-4752-951b-0f2e48ca9169)
+
+
 Developed by the **Ocean Molecular Ecology** ([OME](https://www.pmel.noaa.gov/ocean-molecular-ecology/)) Group at the Pacific Marine Environmental Laboratory ([PMEL/NOAA](https://www.pmel.noaa.gov/)) in cooperation with the Cooperative Institute for Climate, Ocean, & Ecosystem Studies ([CICOES/UW](https://cicoes.uw.edu/)).
 
 ## Citation
