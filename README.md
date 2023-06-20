@@ -26,7 +26,7 @@ IN REVIEW
 * phyloseq – [McMurdie and Holmes, 2013](https://doi.org/10.1371/journal.pone.0061217) ([useful tutorial](https://joey711.github.io/phyloseq/))
 * vegan – [Oksanen et al., 2020](https://cran.r-project.org/web/packages/vegan/)
 
-Many other auxiliary R packages make the figures possible: see dependencies.
+Many other auxiliary R packages make the figures possible: see [dependencies](https://github.com/McAllister-NOAA/REVAMP#install-the-necessary-dependencies-for-revamp).
 
 ## Installation
 ### Easy Installation
