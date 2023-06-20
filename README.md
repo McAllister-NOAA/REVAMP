@@ -601,7 +601,7 @@ Description of arguments:
 ## Miscellaneous uses
 
 ### Filtering BLAST data by release date
-One beneficial application of the REVAMP pipeline is the assessment of marker genes and database quality over time. By filtering NCBI's GenBank sequences from the BLASTn results based on when they were released, REVAMP allows a user to determine the effect of adding reference organisms to the database, and how effective that database is at resolving different marker genes to Species, Genus, Family, Order, and Class. See the docs on this repository: [BLAST_dateFiltering](https://github.com/McAllister-NOAA/BLAST_dateFiltering).
+One beneficial application of the REVAMP pipeline is the assessment of marker genes and database quality over time. By filtering NCBI's GenBank sequences from the BLASTn results based on when they were released, REVAMP allows a user to determine the effect of adding reference organisms to the database, and how effective that database is at resolving different marker genes to Species, Genus, Family, Order, and Class. See the docs in this repository: [BLAST_dateFiltering](https://github.com/McAllister-NOAA/BLAST_dateFiltering).
 
 #### Legal Disclaimer
 *This repository is a software product and is not official communication
