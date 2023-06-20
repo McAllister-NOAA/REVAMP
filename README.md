@@ -477,22 +477,13 @@ Each variable's goodness of fit (r^2) and statistical probability (p-value) is s
 |`vegan`-based NMDS overlayed with A) variables significant at ≤0.05 p-value (`NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.05.pdf`), B) variables significant at ≤0.01 p-value (`NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_p0.001.pdf`), and C) all "chemistry" variables (`NMDS_vegan_ASVbased_samples_relabund_filtsamples_alltaxa_environmentFitVectors_chemOnly.pdf`)|
 
 ##### ReadsVSReplicateDetection (if `replicates` metadata column given)
-In addition to the 
+In addition to the tables created in the `processed_tables` folder, REVAMP created a violin plot examining relative abundance of reads compared to the number of replicates ASVs are found in. In a perfect world, abundant ASVs should be found in every sample, and less abundant ASVs should not. These figures highlight the stochasticity of metabarcoding data. Figures are created with both ASV-based and Taxonomy-merge-based datasets, using A) averaged read counts over all replicates, B) averaged read counts over the number of replicates where the ASV/taxa was found, and C) summed reads over all replicates.
 
+![ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withoutUnknowns_avgReadsAllReplicates](https://github.com/McAllister-NOAA/REVAMP/assets/60410177/8436c30d-06a8-436c-a8ae-9861412a835c)
+`ViolinBoxPlot_ReadsVSReplicateDetection_ASVbased_withoutUnknowns_avgReadsAllReplicates.pdf`
 
-
-##### Taxa_of_interest (if a `taxaOfInterestFile` is given with appropriate `taxaOfInterestLevel` and `providedTaxaOfInterest=TRUE` in Figure configuration file `-f`)
-
-#TAXA of Interest: Provides specific figures.
-#List one name per line. All from same taxonomic level.
-providedTaxaOfInterest=TRUE
-taxaOfInterestFile=/path/to/file/choice_taxa.txt
-taxaOfInterestLevel=Order #Options: Kingdom, Phylum, Class, Order, Family, Genus, or Species
-
-
-
-
-
+##### Taxa_of_interest (if set in Figure configuration file `-f`)
+REVAMP can create a subset of figures (where appropriate), if the user provides a list of taxonomies of interest (must be same taxonomic level). The user must set the following parameters in the Figure configuration file (`-f`): `providedTaxaOfInterest=TRUE`, `taxaOfInterestLevel` (Options: Kingdom, Phylum, Class, Order, Family, Genus, or Species), and `taxaOfInterestFile` (one taxa per line). Figures created include only: 02_Barcharts, 03_Heatmaps, and 06_Network.
 
 ## Stand alone applications
 
