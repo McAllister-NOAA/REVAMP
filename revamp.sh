@@ -785,11 +785,12 @@ if [[ "${silvaASVflag}" = "TRUE" ]]; then
     cat ${outdirectory}/ASV2Taxonomy/ASVs_counts_mergedOnTaxonomy.tsv | grep -v -f ${outdirectory}/ASV2Taxonomy/${outdirectory}_unknown_asvids.txt > ${outdirectory}/ASV2Taxonomy/ASVs_counts_mergedOnTaxonomy_NOUNKNOWNS.tsv
     mkdir ${outdirectory}/ASV2Taxonomy/KRONA_plots
     mkdir ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs
-    mv ${outdirectory}/ASV2Taxonomy/MP* ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs/
+    mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_KRONA.txt ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt
+    mv ${outdirectory}/ASV2Taxonomy/MP_*_KRONA.txt ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs/
     mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_wholeKRONA.txt ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs/${outdirectory}_samplesSummedKRONA.txt
     mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_master_krona.html ${outdirectory}/ASV2Taxonomy/KRONA_plots/
     mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_wholeKRONA.html ${outdirectory}/ASV2Taxonomy/KRONA_plots/${outdirectory}_samplesSummedKRONA.html
-    mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_KRONA.txt ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt
+
     
     perl ${revampdir}/assets/stats.pl -a ${outdirectory}/dada2/ASVs_counts.tsv -t ${outdirectory}/ASV2Taxonomy/ASVs_counts_mergedOnTaxonomy.tsv -i ${outdirectory}/ASV2Taxonomy/${outdirectory}_asvTaxonomyTable.txt > ${outdirectory}/ASV2Taxonomy/basic_ASV_taxonomy_stats.txt
     
@@ -876,11 +877,11 @@ else
       rm ${outdirectory}/ASV2Taxonomy/temp_grep_unknowns
       mkdir ${outdirectory}/ASV2Taxonomy/KRONA_plots
       mkdir ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs
-      mv ${outdirectory}/ASV2Taxonomy/MP* ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs/
+      mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_KRONA.txt ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt
+      mv ${outdirectory}/ASV2Taxonomy/MP_*_KRONA.txt ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs/
       mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_wholeKRONA.txt ${outdirectory}/ASV2Taxonomy/KRONA_plots/KRONA_inputs/${outdirectory}_samplesSummedKRONA.txt
       mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_master_krona.html ${outdirectory}/ASV2Taxonomy/KRONA_plots/
       mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_wholeKRONA.html ${outdirectory}/ASV2Taxonomy/KRONA_plots/${outdirectory}_samplesSummedKRONA.html
-      mv ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_KRONA.txt ${outdirectory}/ASV2Taxonomy/${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt
       
       perl ${revampdir}/assets/stats.pl -a ${outdirectory}/dada2/ASVs_counts.tsv -t ${outdirectory}/ASV2Taxonomy/ASVs_counts_mergedOnTaxonomy.tsv -i ${outdirectory}/ASV2Taxonomy/${outdirectory}_asvTaxonomyTable.txt > ${outdirectory}/ASV2Taxonomy/basic_ASV_taxonomy_stats.txt
       
@@ -893,11 +894,11 @@ else
       #Move non-filtered files to folder, replace with files from "IGNORING_ASVs" directory
       mkdir unfiltered_files
       mkdir -p KRONA_plots/KRONA_inputs
-      mv MP* KRONA_plots/KRONA_inputs/
+      mv ${outdirectory}_allin_KRONA.txt ${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt
+      mv MP_*_KRONA.txt KRONA_plots/KRONA_inputs/
       mv ${outdirectory}_wholeKRONA.txt KRONA_plots/KRONA_inputs/${outdirectory}_samplesSummedKRONA.txt
       mv ${outdirectory}_master_krona.html KRONA_plots/
       mv ${outdirectory}_wholeKRONA.html KRONA_plots/${outdirectory}_samplesSummedKRONA.html
-      mv ${outdirectory}_allin_KRONA.txt ${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt
       mv KRONA_plots unfiltered_files/
       mv ${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt unfiltered_files/
       mv ${outdirectory}_asvTaxonomyTable.txt unfiltered_files/
@@ -907,9 +908,9 @@ else
       mv ${outdirectory}_NO_UNKNOWNS_barchart.txt unfiltered_files/
       
       mkdir -p IGNORING_ASVs/KRONA_plots/KRONA_inputs
-      mv IGNORING_ASVs/MP* IGNORING_ASVs/KRONA_plots/KRONA_inputs/
-      mv IGNORING_ASVs/${outdirectory}_IGNORE_master_krona.html IGNORING_ASVs/KRONA_plots/
       mv IGNORING_ASVs/${outdirectory}_IGNORE_allin_KRONA.txt ${outdirectory}_allin_TaxonomyASVSampleCount_byline.txt
+      mv IGNORING_ASVs/MP_*_KRONA.txt IGNORING_ASVs/KRONA_plots/KRONA_inputs/
+      mv IGNORING_ASVs/${outdirectory}_IGNORE_master_krona.html IGNORING_ASVs/KRONA_plots/
       mv IGNORING_ASVs/KRONA_plots ./
       mv IGNORING_ASVs/${outdirectory}_ASVs_to_IGNORE.txt ./
       mv IGNORING_ASVs/${outdirectory}_IGNORE_asvTaxonomyTable.txt ./${outdirectory}_asvTaxonomyTable.txt
