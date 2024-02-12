@@ -10,10 +10,10 @@ Developed by the **Ocean Molecular Ecology** ([OME](https://www.pmel.noaa.gov/oc
 
 ## Citation
 
-**If you find REVAMP useful in your research, please cite...**
+**If you find REVAMP useful in your research, please [cite](https://doi.org/10.5670/oceanog.2023.231)...**
 
 ```
-IN REVIEW
+McAllister, S.M., C. Paight, E.L. Norton, and M.P. Galaska. 2023. REVAMP: Rapid Exploration and Visualization through an Automated Metabarcoding Pipeline. Oceanography 36(2–3):114–119, https://doi.org/10.5670/oceanog.2023.231.
 ```
 
 **REVAMP is a wrapper for several tools, which should also be cited:**
