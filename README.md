@@ -168,8 +168,8 @@ removeASVsFILE=/path/to/file/remove_contaminants.txt (OPTIONAL)
 dada_minlength=120
 dada_phix=TRUE
 dada_trunQ=2
-dada_maxEE1=5
-dada_maxEE2=5
+dada_maxEE1=2
+dada_maxEE2=2
 dada_trimRight=0 #Recommended to look at fastq quality and trim ends of sequence data as needed.
 dada_trimLeft=0
 ###
