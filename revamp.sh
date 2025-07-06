@@ -40,12 +40,13 @@ rflag=0
 oflag=0
 fflag=0
 cflag=0
+tflag=0
 blastflag=FALSE
 silvaASVflag=FALSE
 bypassflag=FALSE
 keepIntermediateFiles=TRUE
 
-while getopts ":p:s:r:o:b:f:yke" opt; do
+while getopts ":p:s:r:t:o:b:f:yke" opt; do
   case ${opt} in
     p ) pflag=1
         parameterfilepath=$OPTARG #revamp_config.txt (see README)
@@ -63,6 +64,9 @@ while getopts ":p:s:r:o:b:f:yke" opt; do
     f ) fflag=1
         figureparamfilepath=$OPTARG #Location of figure config file (see README)
       ;;
+    t ) tflag=1
+        num_threads=$OPTARG #Number of threads to use for multi-thread processes (see README)
+      ;;
     b ) blastflag=TRUE
         optionalUserBLASTResult=$OPTARG #Location of user blastn input (optional)
       ;;
@@ -79,6 +83,7 @@ while getopts ":p:s:r:o:b:f:yke" opt; do
          echo "       -s Sample metadata file"
          echo "       -r Read folder"
          echo "       -o Output directory"
+         echo "       -t Number of threads (CPUs) to use"
          echo "       -b User-supplied BLASTn btab result file (optional)"
          echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
          echo "       -y Bypass all terminal prompts (optional)"
@@ -95,6 +100,7 @@ while getopts ":p:s:r:o:b:f:yke" opt; do
         echo "       -s Sample metadata file"
         echo "       -r Read folder"
         echo "       -o Output directory"
+        echo "       -t Number of threads (CPUs) to use"
         echo "       -b User-supplied BLASTn btab result file (optional)"
         echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
         echo "       -y Bypass all terminal prompts (optional)"
@@ -115,6 +121,7 @@ if [ $OPTIND -eq 1 ]
         echo "       -s Sample metadata file"
         echo "       -r Read folder"
         echo "       -o Output directory"
+        echo "       -t Number of threads (CPUs) to use"
         echo "       -b User-supplied BLASTn btab result file (optional)"
         echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
         echo "       -y Bypass all terminal prompts (optional)"
@@ -125,14 +132,15 @@ if [ $OPTIND -eq 1 ]
         exit
     fi
 
-if [[ $pflag -eq 0 || $sflag -eq 0 || $rflag -eq 0 || $oflag -eq 0 || $fflag -eq 0 ]]
-  then echo "All options except -b, -y, and -k are required."
+if [[ $pflag -eq 0 || $sflag -eq 0 || $tflag -eq 0 || $rflag -eq 0 || $oflag -eq 0 || $fflag -eq 0 ]]
+  then echo "All options except -b, -e, -y, and -k are required."
         echo "Usage: revamp.sh" #Missing required options
         echo "       -p Config File"
         echo "       -f Figure config file"
         echo "       -s Sample metadata file"
         echo "       -r Read folder"
         echo "       -o Output directory"
+        echo "       -t Number of threads (CPUs) to use"
         echo "       -b User-supplied BLASTn btab result file (optional)"
         echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
         echo "       -y Bypass all terminal prompts (optional)"
@@ -291,7 +299,7 @@ else
         cutadapt -a "${primerF};required...${revcomp_primerR};optional" \
         -A "${primerR};required...${revcomp_primerF};optional" \
         --discard-untrimmed \
-        -j 0 \
+        -j ${num_threads} \
         -m 1 \
         -o ${outdirectory}/cutadapt/${sample}_R1_trimmed.fq.gz -p ${outdirectory}/cutadapt/${sample}_R2_trimmed.fq.gz \
         ${readfolderpath}/${sample}_R1.fastq.gz ${readfolderpath}/${sample}_R2.fastq.gz \
@@ -312,7 +320,7 @@ else
         echo >> ${outdirectory}/cutadapt/cutadapt_primer_trimming_stats.txt
         cutadapt -a "${primerF};required...${revcomp_primerR};optional" \
         --discard-untrimmed \
-        -j 0 \
+        -j ${num_threads} \
         -m 1 \
         -o ${outdirectory}/cutadapt/${sample}_R1_trimmed.fq.gz \
         ${readfolderpath}/${sample}_R1.fastq.gz \
@@ -333,7 +341,7 @@ else
         echo >> ${outdirectory}/cutadapt/cutadapt_primer_trimming_stats.txt
         cutadapt -a "${primerR};required...${revcomp_primerF};optional" \
         --discard-untrimmed \
-        -j 0 \
+        -j ${num_threads} \
         -m 1 \
         -o ${outdirectory}/cutadapt/${sample}_R2_trimmed.fq.gz \
         ${readfolderpath}/${sample}_R2.fastq.gz \
@@ -679,11 +687,11 @@ else
       do
       let "runthroughcount=runthroughcount+1"
       if [[ "${blastMode}" = "allIN" ]]; then
-        blastn -db ${locationNTdatabase}/nt -query ${outdirectory}/dada2/ASVs.fa -outfmt '6 qseqid pident length staxids sacc' -subject_besthit -max_target_seqs $maxtargetseqs -num_threads 6 -out ${outdirectory}/blast_results/ASV_blastn_nt.btab
+        blastn -db ${locationNTdatabase}/nt -query ${outdirectory}/dada2/ASVs.fa -outfmt '6 qseqid pident length staxids sacc' -subject_besthit -max_target_seqs $maxtargetseqs -num_threads ${num_threads} -out ${outdirectory}/blast_results/ASV_blastn_nt.btab
       elif [[ "${blastMode}" = "mostEnvOUT" ]]; then
-        blastn -db ${locationNTdatabase}/nt -query ${outdirectory}/dada2/ASVs.fa -outfmt '6 qseqid pident length staxids sacc' -subject_besthit -max_target_seqs $maxtargetseqs -num_threads 6 -out ${outdirectory}/blast_results/ASV_blastn_nt.btab -negative_taxidlist ${locationNTdatabase}/taxdump/taxid_exclusion_list_leavesinUnclassified.txt
+        blastn -db ${locationNTdatabase}/nt -query ${outdirectory}/dada2/ASVs.fa -outfmt '6 qseqid pident length staxids sacc' -subject_besthit -max_target_seqs $maxtargetseqs -num_threads ${num_threads} -out ${outdirectory}/blast_results/ASV_blastn_nt.btab -negative_taxidlist ${locationNTdatabase}/taxdump/taxid_exclusion_list_leavesinUnclassified.txt
       elif [[ "${blastMode}" = "allEnvOUT" ]]; then
-        blastn -db ${locationNTdatabase}/nt -query ${outdirectory}/dada2/ASVs.fa -outfmt '6 qseqid pident length staxids sacc' -subject_besthit -max_target_seqs $maxtargetseqs -num_threads 6 -out ${outdirectory}/blast_results/ASV_blastn_nt.btab -negative_taxidlist ${locationNTdatabase}/taxdump/taxid_exclusion_list_removesUnclassified.txt
+        blastn -db ${locationNTdatabase}/nt -query ${outdirectory}/dada2/ASVs.fa -outfmt '6 qseqid pident length staxids sacc' -subject_besthit -max_target_seqs $maxtargetseqs -num_threads ${num_threads} -out ${outdirectory}/blast_results/ASV_blastn_nt.btab -negative_taxidlist ${locationNTdatabase}/taxdump/taxid_exclusion_list_removesUnclassified.txt
       else
         echo "Incorrect blastMode specified"
         exit
@@ -1125,7 +1133,13 @@ else #CONTROLSPRESENT = FALSE
     fi
 fi
 
-for f in ${workingdirectory}/${outdirectory}/processed_tables/sample_metadata*; do cat $f | sed -E 's/, /_/g' > ${f}_mod; mv ${f}_mod $f; done
+shopt -s nullglob
+files=(${workingdirectory}/${outdirectory}/processed_tables/sample_metadata*)
+if [ ${#files[@]} -gt 0 ]; then
+  for f in "${files[@]}"; do 
+    cat $f | sed -E 's/, /_/g' > ${f}_mod
+    mv ${f}_mod $f
+  done
 
 #Phyloseq figures
 mkdir -p ${outdirectory}/Figures/02_Barcharts/read_count

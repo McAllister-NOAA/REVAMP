@@ -12,11 +12,11 @@ args <- normalizePath(args, mustWork = TRUE)
 
 ########################################
 # TEMP WHILE WORKING ON SCRIPT
-#args[1]<-"~/Desktop/OSU_sequencing_analysis/temp_REVAMP/20230331_MiSeq1040_Ax20_Pool2_Lane1/16S_out/dada2/ASVs_counts.tsv" #path to ASV count table 1
-#args[2]<-"~/Desktop/OSU_sequencing_analysis/temp_REVAMP/20230331_MiSeq1040_Ax20_Pool2_Lane1/16S_out/dada2/ASVs.fa" #path to ASV fasta file 1
-#args[3]<-"~/Desktop/OSU_sequencing_analysis/temp_REVAMP/20230905_MiSeq1079_Ax20_Pool2_Lane2/AX_16S_out/dada2/ASVs_counts.tsv" #path to ASV count table 2
-#args[4]<-"~/Desktop/OSU_sequencing_analysis/temp_REVAMP/20230905_MiSeq1079_Ax20_Pool2_Lane2/AX_16S_out/dada2/ASVs.fa" #path to ASV fasta file 2
-#args[5]<-"~/Desktop/OSU_sequencing_analysis/temp_REVAMP/combine_Ax_lanes_16S" #outdir
+#args[1]<-"~/PATH/to/REVAMP/folder1/dada2/ASVs_counts.tsv" #path to ASV count table 1
+#args[2]<-"~/PATH/to/REVAMP/folder1/dada2/ASVs.fa" #path to ASV fasta file 1
+#args[3]<-"~/PATH/to/REVAMP/folder2/dada2/ASVs_counts.tsv" #path to ASV count table 2
+#args[4]<-"~/PATH/to/REVAMP/folder2/dada2/ASVs.fa" #path to ASV fasta file 2
+#args[5]<-"~/PATH/to/outdir" #outdir
 ########################################
 library("dplyr")
 library("tidyr")
