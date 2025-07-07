@@ -510,12 +510,28 @@ REVAMP can create a subset of figures (where appropriate), if the user provides 
 
 ## Stand-alone applications
 
+### merge_asv_runs.R
+Allows a user to merge two sets of counts tables from separate REVAMP runs to allow for ease in downstream analyses. Merges on identical ASVs and sample names. Unique samples and ASVs are appended to the new counts table. This is designed to run before the BLAST step to reduce computational footprint. Produces new ASVs_counts.tsv and ASVs.fa files as well as a document (ASVs_nameChange.txt) linking new and old ASV names.
+
+#### Arguments
+```
+Usage: Rscript --vanilla merge_asv_runs.R [positional arguments]
+       argument 1 = path/to/folder1/dada2/ASVs_counts.tsv
+       argument 2 = path/to/folder1/dada2/ASVs.fa
+       argument 3 = path/to/folder2/dada2/ASVs_counts.tsv
+       argument 4 = path/to/folder2/dada2/ASVs.fa
+       argument 5 = path/to/outdir
+```
+
+Description of arguments:
+Provide the REVAMP outputs from two different runs ASVs_counts.tsv/ASVs.fa plus the output directory as positional arguments to the stand alone script.
+
 ### silvangs_convertTable2REVAMP.sh
 Allows for the independent incorporation of SILVAngs output into the pipeline for the production of tables and figures only. Unlike the `-e` option in the main `revamp.sh` pipeline, this approach excludes initial quality control through ASV assignment. Ideal for use with single read data (e.g. Nanopore reads), producing the same figures and tables as the main pipeline. 
 
 #### Arguments
 ```
-Usage: silvangs_convertTable2REVAMP.sh"
+Usage: silvangs_convertTable2REVAMP.sh
        -i Input SILVAngs exports/x---[ls]su---otus.csv spreadsheet
        -r Reference taxonomy map for current SILVA database: i.e. tax_slv_ssu_138.1.txt
        -s Sample metadata file
