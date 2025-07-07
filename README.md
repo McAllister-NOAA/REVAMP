@@ -563,6 +563,28 @@ Description of arguments:
 * `-o`: **OPTIONAL** Sample order file (normally there is one created in the out directory after REVAMP interprets the sample metadata file.
 * `-m`: PATH to the REVAMP program directory.
 
+### import_ASVTables2REVAMP.sh
+Allows a user to supply base ASV count table, taxonomy table, percent abundance table, and sample metadata table to directly create REVAMP figures. Note that sample names should match between ASV tables and sample metadata file (no additional cleaning is done).
+
+#### Arguments
+```
+Usage: morphology_convertTable2REVAMP.sh
+       -i ASV count file
+       -s Sample metadata file
+       -x ASV Taxonomy file
+       -p ASV percent abundance table
+       -o Output directory
+       -f Filter percent cutoff for assignment to zzOther
+       -n Filter NAs from figures (optional)
+       -t Taxa of interest file (one per line) (optional)
+       -c Taxonomic category (e.g. Order) used in Taxa of interest file (required if -t called)
+```
+
+Description of arguments:
+* `-i`: 
+
+
+
 ### morphology_convertTable2REVAMP.sh
 Allows for the production of figures and tables from simple taxonomy assignments (e.g. binomial species name or higher) with feature counts data (e.g. biomass or density measurements) per sample, such as what could be used for morphology-based environmental assessment. Each of these taxonomic assignments is traced to NCBI’s taxonomy database through TaxonKit (name2taxid), with user guidance where needed.
 
