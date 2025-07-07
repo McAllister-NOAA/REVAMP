@@ -581,9 +581,15 @@ Usage: morphology_convertTable2REVAMP.sh
 ```
 
 Description of arguments:
-* `-i`: 
-
-
+* `-i`: ASVs_counts.tsv file (same as REVAMP output).
+* `-s`: Sample metadata file (same as REVAMP input).
+* `-x`: REVAMP_asvTaxonomyTable.txt file (same as REVAMP output).
+* `-p`: ASVs_counts_NOUNKNOWNS_percentabund.tsv file (same as REVAMP output).
+* `-o`: Location of output directory.
+* `-f`: Filter percent cutoff for assignment of taxonomy to zzOther.
+* `-n`: Toggle to filter NAs from figures.
+* `-t`: Toggle use of taxa of interest (optional).
+* `-c`: Taxonomic level of the names provided by `-t`.
 
 ### morphology_convertTable2REVAMP.sh
 Allows for the production of figures and tables from simple taxonomy assignments (e.g. binomial species name or higher) with feature counts data (e.g. biomass or density measurements) per sample, such as what could be used for morphology-based environmental assessment. Each of these taxonomic assignments is traced to NCBI’s taxonomy database through TaxonKit (name2taxid), with user guidance where needed.
