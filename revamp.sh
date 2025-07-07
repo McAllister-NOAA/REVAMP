@@ -161,7 +161,7 @@ if [[ $pflag -eq 0 || $sflag -eq 0 || $tflag -eq 0 || $rflag -eq 0 || $oflag -eq
 ##########################################################################################
 unset primerF
 unset primerR
-unset blastLengthCutoff
+unset blastQueryCovCutoff
 unset systemmemoryMB
 unset locationNTdatabase
 unset taxonomyCutoffs
@@ -744,9 +744,9 @@ else
     
     #let "insertSize=ampliconSize - ${#primerF} - ${#primerR}"
     
-    Rscript --vanilla ${revampdir}/assets/reformat_blast.R ${workingdirectory}/${outdirectory}/blast_results $blastLengthCutoff \
+    Rscript --vanilla ${revampdir}/assets/reformat_blast.R ${workingdirectory}/${outdirectory}/blast_results $blastQueryCovCutoff \
         1>> ${workingdirectory}/${outdirectory}/blast_results/blastreformatting_rscript_out.log 2>&1
-    echo "reformat_blast.R	${workingdirectory}/${outdirectory}/blast_results $blastLengthCutoff" >> ${outdirectory}/Rscript_arguments.log
+    echo "reformat_blast.R	${workingdirectory}/${outdirectory}/blast_results $blastQueryCovCutoff" >> ${outdirectory}/Rscript_arguments.log
     
     echo
     

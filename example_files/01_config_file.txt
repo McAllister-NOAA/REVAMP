@@ -5,7 +5,7 @@
 ####################################################
 primerF=GYGGTGCATGGCCGTTSKTRGTT
 primerR=GTGTGYACAAAGGBCAGGGAC
-blastLengthCutoff=370 #bp length under which BLAST hits are not considered
+blastQueryCovCutoff=90 #percent of ASV length under which BLAST hits are not considered
 systemmemoryMB=32000 #MB of total system memory; uses only 70% of max
 locationNTdatabase=/path/to/NCBI/blastdb
 taxonomyCutoffs=97,95,90,80,70,60 #Percent ID cutoffs for ID to S,G,F,O,C,P
