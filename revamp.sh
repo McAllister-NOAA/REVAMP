@@ -737,6 +737,7 @@ else
   else
     if [ -f "${outdirectory}/blast_results/ASV_blastn_nt_formatted.txt" ]; then
       rm ${outdirectory}/blast_results/ASV_blastn_nt_formatted.txt
+      rm ${outdirectory}/blast_results/ASV_blastn_nt_formatted_verbose.txt
     fi
   
     echo
