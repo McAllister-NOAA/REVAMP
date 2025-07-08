@@ -98,6 +98,7 @@ format_pct <- function(type) {
   }
 }
 cat("Comparison Results:\n")
+cat(args[1], "vs.", args[2], "\n")
 cat("# ASVs:", total_asvs, "\n")
 cat("% identical matches:", format_pct("identical"), "\n")
 cat("% recovered unknown 1to2 matches:", format_pct("recovered_from_unknown_1to2"), "\n")
