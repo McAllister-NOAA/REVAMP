@@ -41,12 +41,13 @@ oflag=0
 fflag=0
 cflag=0
 tflag=0
+skipFigsflag=FALSE
 blastflag=FALSE
 silvaASVflag=FALSE
 bypassflag=FALSE
 keepIntermediateFiles=TRUE
 
-while getopts ":p:s:r:t:o:b:f:yke" opt; do
+while getopts ":p:s:r:t:o:b:f:ykeg" opt; do
   case ${opt} in
     p ) pflag=1
         parameterfilepath=$OPTARG #revamp_config.txt (see README)
@@ -74,6 +75,8 @@ while getopts ":p:s:r:t:o:b:f:yke" opt; do
       ;;
     y ) bypassflag=TRUE
       ;;
+    g ) skipFigsflag=TRUE
+      ;;  
     k ) keepIntermediateFiles=FALSE
       ;;
     \? ) echo "Invalid option: -$OPTARG"
@@ -87,6 +90,7 @@ while getopts ":p:s:r:t:o:b:f:yke" opt; do
          echo "       -b User-supplied BLASTn btab result file (optional)"
          echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
          echo "       -y Bypass all terminal prompts (optional)"
+         echo "       -g Skip time-consuming figure generation step (optional)"
          echo "       -k Remove all intermediate files (optional)"
          echo "          Not recommended for first run"
          echo "          (best to rerun with -k after successful completion)"
@@ -104,6 +108,7 @@ while getopts ":p:s:r:t:o:b:f:yke" opt; do
         echo "       -b User-supplied BLASTn btab result file (optional)"
         echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
         echo "       -y Bypass all terminal prompts (optional)"
+        echo "       -g Skip time-consuming figure generation step (optional)"
         echo "       -k Remove all intermediate files (optional)"
         echo "          Not recommended for first run"
         echo "          (best to rerun with -k after successful completion)"
@@ -125,6 +130,7 @@ if [ $OPTIND -eq 1 ]
         echo "       -b User-supplied BLASTn btab result file (optional)"
         echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
         echo "       -y Bypass all terminal prompts (optional)"
+        echo "       -g Skip time-consuming figure generation step (optional)"
         echo "       -k Remove all intermediate files (optional)"
         echo "          Not recommended for first run"
         echo "          (best to rerun with -k after successful completion)"
@@ -133,7 +139,7 @@ if [ $OPTIND -eq 1 ]
     fi
 
 if [[ $pflag -eq 0 || $sflag -eq 0 || $tflag -eq 0 || $rflag -eq 0 || $oflag -eq 0 || $fflag -eq 0 ]]
-  then echo "All options except -b, -e, -y, and -k are required."
+  then echo "All options except -b, -e, -y, -g, and -k are required."
         echo "Usage: revamp.sh" #Missing required options
         echo "       -p Config File"
         echo "       -f Figure config file"
@@ -144,6 +150,7 @@ if [[ $pflag -eq 0 || $sflag -eq 0 || $tflag -eq 0 || $rflag -eq 0 || $oflag -eq
         echo "       -b User-supplied BLASTn btab result file (optional)"
         echo "       -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)"
         echo "       -y Bypass all terminal prompts (optional)"
+        echo "       -g Skip time-consuming figure generation step (optional)"
         echo "       -k Remove all intermediate files (optional)"
         echo "          Not recommended for first run"
         echo "          (best to rerun with -k after successful completion)"
@@ -1074,12 +1081,14 @@ for ((f=1; f<=`awk '{print NF}' ${workingdirectory}/${outdirectory}/sample_metad
 #echo "Location: $locationChemHeaders"
 
 #Maps
+if [ "$skipFigsflag" = "FALSE" ]; then
 mkdir ${outdirectory}/Figures/01_Maps
 Rscript --vanilla ${revampdir}/assets/maps.R ${workingdirectory}/${outdirectory}/Figures/01_Maps ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites ${workingdirectory}/${outdirectory}/ASV2Taxonomy/${outdirectory}_NO_UNKNOWNS_barchart.txt $filterPercent $pieScale \
     1>> ${workingdirectory}/${outdirectory}/Figures/01_Maps/maps_rscript_out.log 2>&1
 echo "maps.R	${workingdirectory}/${outdirectory}/Figures/01_Maps ${workingdirectory}/${outdirectory}/sample_metadata_forR.txt $replicates $sites ${workingdirectory}/${outdirectory}/ASV2Taxonomy/${outdirectory}_NO_UNKNOWNS_barchart.txt $filterPercent $pieScale" >> ${outdirectory}/Rscript_arguments.log
 
 rm -f ${workingdirectory}/${outdirectory}/Figures/01_Maps/Rplot*
+fi
 
 #Tables
 perl ${revampdir}/assets/barchart_filterLowAbund.pl -i ${outdirectory}/ASV2Taxonomy/${outdirectory}_barchart_forR.txt -f $filterPercent > ${outdirectory}/ASV2Taxonomy/${outdirectory}_barchart_forR_filtLowAbund_zzOther.txt
@@ -1144,6 +1153,7 @@ if [ ${#files[@]} -gt 0 ]; then
 fi
 
 #Phyloseq figures
+if [ "$skipFigsflag" = "FALSE" ]; then
 mkdir -p ${outdirectory}/Figures/02_Barcharts/read_count
 mkdir -p ${outdirectory}/Figures/02_Barcharts/relative_abundance
 mkdir -p ${outdirectory}/Figures/03_Heatmaps/ASV_based
@@ -1244,6 +1254,8 @@ if [[ "${replicates}" = "TRUE" ]]; then
   
 
 fi #replicate if
+
+fi #skipFigs if
 
 echo "figuresFinished=TRUE" >> ${outdirectory}/progress.txt
   
