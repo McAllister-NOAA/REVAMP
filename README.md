@@ -526,6 +526,20 @@ Usage: Rscript --vanilla merge_asv_runs.R [positional arguments]
 Description of arguments:
 Provide the REVAMP outputs from two different runs ASVs_counts.tsv/ASVs.fa plus the output directory as positional arguments to the stand alone script.
 
+### identicalASV_taxonomyComparison.R
+Allows a user to generate a table comparing taxonomy assignments and quality between REVAMP runs. ASVs must be identical between the comparisons. This script will produce a single comparison file between the two runs and prints to terminal some stats of the taxonomy results.
+
+#### Arguments
+```
+Usage: Rscript --vanilla identicalASV_taxonomyComparison.R [positional arguments]
+       argument 1 = path/to/folder1
+       argument 2 = path/to/folder2
+       argument 3 = path/to/outdir #location to write outfile
+```
+
+Description of arguments:
+Point the script to the high level REVAMP output directory for each of the two runs for comparison. The final argument points to the location where the comparison table file "comparison_ASV_results.txt" will be created.
+
 ### silvangs_convertTable2REVAMP.sh
 Allows for the independent incorporation of SILVAngs output into the pipeline for the production of tables and figures only. Unlike the `-e` option in the main `revamp.sh` pipeline, this approach excludes initial quality control through ASV assignment. Ideal for use with single read data (e.g. Nanopore reads), producing the same figures and tables as the main pipeline. 
 
