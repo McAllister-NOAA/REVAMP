@@ -1141,6 +1141,7 @@ if [ ${#files[@]} -gt 0 ]; then
     cat $f | sed -E 's/, /_/g' > ${f}_mod
     mv ${f}_mod $f
   done
+fi
 
 #Phyloseq figures
 mkdir -p ${outdirectory}/Figures/02_Barcharts/read_count
@@ -1251,11 +1252,3 @@ fi #Final fi for if Figures folder present statement
 echo "YOU MADE IT!"
 
 sleep 1
-
-
-
-
-
-
-
-
