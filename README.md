@@ -59,6 +59,13 @@ ncbi_db_cleanup.sh
 
 If NCBI *nt* database files continually fail to download, try to run `update_blastdb.pl nt` outside of the pipeline's script.
 
+TaxonKit also requires the taxonomy dmp files from the NCBI database download used for BLAST. Those files are copied from the NCBI db `taxdump` directory prepared by the `ncbi_db_cleanup.sh` script. For this to work, add `TAXONKIT_DB` to your path to point to where these TaxonKit files should be stored (default = `~/.taxonkit`).
+
+Example (add to `.bash_profile`:
+```
+export TAXONKIT_DB=~/.taxonkit
+```
+
 #### Install the necessary dependencies for REVAMP
 
 NCBI databases (should be already installed; see above):
