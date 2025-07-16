@@ -266,6 +266,14 @@ perl ${revampdir}/assets/sampleMetadata_fileCleanup.pl -i ${samplemetafilepath} 
 #Create ordered sample name file
 cat ${outdirectory}/sample_metadata_forR.txt | cut -f1 | grep -v "Sample" > ${outdirectory}/sample_order.txt
 
+#Copy current blastdb taxonomy files to Taxonkit db directory
+cd ${TAXONKIT_DB}
+rm names.dmp nodes.dmp delnodes.dmp merged.dmp
+cp ${locationNTdatabase}/taxdump/names.dmp ./
+cp ${locationNTdatabase}/taxdump/nodes.dmp ./
+cp ${locationNTdatabase}/taxdump/delnodes.dmp ./
+cp ${locationNTdatabase}/taxdump/merged.dmp ./
+cd ${workingdirectory}
 
 ##########################################################################################
 ##########################################################################################
