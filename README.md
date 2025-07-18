@@ -133,7 +133,7 @@ Usage: revamp.sh
        -s Sample metadata file
        -r Read folder
        -o Output directory
-       -t Number of threads (CPUs) to use"
+       -t Number of threads (CPUs) to use
        -b User-supplied BLASTn btab result file (optional)
        -e Toggle use of SILVAngs taxonomy assignments by ASV (optional)
        -y Bypass all terminal prompts (optional)
