@@ -162,8 +162,6 @@ if [[ "${providedTaxaOfInterest}" = "TRUE" ]]; then
 
 #Create sample metadata file with identical manipulation of sample names for downstream R work
 perl ${revampdir}/assets/sampleMetadata_fileCleanup.pl -i ${samplemetafilepath} > ${outdirectory}/sample_metadata_forR.txt
-cat ${outdirectory}/sample_metadata_forR.txt | sed -E 's/^MP_//' > ${outdirectory}/sample_metadata_forR.txt2
-mv ${outdirectory}/sample_metadata_forR.txt2 ${outdirectory}/sample_metadata_forR.txt
 
 cat ${outdirectory}/ASVs_counts_used.tsv | sed -E '1 s/[^a-zA-Z0-9_[:space:]]/_/g' > ${outdirectory}/ASVs_counts_used_forR.tsv
 cat ${outdirectory}/ASVs_percAbundance_used.tsv | sed -E '1 s/[^a-zA-Z0-9_[:space:]]/_/g' > ${outdirectory}/ASVs_percAbundance_used_forR.tsv
