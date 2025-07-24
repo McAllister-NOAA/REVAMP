@@ -113,3 +113,12 @@ if (sum_pct < 0.01 && sum_pct > 0) {
   higher_result <- sprintf("%.2f%%", sum_pct)
 }
 cat("% same higher taxonomy matches:", higher_result, "\n")
+
+unknown_levels <- c("no_match", "unknown_match")
+sum_pct <- 100 * sum(match_counts[unknown_levels], na.rm = TRUE) / total_asvs
+if (sum_pct < 0.01 && sum_pct > 0) {
+  unknown_result <- "<0.01%"
+} else {
+  unknown_result <- sprintf("%.2f%%", sum_pct)
+}
+cat("% non matches:", unknown_result, "\n")
