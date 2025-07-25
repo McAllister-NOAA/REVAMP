@@ -36,8 +36,9 @@ grep "scientific name" names.dmp | grep -i "unclassified" | cut -f1 >> taxids_to
 subtree -t nodes.dmp -i taxids_to_ignore.txt > taxid_exclusion_list_removesUnclassified.txt
 rm taxids_to_ignore.txt
 
-mkdir -p ~/.taxonkit
-cp names.dmp ~/.taxonkit/
-cp nodes.dmp ~/.taxonkit/
-cp delnodes.dmp ~/.taxonkit/
-cp merged.dmp ~/.taxonkit/
+#Removed due to new REVAMP use of the $TAXONKIT_DB env variable
+#mkdir -p ~/.taxonkit
+#cp names.dmp ~/.taxonkit/
+#cp nodes.dmp ~/.taxonkit/
+#cp delnodes.dmp ~/.taxonkit/
+#cp merged.dmp ~/.taxonkit/
