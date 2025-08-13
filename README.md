@@ -2,6 +2,8 @@
 
 # REVAMP: Rapid Exploration and Visualization through an Automated Metabarcoding Pipeline
 
+[![DOI](https://zenodo.org/badge/653783784.svg)](https://doi.org/10.5281/zenodo.8195014)
+
 Created by Sean M. McAllister, Christopher Paight, Emily L. Norton, and Matthew P. Galaska
 
 **REVAMP** is designed to streamline the processing of metabarcoding data from raw fastq data files to the generation of information and visuals. The purpose is to standardize methods for rapid assessments of molecular ecology datasets, including those for environmental DNA (eDNA) monitoring.
