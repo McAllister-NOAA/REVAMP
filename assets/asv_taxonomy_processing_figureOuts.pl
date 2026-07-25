@@ -196,7 +196,7 @@ if ($options{e})
         close(NCBI);
         
         system("taxonkit lineage ncbiTaxonomyIDs.txt | awk '".'$2!=""'."' > taxonkit_out.txt");
-        system("taxonkit reformat taxonkit_out.txt | cut -f1,3 > reformatted_taxonkit_out.txt");
+        system("taxonkit reformat2 taxonkit_out.txt | cut -f1,3 > reformatted_taxonkit_out.txt");
         system("perl ".$options{m}."/assets/fillIn_taxonkit.pl -i reformatted_taxonkit_out.txt > reformatted_taxonkit_out.txt_temp");
         system("mv reformatted_taxonkit_out.txt reformatted_taxonkit_out_ORIGINAL.txt");
         system("cat reformatted_taxonkit_out.txt_temp | sed -E 's/[^A-Za-z0-9;[:blank:]]/_/g' > reformatted_taxonkit_out.txt");

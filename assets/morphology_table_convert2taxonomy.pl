@@ -259,7 +259,7 @@ foreach my $i (sort keys %TAXLIST)
 close(TAXAOUT3);
 
 system("taxonkit lineage ".$options{o}."/morphology_taxIDs.txt | awk '".'$2!=""'."' > ".$options{o}."/morphology_taxonkit_out.txt");
-system("taxonkit reformat ".$options{o}."/morphology_taxonkit_out.txt > ".$options{o}."/morphology_reformatted_taxonkit_out.txt");
+system("taxonkit reformat2 ".$options{o}."/morphology_taxonkit_out.txt > ".$options{o}."/morphology_reformatted_taxonkit_out.txt");
 
 if ($options{a})
     {   system('perl '.$options{m}.'/assets/fillIn_taxonkit_mod.pl -i '.$options{o}.'/morphology_reformatted_taxonkit_out.txt > '.$options{o}.'/morphology_reformatted_taxonkit_out.txt_temp');

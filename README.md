@@ -78,7 +78,7 @@ Stand-alone tools:
 * [Taxonomy Tools](https://github.com/pmenzel/taxonomy-tools)
 * [Cutadapt](https://cutadapt.readthedocs.io/en/stable/installation.html) - v.3.7
 * [BLAST+](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) - v.2.13.0+
-* [TaxonKit](https://bioinf.shenwei.me/taxonkit/download/) - v.0.5.0
+* [TaxonKit](https://bioinf.shenwei.me/taxonkit/download/) - v.0.20.0 (Note that recent NCBI changes to Domains necessitates updating)
 * [Krona](https://github.com/marbl/Krona/wiki) - v.2.7.1
 
 R packages:

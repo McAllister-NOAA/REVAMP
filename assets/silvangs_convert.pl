@@ -173,7 +173,7 @@ foreach my $i (@uniq_taxids)
 close(NCBI);
 
 system("taxonkit lineage ".$options{o}."/ncbiTaxonomyIDs.txt | awk '".'$2!=""'."' > ".$options{o}."/taxonkit_out.txt");
-system("taxonkit reformat ".$options{o}."/taxonkit_out.txt | cut -f1,3 > ".$options{o}."/reformatted_taxonkit_out.txt");
+system("taxonkit reformat2 ".$options{o}."/taxonkit_out.txt | cut -f1,3 > ".$options{o}."/reformatted_taxonkit_out.txt");
 system("perl ".$options{m}."/assets/fillIn_taxonkit.pl -i ".$options{o}."/reformatted_taxonkit_out.txt > ".$options{o}."/reformatted_taxonkit_out.txt_temp");
 system("mv ".$options{o}."/reformatted_taxonkit_out.txt ".$options{o}."/reformatted_taxonkit_out_ORIGINAL.txt");
 system("cat ".$options{o}."/reformatted_taxonkit_out.txt_temp | sed -E 's/[^A-Za-z0-9;[:blank:]]/_/g' > ".$options{o}."/reformatted_taxonkit_out.txt");
